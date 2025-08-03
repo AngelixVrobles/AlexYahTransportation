@@ -15,22 +15,27 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        
     </head>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+               <a class="navbar-brand" href="#page-top"><img class="logo-grande" src="assets/img/Logo.png" alt="..." /></a>
+
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#About us">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#drive">Driver Registration</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Hot it Works</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Why Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -44,249 +49,103 @@
                 <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
             </div>
         </header>
-        <!-- Services-->
-        <section class="page-section" id="services">
+        <!-- About us-->
+        <section class="page-section" id="About us">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">E-Commerce</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Responsive Design</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Web Security</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                </div>
+                    <h2 class="section-heading text-uppercase">About Us</h2>
+                    <p>We provide alternative transportation to and from school for <strong>Special Education children</strong>. Our mission is to ensure that every student travels safely, comfortably, and on time.</p>
+                    <p>We are currently looking for responsible and caring drivers to help transport students to and from school.</p>
+                </div> 
             </div>
         </section>
-        <!-- Portfolio Grid-->
-        <section class="page-section bg-light" id="portfolio">
+        <!-- Drive With us-->
+        <section class="page-section bg-light" id="drive">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Drive with US</h2>
+                    <p class="subtitle">Select a state to view available cities.</p>
+
+                        <div class="state-buttons">
+                            <button class="state-btn" data-state="California">California</button>
+                            <button class="state-btn" data-state="Florida">Florida</button>
+                            <button class="state-btn" data-state="Missouri">Missouri</button>
+                            <button class="state-btn" data-state="Texas">Texas</button>
+                        </div>
+                        <div class="cities-grid" id="citiesGrid"></div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 1-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Threads</div>
-                                <div class="portfolio-caption-subheading text-muted">Illustration</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 2-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Explore</div>
-                                <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 3-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Finish</div>
-                                <div class="portfolio-caption-subheading text-muted">Identity</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                        <!-- Portfolio item 4-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/4.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Lines</div>
-                                <div class="portfolio-caption-subheading text-muted">Branding</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <!-- Portfolio item 5-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/5.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Southwest</div>
-                                <div class="portfolio-caption-subheading text-muted">Website Design</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Portfolio item 6-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/6.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Window</div>
-                                <div class="portfolio-caption-subheading text-muted">Photography</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
+                
         </section>
         <!-- About-->
-        <section class="page-section" id="about">
+        <section class="page-section" id="benefits">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Benefits</h2>
+                    <div class="benefits-container">
+                        <ul class="benefits-list left">
+                            <li>
+                            <i class="fas fa-clock benefit-icon" aria-hidden="true"></i>
+                            <span>Flexible part-time schedule with competitive compensation</span>
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            </li>
+                            <li>
+                            <i class="fas fa-dollar-sign benefit-icon" aria-hidden="true"></i>
+                            <span>$30 base fare for distances between 1 and 10 miles</span>
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            </li>
+                        </ul>
+
+                        <ul class="benefits-list right">
+                            <li>
+                            <i class="fas fa-plus benefit-icon" aria-hidden="true"></i>
+                            <span>$1.25 additional per mile after the first 10 miles</span>
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            </li>
+                            <li>
+                            <i class="fas fa-calendar-alt benefit-icon" aria-hidden="true"></i>
+                            <span>Reliable and consistent work schedule</span>
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            </li>
+                        </ul>
+
+                        <ul class="benefits-list center">
+                            <li>
+                            <i class="fas fa-ban benefit-icon" aria-hidden="true"></i>
+                            <span>Commercial Driver's License (CDL) not required</span>
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
-                <ul class="timeline">
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>2009-2011</h4>
-                                <h4 class="subheading">Our Humble Beginnings</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>March 2011</h4>
-                                <h4 class="subheading">An Agency is Born</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>December 2015</h4>
-                                <h4 class="subheading">Transition to Full Service</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>July 2020</h4>
-                                <h4 class="subheading">Phase Two Expansion</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h4>
-                                Be Part
-                                <br />
-                                Of Our
-                                <br />
-                                Story!
-                            </h4>
-                        </div>
-                    </li>
-                </ul>
+                
             </div>
         </section>
         <!-- Team-->
-        <section class="page-section bg-light" id="team">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        <section id="requirements">
+            <div class="requirements-container">
+                <!-- Columna izquierda -->
+                <div class="requirements-left">
+                <h2 class="section-heading">Driver Requirements</h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
-                            <h4>Parveen Anand</h4>
-                            <p class="text-muted">Lead Designer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." />
-                            <h4>Diana Petersen</h4>
-                            <p class="text-muted">Lead Marketer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
-                            <h4>Larry Parker</h4>
-                            <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
+
+                <!-- Columna derecha -->
+                <div class="requirements-right">
+                <ul class="requirements-list">
+                    <li><span class="requirement-number">01</span> Pass a National Background Check</li>
+                    <li><span class="requirement-number">02</span> Have a Clean Driving Record</li>
+                    <li><span class="requirement-number">03</span> Own a 4-Door, Insured Vehicle</li>
+                    <li><span class="requirement-number">04</span> Carry a Valid Driver’s License</li>
+                    <li><span class="requirement-number">05</span> Complete Student Safety Training</li>
+                    <li><span class="requirement-number">06</span> Pass a Live Interview & Orientation</li>
+                    <li><span class="requirement-number">07</span> Maintain Excellent Ratings from Families</li>
+                </ul>
                 </div>
             </div>
         </section>
-        <!-- Clients-->
+        <!-- Clients
         <div class="py-5">
             <div class="container">
                 <div class="row align-items-center">
@@ -305,6 +164,7 @@
                 </div>
             </div>
         </div>
+        -->
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container">
@@ -373,7 +233,7 @@
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2023</div>
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; 2025 Alexyah Transportation. All rights reserved</div>
                     <div class="col-lg-4 my-3 my-lg-0">
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -606,5 +466,46 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        
+        <script>
+            const cityData = {
+            California: [
+                "Alameda", "Antioch", "Berkeley", "Burlingame", "Campbell", "Castro Valley",
+                "Citrus Heights", "Concord", "Cupertino", "Dublin", "Elk Grove", "Fairfield",
+                "Foster City", "Hayward", "Lodi", "Los Gatos", "Menlo Park", "Milpitas", 
+                "Modesto", "Mountain View", "Morgan Hill", "Napa", "Oakland", "San Jose", 
+                "Santa Clara", "Santa Cruz", "San Lorenzo", "San Pablo", "Sacramento", 
+                "Saratoga", "Scotts Valley", "Stockton", "Sunnyvale", "Richmond", 
+                "Vallejo", "Watsonville"
+            ],
+            Florida: ["Auburndale", "Bartow", "Lakeland", "Mulberry"],
+            Missouri: ["Independence", "Kansas City", "Lee’s Summit", "Saint Louis"],
+            Texas: ["Houston", "Katy"]
+            };
+
+            const buttons = document.querySelectorAll('.state-btn');
+            const cityContainer = document.getElementById('citiesGrid');
+
+            buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const selectedState = btn.dataset.state;
+                const cities = cityData[selectedState] || [];
+
+                cityContainer.innerHTML = '';
+                cities.forEach(city => {
+                const cityEl = document.createElement('div');
+                cityEl.classList.add('city');
+                cityEl.textContent = city;
+                cityContainer.appendChild(cityEl);
+                });
+            });
+            });
+
+            // Load California by default
+            document.querySelector('[data-state="California"]').click();
+    </script>
     </body>
 </html>
