@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Driver Registration</title>
+    <!-- Font icons -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme -->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body id="page-top">
+
+    <!-- Navigation-->
+    <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="assets/img/logos/AlexYahTransportationLogo.png" alt="..." /></a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html#About us">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Driver Registration">Driver Registration</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html#about">Hot it Works</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html#team">Why Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    <!-- Formulario -->
+    <section class="page-section bg-light" id="driver-registration" style="margin-top: 100px;">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-heading text-uppercase">Driver Registration</h2>
+            <p class="text-muted">Complete all fields below to apply as a driver.</p>
+        </div>
+
+        <!-- Card -->
+        <div class="card border bg-transparent">
+            <div class="card-body">
+                <form id="driverForm" class="mx-auto" style="max-width: 1000px;"> <!-- Contenedor centrado con ancho máximo -->
+                    
+                    <!-- Campos de texto -->
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Email *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Home Address *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" name="address" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Emergency Contact (Number) *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="tel" class="form-control" name="emergency_contact" required>
+                        </div>
+                    </div>
+
+                    <!-- Upload con preview -->
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Driver License (DL) *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Profile Picture *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Registration *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Insurance *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Inspection *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>5 Pictures of the Car (Front, Back, Sides, Odometer) *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" multiple required>
+                            <div class="multi-preview mt-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Live Scan *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Tb-Test *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Drug Test *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>CPR *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>DOT *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>English Course</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*">
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Pull Notice *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*">
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>Safe Ride *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*">
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <label>W9 *</label>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control image-input" accept="image/*" required>
+                            <img class="img-preview mt-2 d-none" width="200">
+                        </div>
+                    </div>
+
+                    <!-- Checkboxes -->
+                    <div class="form-check mb-5">
+                        <input class="form-check-input" type="checkbox" name="consentText " id="consentText ">
+                        <label class="form-check-label" for="consentText ">By checking this box, I consent to receive transactional messages related to my account, orders, or services i have requested. These messages may include appointment reminders, order confirmations, and account notifications among others. Message frequency may vary. Message & Data rates may apply. Reply HELP for help STOP to opt-out.</label>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-xl text-uppercase">Submit Registration</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; 2025 Alexyah Transportation. All rights reserved</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+<!-- By checking this box, I consent to receive transactional messages related to my account, orders, or services i have requested. These messages may include appointment reminders, order confirmations, and account notifications among others. Message frequency may vary. Message & Data rates may apply. Reply HELP for help STOP to opt-out. -->
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+
+    <script>
+        document.querySelectorAll('.image-input').forEach(input => {
+            input.addEventListener('change', function (e) {
+                const file = this.files;
+                const preview = this.nextElementSibling;
+
+                // Si es múltiple (car pictures)
+                if (this.hasAttribute('multiple')) {
+                    const container = this.parentElement.querySelector('.multi-preview');
+                    container.innerHTML = "";
+                    [...file].forEach(f => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.classList.add('me-2', 'mb-2');
+                            img.style.width = "240px";
+                            container.appendChild(img);
+                        }
+                        reader.readAsDataURL(f);
+                    });
+                } else {
+                    if (file && file[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            preview.src = e.target.result;
+                            preview.classList.remove('d-none');
+                        }
+                        reader.readAsDataURL(file[0]);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
