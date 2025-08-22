@@ -11206,74 +11206,108 @@ section#contact form#contactForm :-ms-input-placeholder {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+/* Reset de lista */
 .benefits-list {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
 
-/* General layout */
+/* Sección general */
 #benefits {
-  padding: 60px 0;
+  padding: 80px 20px; /* más espacio arriba y abajo */
   background-color: #f9fbfd;
+  text-align: left; /* centra el título y subtítulos */
 }
 
 .section-heading {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 700;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   color: #2c3e50;
+  position: relative;
 }
 
-/* Grid layout for benefits */
+/* Opcional: línea decorativa debajo del título */
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #3498db;
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Grid de beneficios */
 .benefits-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
+  gap: 30px; /* espacio entre tarjetas */
+  max-width: 1100px;
   margin: 0 auto;
+  padding: 0 10px;
+  justify-items: start; /* alinea todas las tarjetas al inicio horizontal */
 }
 
-/* Individual benefit card */
+/* Tarjeta individual */
 .benefit-card {
   background-color: #ffffff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;  /* contenido desde arriba */
+  align-items: flex-start;      /* alinea todo a la izquierda */
+  text-align: left;
   gap: 15px;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.benefit-card:hover {
-  transform: translateY(-5px);
-}
-
+/* Icono del beneficio */
 .benefit-icon {
-  font-size: 24px;
+  font-size: 36px;
   color: #3498db;
-  flex-shrink: 0;
-  margin-top: 2px;
+  margin: 0;  /* quita márgenes extra */
 }
 
+/* Título del beneficio */
+.benefit-card h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.2;
+}
+
+/* Texto del beneficio */
 .benefit-card p {
   margin: 0;
   font-size: 16px;
   color: #2c3e50;
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+/* Opcional: título dentro de la tarjeta */
+.benefit-card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
 #requirements {
-  background-color: #f9fbfd;
+  background-color: #E8E9F1;
   padding: 60px 20px;
   font-family: 'Segoe UI', sans-serif;
 }
 
 .section-heading {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   color: #2c3e50;
   text-transform: uppercase;
   text-align: center;
@@ -11296,14 +11330,19 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .requirements-image {
   width: 100%;
-  max-width: 350px;
+  max-width: px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
 .requirements-right {
-  flex: 1 1 500px;
+  flex: 1 1 650px;
+  background-color: #FAFBFF; /* color de fondo (puedes cambiarlo) */
+  padding: 30px;
+  border-radius: 12px; /* opcional, si quieres esquinas redondeadas */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1); /* opcional, sombra */
+  
 }
 
 .requirements-list {
@@ -11316,7 +11355,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 .requirements-list li {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.6;
   color: #34495e;
   position: relative;
@@ -11397,6 +11436,129 @@ section#contact form#contactForm :-ms-input-placeholder {
 .square:hover {
   background-color: #4fc3f7;
   color: white;
+}
+/* Sección general con fondo azul transparente y textura */
+#How\ it\ Works {
+  padding: 80px 20px;
+  background-color: rgba(56, 87, 246, 0.7); /* azul semi-transparente */
+  
+  /* Textura sutil de puntos */
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+                    linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent);
+  background-size: 20px 20px, 40px 40px;
+  
+  color: white;           /* texto en blanco */
+  text-align: center;
+  position: relative;
+}
+
+/* Sombra sutil para mejorar legibilidad del texto */
+#How\ it\ Works h2,
+#How\ it\ Works p {
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Contenedor centrado */
+#How\ it\ Works .container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Título principal */
+#How\ it\ Works .section-heading {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: white;
+  position: relative;
+}
+
+/* Línea decorativa debajo del título */
+#How\ it\ Works .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: rgba(255,255,255,0.7);
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Párrafo de descripción */
+#How\ it\ Works p {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.95);
+}
+/* Contenedor centrado */
+#How\ it\ Works .container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Título principal centrado */
+#How\ it\ Works .section-heading {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+
+/* Párrafo de descripción alineado a la izquierda */
+#How\ it\ Works p {
+  font-size: px;
+  line-height: 1.7;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;         /* ahora alineado a la izquierda */
+  max-width: 1100px;         /* ancho máximo para mejor legibilidad */
+  margin-left: auto;        /* centra dentro del contenedor */
+  margin-right: auto;
+}
+/* Línea decorativa debajo del título */
+#How\ it\ Works .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.9); /* antes azul, ahora blanca semi-transparente */
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  #How\ it\ Works .section-heading {
+    font-size: 30px;
+  }
+
+  #How\ it\ Works p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  #How\ it\ Works {
+    padding: 60px 15px;
+  }
+
+  #How\ it\ Works .section-heading {
+    font-size: 26px;
+  }
+
+  #How\ it\ Works p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
 }
 
 .benefits-container 
