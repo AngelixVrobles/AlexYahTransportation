@@ -11398,3 +11398,47 @@ section#contact form#contactForm :-ms-input-placeholder {
   background-color: #4fc3f7;
   color: white;
 }
+
+.benefits-container 
+ {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  }
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  min-width: 250px;
+  text-align: justify;
+  }
+.benefits-list li {
+  background: #f9fafb;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .benefits-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 768px) {
+            .benefits-list {
+                min-width: 100%;
+            }
+        }
