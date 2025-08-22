@@ -11205,80 +11205,158 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
-
-/* Reset de lista */
-.benefits-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-/* Sección general */
-#benefits {
-  padding: 80px 20px; /* más espacio arriba y abajo */
-  background-color: #f9fbfd;
-  text-align: left; /* centra el título y subtítulos */
-}
-
-.section-heading {
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 50px;
+/* Sección general con fondo gris liso */
+#about-us {
+  padding: 80px 20px;
+  background-color: #E8E9F1; /* gris claro */
   color: #2c3e50;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Contenedor centrado */
+#about-us .container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Título principal */
+#about-us .section-heading {
+  font-size: 36px;
+  font-weight: 700; /* bold */
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  text-align: center;
   position: relative;
 }
 
-/* Opcional: línea decorativa debajo del título */
-.section-heading::after {
+/* Línea decorativa debajo del título */
+#about-us .section-heading::after {
   content: '';
   display: block;
   width: 60px;
   height: 4px;
-  background-color: #3498db;
+  background-color: #3857F6; /* línea negra para contraste */
   margin: 15px auto 0;
   border-radius: 2px;
 }
 
-/* Grid de beneficios */
-.benefits-grid {
+/* Párrafo de descripción */
+#about-us p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: 20px;
+  color: #2c3e50;
+  text-align: center;
+  font-weight: 700; /* bold */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #about-us .section-heading {
+    font-size: 30px;
+  }
+
+  #about-us p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  #about-us {
+    padding: 60px 15px;
+  }
+
+  #about-us .section-heading {
+    font-size: 26px;
+  }
+
+  #about-us p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+/* Sección general con fondo azul transparente y textura */
+#benefits {
+  padding: 80px 20px;
+  background-color: rgba(56, 87, 246, 0.7); /* azul semi-transparente */
+  
+  /* Textura sutil de puntos y líneas */
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+                    linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent);
+  background-size: 20px 20px, 40px 40px;
+
+  color: black; /* cambiar el color por defecto a negro */
+  text-align: center; /* título centrado */
+  position: relative;
+}
+
+/* Contenedor centrado */
+#benefits .benefits-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px; /* espacio entre tarjetas */
+  gap: 30px; 
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 10px;
-  justify-items: start; /* alinea todas las tarjetas al inicio horizontal */
+  justify-items: center; /* centra las tarjetas horizontalmente */
+}
+
+/* Título principal */
+#benefits .section-heading {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: #FCFDFF; /* título negro */
+  position: relative;
+  text-align: center;
+}
+
+/* Línea decorativa debajo del título */
+#benefits .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: rgb(252, 253, 255); /* línea negra semi-transparente */
+  margin: 15px auto 0;
+  border-radius: 2px;
 }
 
 /* Tarjeta individual */
 .benefit-card {
-  background-color: #ffffff;
+  background-color: rgba(255,255,255,0.9); /* blanca semi-transparente */
   border-radius: 12px;
   padding: 25px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;  /* contenido desde arriba */
-  align-items: flex-start;      /* alinea todo a la izquierda */
+  justify-content: flex-start;
+  align-items: flex-start;
   text-align: left;
   gap: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  list-style: none; /* quitar checks o viñetas */
 }
 
 /* Icono del beneficio */
 .benefit-icon {
   font-size: 36px;
-  color: #3498db;
-  margin: 0;  /* quita márgenes extra */
+  color: #3857F6; /* azul principal */
+  margin: 0;
 }
 
 /* Título del beneficio */
 .benefit-card h3 {
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 20px;
   font-weight: 600;
-  color: #2c3e50;
+  color: #000000; /* título negro */
   line-height: 1.2;
 }
 
@@ -11286,16 +11364,34 @@ section#contact form#contactForm :-ms-input-placeholder {
 .benefit-card p {
   margin: 0;
   font-size: 16px;
-  color: #2c3e50;
+  color: #000000; /* texto negro */
   line-height: 1.6;
+  text-align: left;
 }
 
-/* Opcional: título dentro de la tarjeta */
-.benefit-card h3 {
-  margin: 0 0 10px;
-  font-size: 20px;
-  font-weight: 600;
-  color: #2c3e50;
+/* Responsive */
+@media (max-width: 768px) {
+  #benefits .section-heading {
+    font-size: 30px;
+  }
+
+  .benefit-card p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  #benefits {
+    padding: 60px 15px;
+  }
+
+  #benefits .section-heading {
+    font-size: 26px;
+  }
+
+  .benefit-card p {
+    font-size: 14px;
+  }
 }
 
 #requirements {
