@@ -18,7 +18,7 @@
     <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="assets/img/logos/AlexYahTransportationLogo.png" alt="..." /></a>
+                <a class="navbar-brand" href="#index.html"><img src="assets/img/logos/AlexYahTransportationLogo.png" alt="..." /></a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -26,12 +26,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html#About us">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#About us">About Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="#Driver Registration">Driver Registration</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html#about">Hot it Works</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html#team">Why Us</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/AlexYahTransportation/public/index.html#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#Hot it Works">Hot it Works</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#why us">Why Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,205 +40,185 @@
     <!-- Formulario -->
     <section class="page-section bg-light" id="driver-registration" style="margin-top: 100px;">
     <div class="container">
-        <div class="text-center mb-4">
-            <h2 class="section-heading text-uppercase">Driver Registration</h2>
-            <p class="text-muted">Complete all fields below to apply as a driver.</p>
-        </div>
 
         <!-- Card -->
         <div class="card border bg-transparent">
             <div class="card-body">
-                <form id="driverForm"  action="alexyahtransportation-production.up.railway.app"  method="POST"  enctype="multipart/form-data" class="mx-auto" style="max-width: 1000px;">
+               <form id="driverForm"  
+                action="https://alexyahtransportation-production.up.railway.app/upload"  
+                method="POST"  
+                enctype="multipart/form-data"  
+                class="container p-4 shadow rounded bg-white" 
+                style="max-width: 900px;">
 
-                    <!-- Campos de texto -->
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Email *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="email" class="form-control" name="email" required>
+                    <h2 class="text-center mb-3 fw-bold">🚘 Driver Registration</h2>
+                    <p class="text-center text-muted mb-4">Complete all fields below to apply as a driver.</p>
+
+                    <!-- Email -->
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Email *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="email" class="form-control w-100" name="email" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Home Address *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="text" class="form-control" name="address" required>
-                        </div>
-                    </div>
-
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Emergency Contact (Number) *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="tel" class="form-control" name="emergency_contact" required>
+                    <!-- Address -->
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Home Address *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="text" class="form-control w-100" name="address" required>
                         </div>
                     </div>
 
-                    <!-- Upload con preview -->
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Driver License (DL) *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="driver_license" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
-                        </div>
-                    </div>
-
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Profile Picture *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="profile_picture" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <!-- State -->
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Pick your State *</label>
+                        <div class="col-12 col-md-8">
+                        <select id="state" name="state" class="form-select w-100" required>
+                            <option disabled selected>Select a State</option>
+                            <option value="California">California</option>
+                            <option value="Florida">Florida</option>
+                            <option value="Missouri">Missouri</option>
+                            <option value="Texas">Texas</option>
+                        </select>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Registration *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="registration" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
-                        </div>
-                    </div>
-
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Insurance *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="insurance" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <!-- City -->
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Pick your City *</label>
+                        <div class="col-12 col-md-8">
+                        <select id="city" name="city" class="form-select w-100" required>
+                            <option disabled selected>Select a City</option>
+                        </select>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Inspection *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="inspection" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <hr class="my-4">
+
+                    <!-- Section Title -->
+                    <h5 class="fw-bold mb-3 text-primary">📎 Upload Required Documents</h5>
+
+                    <!-- Loop de documentos -->
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Driver License *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="driver_license" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>5 Pictures of the Car (Front, Back, Sides, Odometer) *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="car_pictures" class="form-control image-input" accept="image/*" multiple required>
-                        <div class="multi-preview mt-2"></div>
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Profile Picture *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="profile_picture" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Live Scan *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="live_scan" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Registration *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="registration" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Tb-Test *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="tb_test" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Insurance *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="insurance" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Drug Test *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="drug_test" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Inspection *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="inspection" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>CPR *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="cpr" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Car Pictures (5) *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="car_pictures" class="form-control w-100" accept="image/*" multiple required>
+                        <small class="text-muted">Upload Front, Back, Sides, and Odometer</small>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>DOT *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="dot" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Live Scan *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="live_scan" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>English Course</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="english_course" class="form-control image-input" accept="image/*">
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">TB Test *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="tb_test" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Pull Notice *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="pull_notice" class="form-control image-input" accept="image/*">
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Drug Test *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="drug_test" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>Safe Ride *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="safe_ride" class="form-control image-input" accept="image/*">
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">CPR *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="cpr" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-4">
-                        <label>W9 *</label>
-                        </div>
-                        <div class="col-lg-7">
-                        <input type="file" name="w9" class="form-control image-input" accept="image/*" required>
-                        <img class="img-preview mt-2 d-none" width="200">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">DOT *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="dot" class="form-control w-100" accept="image/*" required>
                         </div>
                     </div>
 
-                    <!-- Checkboxes -->
-                    <div class="form-check mb-5">
-                        <input class="form-check-input" type="checkbox" name="consentText" id="consentText">
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">English Course</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="english_course" class="form-control w-100" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Pull Notice *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="pull_notice" class="form-control w-100" accept="image/*" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label class="col-12 col-md-4 col-form-label">Safe Ride *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="safe_ride" class="form-control w-100" accept="image/*" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 row">
+                        <label class="col-12 col-md-4 col-form-label">W9 *</label>
+                        <div class="col-12 col-md-8">
+                        <input type="file" name="w9" class="form-control w-100" accept="image/*" required>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Consent -->
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" name="consentText" id="consentText" required>
                         <label class="form-check-label" for="consentText">
-                        By checking this box, I consent to receive transactional messages related to my account...
+                        I consent to receive transactional messages related to my account.
                         </label>
                     </div>
 
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-primary btn-xl text-uppercase">Submit Registration</button>
+                    <!-- Submit -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg w-100 w-md-auto">Submit Registration</button>
                     </div>
                 </form>
             </div>
@@ -304,6 +284,46 @@
             });
         });
     </script>
+    <script>
+        const stateSelect = document.getElementById("state");
+        const citySelect = document.getElementById("city");
+
+        const citiesByState = {
+            California: [
+            "Alameda", "Antioch", "Berkeley", "Burlingame", "Campbell", "Castro Valley", "Citrus Heights",
+            "Concord", "Cupertino", "Dublin", "Elk Grove", "Fairfield", "Foster City", "Hayward", "Lodi",
+            "Los Gatos", "Menlo Park", "Milpitas", "Modesto", "Mountain View", "Morgan Hill", "Napa",
+            "Oakland", "San Jose", "Santa Clara", "Santa Cruz", "San Lorenzo", "San Pablo", "Sacramento",
+            "Saratoga", "Scotts Valley", "Stockton", "Sunnyvale", "Richmond", "Vallejo", "Watsonville"
+            ],
+            Florida: [
+            "Auburndale", "Bartow", "Lakeland", "Mulberry"
+            ],
+            Missouri: [
+            "Independence", "Kansas City", "Lee’s Summit", "Saint Louis"
+            ],
+            Texas: [
+            "Houston", "Katy"
+            ]
+        };
+
+
+        stateSelect.addEventListener("change", function () {
+        const selectedState = this.value;
+        const cities = citiesByState[selectedState] || [];
+
+        // Limpiar opciones anteriores
+        citySelect.innerHTML = '<option value="0">Select a city</option>';
+
+        // Agregar nuevas ciudades
+        cities.forEach(function (city) {
+            const option = document.createElement("option");
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+        });
+        });
+  </script>
     
     <script>
         document.getElementById("driverForm").addEventListener("submit", async (e) => {
