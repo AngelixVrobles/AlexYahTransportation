@@ -48,191 +48,193 @@
         <!-- Card -->
         <div class="card border bg-transparent">
             <div class="card-body">
-                <form id="driverForm" class="mx-auto" style="max-width: 1000px;"> <!-- Contenedor centrado con ancho máximo -->
-                    
+                <form id="driverForm" class="mx-auto" style="max-width: 1000px;">
+
                     <!-- Campos de texto -->
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Email *</label>
+                        <label>Email *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="email" class="form-control" name="email" required>
+                        <input type="email" class="form-control" name="email" required>
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Home Address *</label>
+                        <label>Home Address *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="text" class="form-control" name="address" required>
+                        <input type="text" class="form-control" name="address" required>
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Emergency Contact (Number) *</label>
+                        <label>Emergency Contact (Number) *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="tel" class="form-control" name="emergency_contact" required>
+                        <input type="tel" class="form-control" name="emergency_contact" required>
                         </div>
                     </div>
 
                     <!-- Upload con preview -->
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Driver License (DL) *</label>
+                        <label>Driver License (DL) *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="driver_license" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Profile Picture *</label>
+                        <label>Profile Picture *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="profile_picture" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Registration *</label>
+                        <label>Registration *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="registration" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Insurance *</label>
+                        <label>Insurance *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="insurance" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Inspection *</label>
+                        <label>Inspection *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="inspection" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>5 Pictures of the Car (Front, Back, Sides, Odometer) *</label>
+                        <label>5 Pictures of the Car (Front, Back, Sides, Odometer) *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" multiple required>
-                            <div class="multi-preview mt-2"></div>
+                        <input type="file" name="car_pictures" class="form-control image-input" accept="image/*" multiple required>
+                        <div class="multi-preview mt-2"></div>
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Live Scan *</label>
+                        <label>Live Scan *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="live_scan" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Tb-Test *</label>
+                        <label>Tb-Test *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="tb_test" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Drug Test *</label>
+                        <label>Drug Test *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="drug_test" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>CPR *</label>
+                        <label>CPR *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="cpr" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>DOT *</label>
+                        <label>DOT *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="dot" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>English Course</label>
+                        <label>English Course</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*">
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="english_course" class="form-control image-input" accept="image/*">
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Pull Notice *</label>
+                        <label>Pull Notice *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*">
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="pull_notice" class="form-control image-input" accept="image/*">
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>Safe Ride *</label>
+                        <label>Safe Ride *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*">
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="safe_ride" class="form-control image-input" accept="image/*">
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-4">
-                            <label>W9 *</label>
+                        <label>W9 *</label>
                         </div>
                         <div class="col-lg-7">
-                            <input type="file" class="form-control image-input" accept="image/*" required>
-                            <img class="img-preview mt-2 d-none" width="200">
+                        <input type="file" name="w9" class="form-control image-input" accept="image/*" required>
+                        <img class="img-preview mt-2 d-none" width="200">
                         </div>
                     </div>
 
                     <!-- Checkboxes -->
                     <div class="form-check mb-5">
-                        <input class="form-check-input" type="checkbox" name="consentText " id="consentText ">
-                        <label class="form-check-label" for="consentText ">By checking this box, I consent to receive transactional messages related to my account, orders, or services i have requested. These messages may include appointment reminders, order confirmations, and account notifications among others. Message frequency may vary. Message & Data rates may apply. Reply HELP for help STOP to opt-out.</label>
+                        <input class="form-check-input" type="checkbox" name="consentText" id="consentText">
+                        <label class="form-check-label" for="consentText">
+                        By checking this box, I consent to receive transactional messages related to my account...
+                        </label>
                     </div>
 
                     <div class="text-center mt-4">
@@ -300,6 +302,28 @@
                     }
                 }
             });
+        });
+    </script>
+    
+    <script>
+        document.getElementById("driverForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        try {
+            const respuesta = await fetch("http://localhost:3000/upload", {
+            method: "POST",
+            body: formData
+            });
+
+            const resultado = await respuesta.text();
+            alert("Servidor respondió: " + resultado);
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Ocurrió un error al enviar el formulario ❌");
+        }
         });
     </script>
 </body>
