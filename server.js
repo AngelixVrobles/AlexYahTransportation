@@ -107,9 +107,11 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
       subject: "Nueva Solicitud de Registro 🚗",
       text: `
 📋 Datos del Usuario:
+- Name: ${req.body.name}
 - Email: ${req.body.email}
-- Address: ${req.body.address}
-- Emergency Contact: ${req.body.emergency_contact}
+- Phone Number: ${req.body.phone}
+- State: ${req.body.state}
+- City: ${req.body.city}
 
 📎 Archivos Recibidos:
 ${listaArchivos}
