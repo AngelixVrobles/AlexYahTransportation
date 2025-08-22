@@ -3,9 +3,8 @@ const multer = require("multer");
 const nodemailer = require("nodemailer");
 const path = require("path");
 
-
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // 🚀 Railway asigna el puerto
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -94,7 +93,7 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
 
     // === Configurar transporte de correo ===
     const transporter = nodemailer.createTransport({
-      service: "gmail", // puedes cambiar por Outlook, SMTP, etc
+      service: "gmail",
       auth: {
         user: "josegabrielestrella05@gmail.com",
         pass: "zlwd jmnq bswg nvsz"
@@ -127,10 +126,14 @@ ${listaArchivos}
   }
 });
 
+// === Ruta raíz para Railway ===
+app.get("/", (req, res) => {
+  res.send("🚀 Server running in Railway!");
+});
+
 app.use(express.static("public"));
 
-
 // === Servidor ===
-app.listen(3000, () => {
-  console.log("Servidor en http://localhost:3000");
+app.listen(PORT, () => {
+  console.log(`Servidor en http://localhost:${PORT}`);
 });
