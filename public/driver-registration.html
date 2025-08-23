@@ -321,53 +321,36 @@
     });
   });
 </script>
-<script>
-  document.getElementById("driverForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+  <script>
+    document.getElementById('driverForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    const form = e.target;
+    const form = event.target;
     const formData = new FormData(form);
-    const mensaje = document.getElementById("mensaje");
 
-    try {
-      const res = await fetch(form.action, {
-        method: "POST",
-        body: formData
+    // Usar URL completa basada en el host actual
+    const url = `${window.location.origin}/upload`;
+
+    fetch(url, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const mensajeDiv = document.getElementById('mensaje');
+        if (data.success) {
+          mensajeDiv.innerHTML = '<div class="alert alert-success">Your application has been submitted successfully!</div>';
+          form.reset(); // Resetear el formulario
+        } else {
+          mensajeDiv.innerHTML = '<div class="alert alert-danger">There was an error submitting your application. Please try again.</div>';
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        const mensajeDiv = document.getElementById('mensaje');
+        mensajeDiv.innerHTML = '<div class="alert alert-danger">There was an error submitting your application. Please try again.</div>';
       });
-
-      const data = await res.json();
-
-      mensaje.textContent = data.message;
-      mensaje.className = data.success ? "alert alert-success" : "alert alert-danger";
-      mensaje.style.display = "block";
-
-      if (data.success) {
-        form.reset(); // ✅ limpiar formulario
-      }
-
-      // 🔥 ocultar después de 5s
-      setTimeout(() => {
-        mensaje.style.opacity = "0";
-        setTimeout(() => {
-          mensaje.style.display = "none";
-          mensaje.style.opacity = "1"; // reset
-        }, 500);
-      }, 5000);
-
-    } catch (error) {
-      mensaje.textContent = "Error de conexión con el servidor ❌";
-      mensaje.className = "alert alert-danger";
-      mensaje.style.display = "block";
-
-      setTimeout(() => {
-        mensaje.style.opacity = "0";
-        setTimeout(() => {
-          mensaje.style.display = "none";
-          mensaje.style.opacity = "1";
-        }, 500);
-      }, 5000);
-    }
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
