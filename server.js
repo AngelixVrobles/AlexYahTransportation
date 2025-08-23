@@ -1,120 +1,143 @@
-import express from 'express';
-import cors from 'cors';
-import { Resend } from 'resend';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Configurar variables de entorno
-dotenv.config({ path: './secrets.env' });
+const express = require("express");
+const multer = require("multer");
+const nodemailer = require("nodemailer");
+const path = require("path");
 
 const app = express();
-const resend = new Resend(process.env.API_KEY_RESEND);
+const PORT = process.env.PORT || 3000; // 🚀 Railway asigna el puerto
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const emailFrom = 'yohualkis99@gmail.com'
-
-// Middleware
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Ruta de prueba
-app.get('/api/test', (req, res) => {
-    res.json({ 
-        message: '🚀 Server is working!',
-        timestamp: new Date().toISOString()
-    });
+// === Multer config ===
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // carpeta donde se guardan
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
 });
 
-// Ruta para enviar emails
-app.post('/api/send-email', async (req, res) => {
-    try {
-        const { name, email, phone, message } = req.body;
+const upload = multer({ storage });
 
-        console.log('📧 Recibiendo datos:', { name, email, phone, message });
+// === Diccionario de nombres bonitos ===
+const nombresBonitos = {
+  driver_license: "Driver License",
+  profile_picture: "Profile Picture",
+  registration: "Registration",
+  insurance: "Insurance",
+  inspection: "Inspection",
+  car_pictures: "Car Picture",
+  live_scan: "Live Scan",
+  tb_test: "TB Test",
+  drug_test: "Drug Test",
+  cpr: "CPR",
+  dot: "DOT",
+  english_course: "English Course",
+  pull_notice: "Pull Notice",
+  safe_ride: "Safe Ride",
+  w9: "W9"
+};
 
-        const { data, error } = await resend.emails.send({
-            from: emailFrom,
-            to: ["Yohualkis99@gmail.com"],
-            reply_to: email,
-            subject: `New message of ${name} - AlexYah Transportation`,
-            html: `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <style>
-                        body { font-family: Arial, sans-serif; line-height: 1.6; }
-                        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                        .header { background: #007bff; color: white; padding: 20px; text-align: center; }
-                        .info { margin: 15px 0; padding: 10px; background: #f8f9fa; border-radius: 5px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="container">
-                        <div class="header">
-                            <h1>🚚 New message - AlexYah Transportation</h1>
-                        </div>
-                        
-                        <div class="info">
-                            <strong>Full name:</strong> ${name}
-                        </div>
-                        
-                        <div class="info">
-                            <strong>Email:</strong> ${email}
-                        </div>
-                        
-                        <div class="info">
-                            <strong>Phone number:</strong> ${phone}
-                        </div>
-                        
-                        <div class="info">
-                            <strong>Message:</strong><br>
-                            ${message.replace(/\n/g, '<br>')}
-                        </div>
-                    </div>
-                </body>
-                </html>
-            `
-        });
+// === Campos esperados ===
+const camposArchivos = [
+  { name: "driver_license", maxCount: 1 },
+  { name: "profile_picture", maxCount: 1 },
+  { name: "registration", maxCount: 1 },
+  { name: "insurance", maxCount: 1 },
+  { name: "inspection", maxCount: 1 },
+  { name: "car_pictures", maxCount: 5 },
+  { name: "live_scan", maxCount: 1 },
+  { name: "tb_test", maxCount: 1 },
+  { name: "drug_test", maxCount: 1 },
+  { name: "cpr", maxCount: 1 },
+  { name: "dot", maxCount: 1 },
+  { name: "english_course", maxCount: 1 },
+  { name: "pull_notice", maxCount: 1 },
+  { name: "safe_ride", maxCount: 1 },
+  { name: "w9", maxCount: 1 }
+];
 
-        if (error) {
-            console.error('❌ Error Resend:', error);
-            return res.status(500).json({ 
-                success: false, 
-                error: 'Failed to sending email. Please try again later.'
-            });
+// === Ruta para recibir formulario ===
+app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
+  try {
+    console.log(req.body);
+    console.log(req.files);
+
+    // 📎 Construir adjuntos con nombres bonitos
+    const attachments = [];
+    let listaArchivos = "";
+
+    for (let campo in req.files) {
+      req.files[campo].forEach((file, index) => {
+        let nombreBase = nombresBonitos[campo] || campo;
+        let extension = path.extname(file.originalname);
+        let filename = nombreBase;
+
+        // Enumerar si hay múltiples archivos
+        if (req.files[campo].length > 1) {
+          filename += ` ${index + 1}`;
         }
 
-        console.log('✅ Email sent with ID:', data.id);
-        res.json({ 
-            success: true, 
-            message: 'Email sent successfully!' 
+        attachments.push({
+          filename: `${filename}${extension}`,
+          path: file.path
         });
 
-    } catch (error) {
-        console.error('❌ Error:', error);
-        res.status(500).json({ 
-            success: false, 
-            error: 'Internal error server...' 
-        });
+        // Agregar al cuerpo del correo como checklist
+        listaArchivos += `✅ ${filename}${extension}\n`;
+      });
     }
+
+    // === Configurar transporte de correo ===
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "josegabrielestrella05@gmail.com",
+        pass: "zlwd jmnq bswg nvsz"
+      }
+    });
+
+    // === Enviar correo ===
+    const mailOptions = {
+      from: "josegabrielestrella05@gmail.com",
+      to: "josegabrielestrella04@gmail.com",
+      subject: "Nueva Solicitud de Registro 🚗",
+      text: `
+📋 Datos del Usuario:
+- Name: ${req.body.name}
+- Last Name: ${req.body.last_name}
+- Email: ${req.body.email}
+- Phone Number: ${req.body.phone}
+- State: ${req.body.state}
+- City: ${req.body.city}
+
+📎 Archivos Recibidos:
+${listaArchivos}
+      `,
+      attachments
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    // Ahora:
+    res.json({ success: true, message: "Formulario y archivos enviados correctamente ✅" });
+  } catch (err) {
+  console.error(err);
+  res.status(500).json({ success: false, message: "Error al enviar el formulario ❌" });
+}
 });
 
-// Servir archivos estáticos desde la carpeta actual
-app.use(express.static(__dirname));
+// === Ruta raíz para Railway ===
+app.get("/", (req, res) => {
+  res.send("🚀 Server running in Railway!");
+});
 
-// También servir desde public/ si existe
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("public"));
 
-const PORT = process.env.PORT || 3000;
+// === Servidor ===
 app.listen(PORT, () => {
-    console.log(`✅ Server running on http://localhost:${PORT}`);
-});
-
-// Manejar cierre graceful
-process.on('SIGINT', () => {
-    console.log('\n🛑 Apagando servidor...');
-    process.exit(0);
+  console.log(`Servidor en http://localhost:${PORT}`);
 });

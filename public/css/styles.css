@@ -11145,16 +11145,30 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 }
 
+
 .driver-resources-section {
   padding: 80px 20px;
-  background-color: #f9fafb;
+  background-color: #E8E9F1; /* gris más oscuro */
   text-align: center;
 }
 
+/* Título principal */
 .driver-resources-section h2 {
   font-size: 40px;
   color: #1f2937;
   margin-bottom: 10px;
+  position: relative;
+}
+
+/* Línea decorativa debajo del título */
+.driver-resources-section h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #3857F6; /* línea azul para contraste */
+  margin: 15px auto 0;
+  border-radius: 2px;
 }
 
 .subtitle {
@@ -11194,6 +11208,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
+  overflow: hidden; /* evita scroll durante animación */
 }
 
 .cities-grid .city {
@@ -11204,76 +11219,214 @@ section#contact form#contactForm :-ms-input-placeholder {
   color: #374151;
   font-size: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  opacity: 0; /* inicial invisible */
+  transform: translateY(-10px); /* desplazamiento inicial */
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.benefits-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
+.cities-grid .city.show {
+  opacity: 1;
+  transform: translateY(0);
 }
-
-/* General layout */
-#benefits {
-  padding: 60px 0;
-  background-color: #f9fbfd;
-}
-
-.section-heading {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 40px;
+/* Sección general con fondo gris liso */
+#about-us {
+  padding: 80px 20px;
+  background-color: #E8E9F1; /* gris claro */
   color: #2c3e50;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Grid layout for benefits */
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
+/* Contenedor centrado */
+#about-us .container {
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* Individual benefit card */
+/* Título principal */
+#about-us .section-heading {
+  font-size: 36px;
+  font-weight: 700; /* bold */
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  text-align: center;
+  position: relative;
+}
+
+/* Línea decorativa debajo del título */
+#about-us .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #3857F6; /* línea negra para contraste */
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Párrafo de descripción */
+#about-us p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: 20px;
+  color: #2c3e50;
+  text-align: center;
+  font-weight: 700; /* bold */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #about-us .section-heading {
+    font-size: 30px;
+  }
+
+  #about-us p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  #about-us {
+    padding: 60px 15px;
+  }
+
+  #about-us .section-heading {
+    font-size: 26px;
+  }
+
+  #about-us p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+/* Sección general con fondo azul transparente y textura */
+#benefits {
+  padding: 80px 20px;
+  background-color: rgba(56, 87, 246, 0.7); /* azul semi-transparente */
+  
+  /* Textura sutil de puntos y líneas */
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+                    linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent);
+  background-size: 20px 20px, 40px 40px;
+
+  color: black; /* cambiar el color por defecto a negro */
+  text-align: center; /* título centrado */
+  position: relative;
+}
+
+/* Contenedor centrado */
+#benefits .benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px; 
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 10px;
+  justify-items: center; /* centra las tarjetas horizontalmente */
+}
+
+/* Título principal */
+#benefits .section-heading {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: #FCFDFF; /* título negro */
+  position: relative;
+  text-align: center;
+}
+
+/* Línea decorativa debajo del título */
+#benefits .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: rgb(252, 253, 255); /* línea negra semi-transparente */
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Tarjeta individual */
 .benefit-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255,255,255,0.9); /* blanca semi-transparente */
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
+  text-align: left;
   gap: 15px;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  list-style: none; /* quitar checks o viñetas */
 }
 
-.benefit-card:hover {
-  transform: translateY(-5px);
-}
-
+/* Icono del beneficio */
 .benefit-icon {
-  font-size: 24px;
-  color: #3498db;
-  flex-shrink: 0;
-  margin-top: 2px;
+  font-size: 36px;
+  color: #3857F6; /* azul principal */
+  margin: 0;
 }
 
+/* Título del beneficio */
+.benefit-card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000; /* título negro */
+  line-height: 1.2;
+}
+
+/* Texto del beneficio */
 .benefit-card p {
   margin: 0;
   font-size: 16px;
-  color: #2c3e50;
-  line-height: 1.5;
+  color: #000000; /* texto negro */
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #benefits .section-heading {
+    font-size: 30px;
+  }
+
+  .benefit-card p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  #benefits {
+    padding: 60px 15px;
+  }
+
+  #benefits .section-heading {
+    font-size: 26px;
+  }
+
+  .benefit-card p {
+    font-size: 14px;
+  }
 }
 
 #requirements {
-  background-color: #f9fbfd;
+  background-color: #E8E9F1;
   padding: 60px 20px;
   font-family: 'Segoe UI', sans-serif;
 }
 
 .section-heading {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   color: #2c3e50;
   text-transform: uppercase;
   text-align: center;
@@ -11296,14 +11449,19 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .requirements-image {
   width: 100%;
-  max-width: 350px;
+  max-width: px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
 .requirements-right {
-  flex: 1 1 500px;
+  flex: 1 1 650px;
+  background-color: #FAFBFF; /* color de fondo (puedes cambiarlo) */
+  padding: 30px;
+  border-radius: 12px; /* opcional, si quieres esquinas redondeadas */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1); /* opcional, sombra */
+  
 }
 
 .requirements-list {
@@ -11316,7 +11474,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 .requirements-list li {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.6;
   color: #34495e;
   position: relative;
@@ -11339,3 +11497,352 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: 14px;
 }
 
+.square:hover {
+  background-color: #4fc3f7;
+  color: white;
+  cursor: pointer;
+}
+
+.states-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.state-card {
+  background-color: #ffffff;
+  color: #1f2937;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.state-card:hover {
+  background-color: #4fc3f7;
+  color: white;
+  transform: scale(1.05);
+}
+
+.state-card.active {
+  background-color: #0284c7;
+  color: #fff;
+}
+
+.squares-container {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.square {
+  background-color: #ffffff;
+  color: #1f2937;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.square:hover {
+  background-color: #4fc3f7;
+  color: white;
+}
+/* Sección general con fondo azul transparente y textura */
+#How\ it\ Works {
+  padding: 80px 20px;
+  background-color: rgba(56, 87, 246, 0.7); /* azul semi-transparente */
+  
+  /* Textura sutil de puntos */
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+                    linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent);
+  background-size: 20px 20px, 40px 40px;
+  
+  color: white;           /* texto en blanco */
+  text-align: center;
+  position: relative;
+}
+
+/* Sombra sutil para mejorar legibilidad del texto */
+#How\ it\ Works h2,
+#How\ it\ Works p {
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Contenedor centrado */
+#How\ it\ Works .container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Título principal */
+#How\ it\ Works .section-heading {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: white;
+  position: relative;
+}
+
+/* Línea decorativa debajo del título */
+#How\ it\ Works .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: rgba(255,255,255,0.7);
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Párrafo de descripción */
+#How\ it\ Works p {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.95);
+}
+/* Contenedor centrado */
+#How\ it\ Works .container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Título principal centrado */
+#How\ it\ Works .section-heading {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+
+/* Párrafo de descripción alineado a la izquierda */
+#How\ it\ Works p {
+  font-size: px;
+  line-height: 1.7;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;         /* ahora alineado a la izquierda */
+  max-width: 1100px;         /* ancho máximo para mejor legibilidad */
+  margin-left: auto;        /* centra dentro del contenedor */
+  margin-right: auto;
+}
+/* Línea decorativa debajo del título */
+#How\ it\ Works .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.9); /* antes azul, ahora blanca semi-transparente */
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  #How\ it\ Works .section-heading {
+    font-size: 30px;
+  }
+
+  #How\ it\ Works p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  #How\ it\ Works {
+    padding: 60px 15px;
+  }
+
+  #How\ it\ Works .section-heading {
+    font-size: 26px;
+  }
+
+  #How\ it\ Works p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+.benefits-container 
+ {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  }
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  min-width: 250px;
+  text-align: justify;
+  }
+.benefits-list li {
+  background: #f9fafb;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .benefits-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 768px) {
+            .benefits-list {
+                min-width: 100%;
+            }
+        }
+        /* Sección general */
+#Why-us {
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  color: white;
+
+  /* Imagen de fondo con degradado vertical suave */
+  background-image: 
+    linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%), /* degradado más suave arriba */
+    url("../assets/img/why-us.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transition: background 0.6s ease; /* transición suave si cambian colores o efectos */
+}
+
+/* Contenedor del contenido sobre el overlay */
+#Why-us .container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Título principal */
+#Why-us .section-heading {
+  color: #ffffff !important; /* fuerza que el título sea blanco */
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  position: relative;
+}
+/* Línea decorativa debajo del título */
+#Why-us .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: rgba(255,255,255,0.7);
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Párrafo descriptivo */
+#Why-us p {
+  font-size: 20px;
+  line-height: 1.7;
+  margin-top: 20px;
+  color: white;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #Why-us .section-heading {
+    font-size: 30px;
+  }
+
+  #Why-us p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  #Why-us {
+    padding: 60px 15px;
+  }
+
+  #Why-us .section-heading {
+    font-size: 26px;
+  }
+
+  #Why-us p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+body {
+      background: #f8f9fa;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+    .form-container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #1a3e8c;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    label {
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .form-control, .form-select {
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .btn-primary {
+      background: #1a3e8c;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      font-size: 16px;
+    }
+    .btn-primary:hover {
+      background: #163370;
+    }
