@@ -281,15 +281,15 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
       },
       subject: "New Register Request 🚗",
       text: `📋 User Data:
-            - Name: ${req.body.name}
-            - Last Name: ${req.body.last_name}
-            - Email: ${req.body.email}
-            - Phone Number: ${req.body.phone}
-            - State: ${req.body.state}
-            - City: ${req.body.city}
+- Name: ${req.body.name}
+- Last Name: ${req.body.last_name}
+- Email: ${req.body.email}
+- Phone Number: ${req.body.phone}
+- State: ${req.body.state}
+- City: ${req.body.city}
 
-            📎 Received Files:
-            ${listaArchivos}`,
+📎 Received Files:
+${listaArchivos}`,
       attachments
     };
 
