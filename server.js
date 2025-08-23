@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import nodemailer from 'nodemailer';
+import multer from 'multer';
 
 dotenv.config({ path: 'secrets.env' });
 
@@ -10,7 +11,6 @@ console.log('🔍 Loading envoirements variables from: secrets.env');
 console.log('📧 Email config:', process.env.EMAIL_USER ? 'PRESENT' : 'AUSENT');
 
 const app = express();
-const multer = require("multer");
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -215,15 +215,21 @@ const camposArchivos = [
 // === Ruta para recibir formulario ===
 app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
   try {
-    console.log(req.body);
-    console.log(req.files);
+    console.log("📦 REQ.BODY:", JSON.stringify(req.body, null, 2));
+    console.log("📁 REQ.FILES:", JSON.stringify(req.files, null, 2));
 
     // 📎 Construir adjuntos con nombres bonitos
     const attachments = [];
     let listaArchivos = "";
 
+    console.log("🔄 Procesando archivos...");
+    
     for (let campo in req.files) {
+      console.log(`📂 Campo: ${campo}`);
+      
       req.files[campo].forEach((file, index) => {
+        console.log(`📄 Archivo ${index + 1}:`, file);
+
         let nombreBase = nombresBonitos[campo] || campo;
         let extension = path.extname(file.originalname);
         let filename = nombreBase;
@@ -232,6 +238,10 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
         if (req.files[campo].length > 1) {
           filename += ` ${index + 1}`;
         }
+
+        console.log(`🏷️ Nombre final: ${filename}${extension}`);
+        console.log(`📁 Ruta: ${file.path}`);
+        console.log(`📏 Tamaño: ${file.size} bytes`);
 
         attachments.push({
           filename: `${filename}${extension}`,
@@ -242,41 +252,78 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
         listaArchivos += `✅ ${filename}${extension}\n`;
       });
     }
+
+    console.log("📎 Adjuntos preparados:", attachments);
+    console.log("📝 Lista de archivos:\n", listaArchivos);
+
     // === Enviar correo ===
+    console.log("📤 Preparando envío de correo...");
+    
+    const transporter = nodemailer.createTransport({
+            service: 'gmail', // Puedes usar 'hotmail', 'yahoo', etc.
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_USER, // Tu email completo
+                pass: process.env.EMAIL_PASSWORD // Tu contraseña de aplicación
+            }
+        });
+
     const mailOptionsDriverRegistration = {
-       from: {
-          name: "AlexYah Transportation",
-          address: process.env.EMAIL_USER
+      from: {
+        name: "AlexYah Transportation",
+        address: process.env.EMAIL_USER
       },
       to: process.env.EMAIL_USER,
       replyTo: {
-          name: name,
-          address: email
+        name: req.body.name,
+        address: req.body.email
       },
       subject: "New Register Request 🚗",
-      text: `
-📋 User Data:
-- Name: ${req.body.name}
-- Last Name: ${req.body.last_name}
-- Email: ${req.body.email}
-- Phone Number: ${req.body.phone}
-- State: ${req.body.state}
-- City: ${req.body.city}
+      text: `📋 User Data:
+            - Name: ${req.body.name}
+            - Last Name: ${req.body.last_name}
+            - Email: ${req.body.email}
+            - Phone Number: ${req.body.phone}
+            - State: ${req.body.state}
+            - City: ${req.body.city}
 
-📎 Received Files:
-${listaArchivos}
-      `,
+            📎 Received Files:
+            ${listaArchivos}`,
       attachments
     };
 
-    await transporter.sendMail(mailOptionsDriverRegistration);
+    console.log("✉️ Opciones de correo:", mailOptionsDriverRegistration);
 
-    // Ahora:
+    // Verificar que el transporter esté configurado
+    console.log("🔧 Transporter configurado:", !!transporter);
+
+    // Enviar correo
+    console.log("🚀 Enviando correo...");
+    const info = await transporter.sendMail(mailOptionsDriverRegistration);
+    
+    console.log("✅ Correo enviado con ID:", info.messageId);
+    console.log("📧 Respuesta:", info);
+
+    // Respuesta al cliente
     res.json({ success: true, message: "Driver form was sent successfully ✅" });
+
   } catch (err) {
-  console.error(err);
-  res.status(500).json({ success: false, message: "Failed to sending form ❌" });
-}
+    console.error("❌ ERROR DETALLADO:");
+    console.error("📍 Mensaje:", err.message);
+    console.error("📍 Stack:", err.stack);
+    console.error("📍 Código:", err.code);
+    
+    if (err.response) {
+      console.error("📍 Respuesta SMTP:", err.response);
+    }
+    
+    res.status(500).json({ 
+      success: false, 
+      message: "Failed to sending form ❌",
+      error: err.message 
+    });
+  }
 });
 
 // === Ruta raíz para Render ===
@@ -287,6 +334,6 @@ app.get("/", (req, res) => {
 app.use(express.static('./'));
       
 // === Servidor ===
-app.listen(PORT, () => {
-  console.log(`Servidor en http://localhost:${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Servidor en http://localhost:${process.env.PORT}`);
 });
