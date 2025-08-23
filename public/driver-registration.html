@@ -39,207 +39,151 @@
 
     <!-- Formulario -->
         <section class="page-section bg-light" id="driver-registration" style="margin-top: 100px;"> 
-            <div class="container">
-                <h2 class="text-center mt-0">APPLY</h2>
-                <hr class="divider" />   
-                <p class="text-center text-muted mb-5">Home/Apply</p>  
-            </div>
-        <!-- Card -->
-        <div class="card border bg-transparent">
-            <div class="card-body">
-               <form id="driverForm"  
-                action="https://alexyahtransportation-1.onrender.com"  
-                method="POST"  
-                enctype="multipart/form-data"  
-                class="container p-4 shadow rounded bg-white" 
-                style="max-width: 900px;">
+  <div class="container">
+    <h2 class="text-center mt-0">APPLY</h2>
+    <hr class="divider" />   
+    <p class="text-center text-muted mb-5">Home / Apply</p>  
+  </div>
 
-                    <h2 class="text-center mb-3 fw-bold">Driver Registration</h2>
-                    <p class="text-center text-muted mb-4">Complete all fields below to apply as a driver.</p>
+  <!-- Card -->
+  <div class="form-container">
+    <form id="driverForm"  
+      action="https://alexyahtransportation-1.onrender.com/upload"  
+      method="POST"  
+      enctype="multipart/form-data"  
+      class="container p-4 shadow rounded bg-white" 
+      style="max-width: 900px;">
 
-                     <!-- Nombre -->
-                    <div class="mb-4 row">
-                        <label class="col-sm-4 col-form-label">Name*</label>
-                        <div class="col-sm-8">
-                        <input type="text" class="form-control" name="name" required>
-                        </div>
-                    </div>
-                    <!-- Last Name -->
-                    <div class="mb-4 row">
-                        <label class="col-sm-4 col-form-label">Last Name*</label>
-                        <div class="col-sm-8">
-                        <input type="text" class="form-control" name="name" required>
-                        </div>
-                    </div>
-                    <!-- Email -->
-                    <div class="mb-4 row">
-                        <label class="col-sm-4 col-form-label">Email*</label>
-                        <div class="col-sm-8">
-                        <input type="email" class="form-control" name="email" required>
-                        </div>
-                    </div>
+      <h2 class="text-center mb-4">Apply to AlexYah</h2>
 
-                    <!-- phone number -->
-                    <div class="mb-4 row">
-                        <label class="col-sm-4 col-form-label">Phone number*</label>
-                        <div class="col-sm-8">
-                        <input type="number" class="form-control" name="phone" required>
-                        </div>
-                    </div>
+      <div class="row">
+        <!-- Nombres -->
+        <div class="col-md-6 mb-3">
+          <label>First Name*</label>
+          <input type="text" name="first_name" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Last Name*</label>
+          <input type="text" name="last_name" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Email*</label>
+          <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Phone Number*</label>
+          <input type="text" name="phone" class="form-control" required>
+        </div>
 
-                    <!-- State -->
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Pick your State*</label>
-                        <div class="col-12 col-md-8">
-                        <select id="state" name="state" class="form-select w-100" required>
-                            <option disabled selected>Select a State</option>
-                            <option value="California">California</option>
-                            <option value="Florida">Florida</option>
-                            <option value="Missouri">Missouri</option>
-                            <option value="Texas">Texas</option>
-                        </select>
-                    </div>
+        <!-- State -->
+        <div class="col-md-6 mb-3">
+          <label>Pick your State*</label>
+          <select id="state" name="state" class="form-select" required>
+            <option disabled selected>Select a State</option>
+            <option value="California">California</option>
+            <option value="Florida">Florida</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Texas">Texas</option>
+          </select>
+        </div>
 
-                    <!-- City -->
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Pick your City*</label>
-                        <div class="col-12 col-md-8">
-                        <select id="city" name="city" class="form-select w-100" required>
-                            <option disabled selected>Select a City</option>
-                        </select>
-                        </div>
-                    </div>
+        <!-- City -->
+        <div class="col-md-6 mb-3">
+          <label>Pick your City*</label>
+          <select id="city" name="city" class="form-select" required>
+            <option disabled selected>Select a City</option>
+          </select>
+        </div>
+      </div>
 
-                    <hr class="my-4">
+      <!-- Archivos -->
+      <div class="mb-3">
+        <label>Driver License (DL)*</label>
+        <input type="file" name="driver_license" class="form-control" required>
+      </div>
 
-                    <!-- Section Title -->
-                    <h5 class="fw-bold mb-3 text-primary">Upload Required Documents</h5>
+      <div class="mb-3">
+        <label>Profile Picture*</label>
+        <input type="file" name="profile_picture" class="form-control" required>
+      </div>
 
-                    <!-- Loop de documentos -->
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Driver License*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="driver_license" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>Insurance*</label>
+        <input type="file" name="insurance" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Profile Picture*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="profile_picture" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>Inspection*</label>
+        <input type="file" name="inspection" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Registration*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="registration" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>5 Pictures of the Car (Front, Back, Sides, Odometer)*</label>
+        <input type="file" name="car_pictures" class="form-control" multiple required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Insurance*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="insurance" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>Live Scan*</label>
+        <input type="file" name="live_scan" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Inspection*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="inspection" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>Tb-Test*</label>
+        <input type="file" name="tb_test" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Car Pictures (5)*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="car_pictures" class="form-control w-100" accept="image/*" multiple required>
-                        <small class="text-muted">Upload Front, Back, Sides, and Odometer</small>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>Drug Test*</label>
+        <input type="file" name="drug_test" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Live Scan*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="live_scan" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>CPR*</label>
+        <input type="file" name="cpr" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">TB Test*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="tb_test" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>DOT*</label>
+        <input type="file" name="dot" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Drug Test*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="drug_test" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>English Course</label>
+        <input type="file" name="english_course" class="form-control">
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">CPR*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="cpr" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>Pull Notice*</label>
+        <input type="file" name="pull_notice" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">DOT*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="dot" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>Safe Ride*</label>
+        <input type="file" name="safe_ride" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">English Course*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="english_course" class="form-control w-100" accept="image/*">
-                        </div>
-                    </div>
+      <div class="mb-3">
+        <label>W9*</label>
+        <input type="file" name="w9" class="form-control" required>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Pull Notice*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="pull_notice" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <!-- Consentimiento -->
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" name="consentText" id="consentText" required>
+        <label class="form-check-label" for="consentText">
+          By checking this box, I consent to receive transactional messages related to my account...
+        </label>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Safe Ride*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="safe_ride" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+      <!-- Botón -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary px-5">Submit Registration</button>
+      </div>
 
-                    <div class="mb-4 row">
-                        <label class="col-12 col-md-4 col-form-label">W9*</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="w9" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
+    </form>
+  </div>
+</section>
 
-                    <hr class="my-4">
-
-                    <!-- Consent -->
-                    <div class="form-check mb-4">
-                        <input class="form-check-input" type="checkbox" name="consentText" id="consentText" required>
-                        <label class="form-check-label" for="consentText">
-                        By checking this box, I consent to receive transactional messages related to my account...
-                        </label>
-                    </div>
-
-                    <!-- Botón -->
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Submit Registration</button>
-                    </div>
-                </form>
-            </div>
-    
-    </section>
     <!-- Footer-->
         <footer class="footer py-4">
             <div class="container">
@@ -299,5 +243,81 @@
             });
         });
     </script>
+    <script>
+    const stateSelect = document.getElementById("state");
+    const citySelect = document.getElementById("city");
+
+     const citiesByState = {
+        California: [
+          "Alameda", "Antioch", "Berkeley", "Burlingame", "Campbell", "Castro Valley", "Citrus Heights",
+          "Concord", "Cupertino", "Dublin", "Elk Grove", "Fairfield", "Foster City", "Hayward", "Lodi",
+          "Los Gatos", "Menlo Park", "Milpitas", "Modesto", "Mountain View", "Morgan Hill", "Napa",
+          "Oakland", "San Jose", "Santa Clara", "Santa Cruz", "San Lorenzo", "San Pablo", "Sacramento",
+          "Saratoga", "Scotts Valley", "Stockton", "Sunnyvale", "Richmond", "Vallejo", "Watsonville"
+        ],
+        Florida: [
+          "Auburndale", "Bartow", "Lakeland", "Mulberry"
+        ],
+        Missouri: [
+          "Independence", "Kansas City", "Lee’s Summit", "Saint Louis"
+        ],
+        Texas: [
+          "Houston", "Katy"
+        ]
+      };
+
+
+    stateSelect.addEventListener("change", function () {
+      const selectedState = this.value;
+      const cities = citiesByState[selectedState] || [];
+
+      // Limpiar opciones anteriores
+      citySelect.innerHTML = '<option value="0">Select a city</option>';
+
+      // Agregar nuevas ciudades
+      cities.forEach(function (city) {
+        const option = document.createElement("option");
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+      });
+    });
+  </script>
+  <script>
+  const citiesbyState = {
+    California: [
+      "Alameda", "Antioch", "Berkeley", "Burlingame", "Campbell", "Castro Valley", "Citrus Heights",
+      "Concord", "Cupertino", "Dublin", "Elk Grove", "Fairfield", "Foster City", "Hayward", "Lodi",
+      "Los Gatos", "Menlo Park", "Milpitas", "Modesto", "Mountain View", "Morgan Hill", "Napa",
+      "Oakland", "San Jose", "Santa Clara", "Santa Cruz", "San Lorenzo", "San Pablo", "Sacramento",
+      "Saratoga", "Scotts Valley", "Stockton", "Sunnyvale", "Richmond", "Vallejo", "Watsonville"
+    ],
+    Florida: ["Auburndale", "Bartow", "Lakeland", "Mulberry"],
+    Missouri: ["Independence", "Kansas City", "Lee’s Summit", "Saint Louis"],
+    Texas: ["Houston", "Katy"]
+  };
+
+  const stateCards = document.querySelectorAll('.state-card');
+  const citiesContainer = document.getElementById('citiesContainer');
+
+  stateCards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Eliminar 'active' de todos
+      stateCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+
+      const state = card.dataset.state;
+      const cities = citiesByState[state] || [];
+
+      citiesContainer.innerHTML = "";
+      cities.forEach(city => {
+        const div = document.createElement("div");
+        div.className = "square";
+        div.textContent = city;
+        citiesContainer.appendChild(div);
+      });
+    });
+  });
+</script>
 </body>
 </html>
