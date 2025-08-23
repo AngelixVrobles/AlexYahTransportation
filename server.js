@@ -53,9 +53,15 @@ app.post('/api/send-email', async (req, res) => {
 
         // Configurar el email
         const mailOptions = {
-            from: `"${name}" <${email}>`, // Email que envía
-            to: process.env.EMAIL_USER, // Email que recibe
-            replyTo: email, // Email del cliente para responder
+            from: {
+                name: "AlexYah Transportation",
+                address: process.env.EMAIL_USER
+            },
+            to: process.env.EMAIL_USER,
+            replyTo: {
+                name: name,
+                address: email
+            }, // Email del cliente para responder
             subject: `📧 New Message from ${name} - AlexYah Transportation`,
             html: `
                 <!DOCTYPE html>
