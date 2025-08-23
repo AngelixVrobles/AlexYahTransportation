@@ -10,11 +10,13 @@ console.log('🔍 Loading envoirements variables from: secrets.env');
 console.log('📧 Email config:', process.env.EMAIL_USER ? 'PRESENT' : 'AUSENT');
 
 const app = express();
+const multer = require("multer");
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Ruta de prueba
 app.get('/api/test', (req, res) => {
@@ -156,14 +158,133 @@ app.post('/api/send-email', async (req, res) => {
             error: 'Error sending email. Please try again later.',
             details: error.message
         });
-    }
+
+// === Multer config ===
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // carpeta donde se guardan
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
 });
 
-// Servir archivos estáticos
-app.use(express.static('./'));
+const upload = multer({ storage });
 
-const PORT = process.env.PORT || 5000;
+// === Diccionario de nombres bonitos ===
+const nombresBonitos = {
+  driver_license: "Driver License",
+  profile_picture: "Profile Picture",
+  registration: "Registration",
+  insurance: "Insurance",
+  inspection: "Inspection",
+  car_pictures: "Car Picture",
+  live_scan: "Live Scan",
+  tb_test: "TB Test",
+  drug_test: "Drug Test",
+  cpr: "CPR",
+  dot: "DOT",
+  english_course: "English Course",
+  pull_notice: "Pull Notice",
+  safe_ride: "Safe Ride",
+  w9: "W9"
+};
+
+// === Campos esperados ===
+const camposArchivos = [
+  { name: "driver_license", maxCount: 1 },
+  { name: "profile_picture", maxCount: 1 },
+  { name: "registration", maxCount: 1 },
+  { name: "insurance", maxCount: 1 },
+  { name: "inspection", maxCount: 1 },
+  { name: "car_pictures", maxCount: 5 },
+  { name: "live_scan", maxCount: 1 },
+  { name: "tb_test", maxCount: 1 },
+  { name: "drug_test", maxCount: 1 },
+  { name: "cpr", maxCount: 1 },
+  { name: "dot", maxCount: 1 },
+  { name: "english_course", maxCount: 1 },
+  { name: "pull_notice", maxCount: 1 },
+  { name: "safe_ride", maxCount: 1 },
+  { name: "w9", maxCount: 1 }
+];
+
+// === Ruta para recibir formulario ===
+app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
+  try {
+    console.log(req.body);
+    console.log(req.files);
+
+    // 📎 Construir adjuntos con nombres bonitos
+    const attachments = [];
+    let listaArchivos = "";
+
+    for (let campo in req.files) {
+      req.files[campo].forEach((file, index) => {
+        let nombreBase = nombresBonitos[campo] || campo;
+        let extension = path.extname(file.originalname);
+        let filename = nombreBase;
+
+        // Enumerar si hay múltiples archivos
+        if (req.files[campo].length > 1) {
+          filename += ` ${index + 1}`;
+        }
+
+        attachments.push({
+          filename: `${filename}${extension}`,
+          path: file.path
+        });
+
+        // Agregar al cuerpo del correo como checklist
+        listaArchivos += `✅ ${filename}${extension}\n`;
+      });
+    }
+    // === Enviar correo ===
+    const mailOptionsDriverRegistration = {
+       from: {
+          name: "AlexYah Transportation",
+          address: process.env.EMAIL_USER
+      },
+      to: process.env.EMAIL_USER,
+      replyTo: {
+          name: name,
+          address: email
+      },
+      subject: "New Register Request 🚗",
+      text: `
+📋 User Data:
+- Name: ${req.body.name}
+- Last Name: ${req.body.last_name}
+- Email: ${req.body.email}
+- Phone Number: ${req.body.phone}
+- State: ${req.body.state}
+- City: ${req.body.city}
+
+📎 Received Files:
+${listaArchivos}
+      `,
+      attachments
+    };
+
+    await transporter.sendMail(mailOptionsDriverRegistration);
+
+    // Ahora:
+    res.json({ success: true, message: "Driver form was sent successfully ✅" });
+  } catch (err) {
+  console.error(err);
+  res.status(500).json({ success: false, message: "Failed to sending form ❌" });
+}
+});
+
+// === Ruta raíz para Render ===
+app.get("/", (req, res) => {
+  res.send("🚀 Server running in Render!");
+});
+
+app.use(express.static('./'));
+      
+// === Servidor ===
 app.listen(PORT, () => {
-    console.log(`✅ Server running on http://localhost:${PORT}`);
-    console.log(`📧 Email config: ${process.env.EMAIL_USER ? 'ACTIVE' : 'INACTIVE'}`);
+  console.log(`Servidor en http://localhost:${PORT}`);
 });
