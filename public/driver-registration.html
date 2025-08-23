@@ -18,7 +18,7 @@
     <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#index.html"><img src="assets/img/logos/AlexYahTransportationLogo.png" alt="..." /></a>
+                <a class="navbar-brand" href="#page-top"><img src="assets/img/logos/AlexYahTransportationLogo.png" alt="..." /></a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -29,8 +29,8 @@
                         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.html#About us">About Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="#Driver Registration">Driver Registration</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#Hot it Works">Hot it Works</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#why us">Why Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#about">Hot it Works</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#team">Why Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -38,200 +38,140 @@
         </nav>
 
     <!-- Formulario -->
-    <section class="page-section bg-light" id="driver-registration" style="margin-top: 100px;">
-    <div class="container">
-
+        <section class="page-section bg-light" id="driver-registration" style="margin-top: 100px;"> 
+            <div class="container">
+                <h2 class="text-center mt-0">APPLY</h2>
+                <hr class="divider" />   
+                <p class="text-center text-muted mb-5">Home/Apply</p>  
+            </div>
         <!-- Card -->
-        <div class="card border bg-transparent">
-            <div class="card-body">
-               <form id="driverForm"  
-                action="https://alexyahtransportation-1.onrender.com"  
-                method="POST"  
-                enctype="multipart/form-data"  
-                class="container p-4 shadow rounded bg-white" 
-                style="max-width: 900px;">
-
-                    <h2 class="text-center mb-3 fw-bold">🚘 Driver Registration</h2>
-                    <p class="text-center text-muted mb-4">Complete all fields below to apply as a driver.</p>
-
-                     <!-- Nombre -->
-                    <div class="mb-4 row">
-                        <label class="col-sm-4 col-form-label">Name *</label>
-                        <div class="col-sm-8">
-                        <input type="text" class="form-control" name="name" required>
-                        </div>
+            <div class="form-container">
+                <h2>Apply to AlexYah</h2>
+                <form id="driverForm" class="mx-auto" style="max-width: 1000px;"> <!-- Contenedor centrado con ancho máximo -->
+                    
+                     <!-- Nombres -->
+                    <div class="mb-3">
+                        <label>First Name*</label>
+                        <input type="text" name="first_name" class="form-control" required>
                     </div>
 
-                    <!-- Email -->
-                    <div class="mb-4 row">
-                        <label class="col-sm-4 col-form-label">Email *</label>
-                        <div class="col-sm-8">
-                        <input type="email" class="form-control" name="email" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Last Name*</label>
+                        <input type="text" name="last_name" class="form-control" required>
                     </div>
 
-                    <!-- phone number -->
-                    <div class="mb-4 row">
-                        <label class="col-sm-4 col-form-label">Phone number *</label>
-                        <div class="col-sm-8">
-                        <input type="number" class="form-control" name="phone" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Email*</label>
+                        <input type="email" name="email" class="form-control" required>
                     </div>
 
-                    <!-- State -->
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Pick your State *</label>
-                        <div class="col-12 col-md-8">
-                        <select id="state" name="state" class="form-select w-100" required>
-                            <option disabled selected>Select a State</option>
-                            <option value="California">California</option>
-                            <option value="Florida">Florida</option>
-                            <option value="Missouri">Missouri</option>
-                            <option value="Texas">Texas</option>
+                    <div class="mb-3">
+                        <label>Home Address*</label>
+                        <input type="text" name="address" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>City*</label>
+                        <input type="text" name="city" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Pick your State*</label>
+                        <select class="form-select" name="state" required>
+                        <option value="">Select a State</option>
+                        <option value="California">California</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Texas">Texas</option>
                         </select>
-                        </div>
                     </div>
 
-                    <!-- City -->
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Pick your City *</label>
-                        <div class="col-12 col-md-8">
-                        <select id="city" name="city" class="form-select w-100" required>
-                            <option disabled selected>Select a City</option>
-                        </select>
-                        </div>
+                    <!-- Archivos -->
+                    <div class="mb-3">
+                        <label>Driver License (DL)*</label>
+                        <input type="file" name="driver_license" class="form-control" required>
                     </div>
 
-                    <hr class="my-4">
-
-                    <!-- Section Title -->
-                    <h5 class="fw-bold mb-3 text-primary">📎 Upload Required Documents</h5>
-
-                    <!-- Loop de documentos -->
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Driver License *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="driver_license" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Profile Picture*</label>
+                        <input type="file" name="profile_picture" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Profile Picture *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="profile_picture" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Insurance*</label>
+                        <input type="file" name="insurance" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Registration *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="registration" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Inspection*</label>
+                        <input type="file" name="inspection" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Insurance *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="insurance" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>5 Pictures of the Car (Front, Back, Sides, Odometer)*</label>
+                        <input type="file" name="car_pictures" class="form-control" multiple required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Inspection *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="inspection" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Live Scan*</label>
+                        <input type="file" name="live_scan" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Car Pictures (5) *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="car_pictures" class="form-control w-100" accept="image/*" multiple required>
-                        <small class="text-muted">Upload Front, Back, Sides, and Odometer</small>
-                        </div>
+                    <div class="mb-3">
+                        <label>Tb-Test*</label>
+                        <input type="file" name="tb_test" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Live Scan *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="live_scan" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Drug Test*</label>
+                        <input type="file" name="drug_test" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">TB Test *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="tb_test" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>CPR*</label>
+                        <input type="file" name="cpr" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Drug Test *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="drug_test" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>DOT*</label>
+                        <input type="file" name="dot" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">CPR *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="cpr" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>English Course</label>
+                        <input type="file" name="english_course" class="form-control">
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">DOT *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="dot" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Pull Notice*</label>
+                        <input type="file" name="pull_notice" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">English Course</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="english_course" class="form-control w-100" accept="image/*">
-                        </div>
+                    <div class="mb-3">
+                        <label>Safe Ride*</label>
+                        <input type="file" name="safe_ride" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Pull Notice *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="pull_notice" class="form-control w-100" accept="image/*" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>W9*</label>
+                        <input type="file" name="w9" class="form-control" required>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-12 col-md-4 col-form-label">Safe Ride *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="safe_ride" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
-
-                    <div class="mb-4 row">
-                        <label class="col-12 col-md-4 col-form-label">W9 *</label>
-                        <div class="col-12 col-md-8">
-                        <input type="file" name="w9" class="form-control w-100" accept="image/*" required>
-                        </div>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <!-- Consent -->
-                    <div class="form-check mb-4">
+                    <!-- Consentimiento -->
+                    <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" name="consentText" id="consentText" required>
                         <label class="form-check-label" for="consentText">
-                        I consent to receive transactional messages related to my account.
+                        By checking this box, I consent to receive transactional messages related to my account...
                         </label>
                     </div>
 
-                    <!-- Submit -->
+                    <!-- Botón -->
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-lg w-100 w-md-auto">Submit Registration</button>
+                        <button type="submit" class="btn btn-primary">Submit Registration</button>
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
+    
     </section>
     <!-- Footer-->
         <footer class="footer py-4">
@@ -290,68 +230,6 @@
                     }
                 }
             });
-        });
-    </script>
-    <script>
-        const stateSelect = document.getElementById("state");
-        const citySelect = document.getElementById("city");
-
-        const citiesByState = {
-            California: [
-            "Alameda", "Antioch", "Berkeley", "Burlingame", "Campbell", "Castro Valley", "Citrus Heights",
-            "Concord", "Cupertino", "Dublin", "Elk Grove", "Fairfield", "Foster City", "Hayward", "Lodi",
-            "Los Gatos", "Menlo Park", "Milpitas", "Modesto", "Mountain View", "Morgan Hill", "Napa",
-            "Oakland", "San Jose", "Santa Clara", "Santa Cruz", "San Lorenzo", "San Pablo", "Sacramento",
-            "Saratoga", "Scotts Valley", "Stockton", "Sunnyvale", "Richmond", "Vallejo", "Watsonville"
-            ],
-            Florida: [
-            "Auburndale", "Bartow", "Lakeland", "Mulberry"
-            ],
-            Missouri: [
-            "Independence", "Kansas City", "Lee’s Summit", "Saint Louis"
-            ],
-            Texas: [
-            "Houston", "Katy"
-            ]
-        };
-
-
-        stateSelect.addEventListener("change", function () {
-        const selectedState = this.value;
-        const cities = citiesByState[selectedState] || [];
-
-        // Limpiar opciones anteriores
-        citySelect.innerHTML = '<option value="0">Select a city</option>';
-
-        // Agregar nuevas ciudades
-        cities.forEach(function (city) {
-            const option = document.createElement("option");
-            option.value = city;
-            option.textContent = city;
-            citySelect.appendChild(option);
-        });
-        });
-  </script>
-    
-    <script>
-        document.getElementById("driverForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        try {
-            const respuesta = await fetch("http://localhost:3000/upload", {
-            method: "POST",
-            body: formData
-            });
-
-            const resultado = await respuesta.text();
-            alert("Servidor respondió: " + resultado);
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Ocurrió un error al enviar el formulario ❌");
-        }
         });
     </script>
 </body>

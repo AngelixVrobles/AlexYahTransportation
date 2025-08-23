@@ -11604,3 +11604,41 @@ section#contact form#contactForm :-ms-input-placeholder {
                 min-width: 100%;
             }
         }
+body {
+      background: #f8f9fa;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+    .form-container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #1a3e8c;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    label {
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .form-control, .form-select {
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .btn-primary {
+      background: #1a3e8c;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      font-size: 16px;
+    }
+    .btn-primary:hover {
+      background: #163370;
+    }
+  
