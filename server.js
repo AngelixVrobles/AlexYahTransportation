@@ -158,6 +158,8 @@ app.post('/api/send-email', async (req, res) => {
             error: 'Error sending email. Please try again later.',
             details: error.message
         });
+    }
+});
 
 // === Multer config ===
 const storage = multer.diskStorage({
