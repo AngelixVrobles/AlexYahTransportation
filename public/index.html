@@ -449,147 +449,156 @@
             </div>
         </div>
 
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-        
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const form = document.getElementById('contactForm');
-                const submitButton = document.getElementById('submitButton');
-                const successMessage = document.getElementById('submitSuccessMessage');
-                const errorMessage = document.getElementById('submitErrorMessage');
+  <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
 
-                form.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    // Remover clases de validación anteriores
-                    form.classList.remove('was-validated');
-                    
-                    // Validar formulario
-                    if (!form.checkValidity()) {
-                        form.classList.add('was-validated');
-                        return;
-                    }
+    <!-- Bootstrap 5 Bundle JS (incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-                    // Mostrar loading
-                    const originalText = submitButton.innerHTML;
-                    submitButton.innerHTML = 'Sending...';
-                    submitButton.disabled = true;
-                    
-                    // Ocultar mensajes previos
-                    successMessage.classList.add('d-none');
-                    errorMessage.classList.add('d-none');
+    <!-- Tu formulario (fetch a localhost) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contactForm");
+        const submitButton = document.getElementById("submitButton");
+        const successMessage = document.getElementById("submitSuccessMessage");
+        const errorMessage = document.getElementById("submitErrorMessage");
 
-                    // Obtener datos del formulario
-                    const formData = {
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value,
-                        phone: document.getElementById('phone').value,
-                        message: document.getElementById('message').value
-                    };
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          form.classList.remove("was-validated");
 
-                    try {
-                        const response = await fetch(`http://localhost:5000/api/send-email`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(formData)
-                        });
+          if (!form.checkValidity()) {
+            form.classList.add("was-validated");
+            return;
+          }
 
-                        const result = await response.json();
+          const originalText = submitButton.innerHTML;
+          submitButton.innerHTML = "Sending...";
+          submitButton.disabled = true;
 
-                        if (response.ok) {
-                            // Mostrar mensaje de éxito
-                            successMessage.classList.remove('d-none');
-                            form.reset();
-                            form.classList.remove('was-validated');
-                            
-                            // Actualizar mensaje de éxito
-                            successMessage.innerHTML = `
-                                <div class="text-center text-white mb-3">
-                                    <div class="fw-bolder">Message sent successfully!</div>
-                                    We'll get back to you soon.
-                                </div>
-                            `;
-                        } else {
-                            throw new Error(result.error || 'Internal server error');
-                        }
+          successMessage.classList.add("d-none");
+          errorMessage.classList.add("d-none");
 
-                    } catch (error) {
-                        console.error('Error:', error);
-                        // Mostrar mensaje de error
-                        errorMessage.classList.remove('d-none');
-                        errorMessage.innerHTML = `
-                            <div class="text-center text-danger mb-3">
-                                Error: ${error.message || 'Error enviando mensaje'}
-                            </div>
-                        `;
-                    } finally {
-                        // Restaurar botón
-                        submitButton.innerHTML = originalText;
-                        submitButton.disabled = false;
-                    }
-                });
+          const formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            message: document.getElementById("message").value,
+          };
 
-                // Remover la clase "disabled" del botón
-                submitButton.classList.remove('disabled');
+          try {
+            const response = await fetch(`http://localhost:5000/api/send-email`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
             });
-        </script>
 
-        <script>
-            const cityData = {
-            California: [
-                "Alameda", "Antioch", "Berkeley", "Burlingame", "Campbell", "Castro Valley",
-                "Citrus Heights", "Concord", "Cupertino", "Dublin", "Elk Grove", "Fairfield",
-                "Foster City", "Hayward", "Lodi", "Los Gatos", "Menlo Park", "Milpitas", 
-                "Modesto", "Mountain View", "Morgan Hill", "Napa", "Oakland", "San Jose", 
-                "Santa Clara", "Santa Cruz", "San Lorenzo", "San Pablo", "Sacramento", 
-                "Saratoga", "Scotts Valley", "Stockton", "Sunnyvale", "Richmond", 
-                "Vallejo", "Watsonville"
-            ],
-            Florida: ["Auburndale", "Bartow", "Lakeland", "Mulberry"],
-            Missouri: ["Independence", "Kansas City", "Lee’s Summit", "Saint Louis"],
-            Texas: ["Houston", "Katy"]
-            };
+            const result = await response.json();
 
-const buttons = document.querySelectorAll('.state-btn');
-const cityContainer = document.getElementById('citiesGrid');
+            if (response.ok) {
+              successMessage.classList.remove("d-none");
+              form.reset();
+              form.classList.remove("was-validated");
+              successMessage.innerHTML = `
+                <div class="text-center text-white mb-3">
+                  <div class="fw-bolder">Message sent successfully!</div>
+                  We'll get back to you soon.
+                </div>`;
+            } else {
+              throw new Error(result.error || "Internal server error");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            errorMessage.classList.remove("d-none");
+            errorMessage.innerHTML = `
+              <div class="text-center text-danger mb-3">
+                Error: ${error.message || "Error enviando mensaje"}
+              </div>`;
+          } finally {
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+          }
+        });
 
-buttons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Toggle botón activo
-    const isActive = btn.classList.contains('active');
-    buttons.forEach(b => b.classList.remove('active'));
-    
-    if (!isActive) btn.classList.add('active');
-
-    // Limpia ciudades
-    cityContainer.innerHTML = '';
-
-    if (!isActive) {
-      const selectedState = btn.dataset.state;
-      const cities = cityData[selectedState] || [];
-
-      cities.forEach((city, index) => {
-        const cityEl = document.createElement('div');
-        cityEl.classList.add('city');
-        cityEl.textContent = city;
-        cityContainer.appendChild(cityEl);
-
-        // Animación con retraso en cascada
-        setTimeout(() => {
-          cityEl.classList.add('show');
-        }, index * 50);
+        // Habilitar botón
+        submitButton.classList.remove("disabled");
       });
-    }
-  });
-});
     </script>
-    </body>
+
+    <!-- States -> Cities -->
+    <script>
+      const cityData = {
+        California: [
+          "Alameda",
+          "Antioch",
+          "Berkeley",
+          "Burlingame",
+          "Campbell",
+          "Castro Valley",
+          "Citrus Heights",
+          "Concord",
+          "Cupertino",
+          "Dublin",
+          "Elk Grove",
+          "Fairfield",
+          "Foster City",
+          "Hayward",
+          "Lodi",
+          "Los Gatos",
+          "Menlo Park",
+          "Milpitas",
+          "Modesto",
+          "Mountain View",
+          "Morgan Hill",
+          "Napa",
+          "Oakland",
+          "San Jose",
+          "Santa Clara",
+          "Santa Cruz",
+          "San Lorenzo",
+          "San Pablo",
+          "Sacramento",
+          "Saratoga",
+          "Scotts Valley",
+          "Stockton",
+          "Sunnyvale",
+          "Richmond",
+          "Vallejo",
+          "Watsonville",
+        ],
+        Florida: ["Auburndale", "Bartow", "Lakeland", "Mulberry"],
+        Missouri: ["Independence", "Kansas City", "Lee’s Summit", "Saint Louis"],
+        Texas: ["Houston", "Katy"],
+      };
+
+      const buttons = document.querySelectorAll(".state-btn");
+      const cityContainer = document.getElementById("citiesGrid");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const isActive = btn.classList.contains("active");
+          buttons.forEach((b) => b.classList.remove("active"));
+          if (!isActive) btn.classList.add("active");
+
+          cityContainer.innerHTML = "";
+
+          if (!isActive) {
+            const selectedState = btn.dataset.state;
+            const cities = cityData[selectedState] || [];
+
+            cities.forEach((city, index) => {
+              const cityEl = document.createElement("div");
+              cityEl.classList.add("city");
+              cityEl.textContent = city;
+              cityContainer.appendChild(cityEl);
+
+              setTimeout(() => {
+                cityEl.classList.add("show");
+              }, index * 50);
+            });
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
