@@ -457,73 +457,73 @@
 
     <!-- Tu formulario (fetch a localhost) -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("contactForm");
-        const submitButton = document.getElementById("submitButton");
-        const successMessage = document.getElementById("submitSuccessMessage");
-        const errorMessage = document.getElementById("submitErrorMessage");
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contactForm");
+    const submitButton = document.getElementById("submitButton");
+    const successMessage = document.getElementById("submitSuccessMessage");
+    const errorMessage = document.getElementById("submitErrorMessage");
 
-        form.addEventListener("submit", async function (e) {
-          e.preventDefault();
-          form.classList.remove("was-validated");
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      form.classList.remove("was-validated");
 
-          if (!form.checkValidity()) {
-            form.classList.add("was-validated");
-            return;
-          }
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
+      }
 
-          const originalText = submitButton.innerHTML;
-          submitButton.innerHTML = "Sending...";
-          submitButton.disabled = true;
+      const originalText = submitButton.innerHTML;
+      submitButton.innerHTML = "Sending...";
+      submitButton.disabled = true;
 
-          successMessage.classList.add("d-none");
-          errorMessage.classList.add("d-none");
+      successMessage.classList.add("d-none");
+      errorMessage.classList.add("d-none");
 
-          const formData = {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            message: document.getElementById("message").value,
-          };
+      const formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        message: document.getElementById("message").value,
+      };
 
-          try {
-            const response = await fetch(`https://alexyahtransportation-2.onrender.com/api/send-email`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(formData),
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-              successMessage.classList.remove("d-none");
-              form.reset();
-              form.classList.remove("was-validated");
-              successMessage.innerHTML = `
-                <div class="text-center text-white mb-3">
-                  <div class="fw-bolder">Message sent successfully!</div>
-                  We'll get back to you soon.
-                </div>`;
-            } else {
-              throw new Error(result.error || "Internal server error");
-            }
-          } catch (error) {
-            console.error("Error:", error);
-            errorMessage.classList.remove("d-none");
-            errorMessage.innerHTML = `
-              <div class="text-center text-danger mb-3">
-                Error: ${error.message || "Error enviando mensaje"}
-              </div>`;
-          } finally {
-            submitButton.innerHTML = originalText;
-            submitButton.disabled = false;
-          }
+      try {
+        const response = await fetch(`https://alexyahtransportation-prueba.onrender.com/api/send-email`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
         });
 
-        // Habilitar botón
-        submitButton.classList.remove("disabled");
-      });
-    </script>
+        const result = await response.json();
+
+        if (response.ok) {
+          successMessage.classList.remove("d-none");
+          form.reset();
+          form.classList.remove("was-validated");
+          successMessage.innerHTML = `
+            <div class="text-center text-white mb-3">
+              <div class="fw-bolder">Message sent successfully!</div>
+              We'll get back to you soon.
+            </div>`;
+        } else {
+          throw new Error(result.error || "Internal server error");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        errorMessage.classList.remove("d-none");
+        errorMessage.innerHTML = `
+          <div class="text-center text-danger mb-3">
+            Error: ${error.message || "Error sending message"}
+          </div>`;
+      } finally {
+        submitButton.innerHTML = originalText;
+        submitButton.disabled = false;
+      }
+    });
+
+    // Habilitar botón
+    submitButton.classList.remove("disabled");
+  });
+</script>
 
     <!-- States -> Cities -->
     <script>

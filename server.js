@@ -1,17 +1,12 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import nodemailer from 'nodemailer';
 import multer from 'multer';
 
-dotenv.config(); // Render usa variables de entorno desde el panel
-
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-console.log('📧 Email config:', process.env.EMAIL_USER ? 'PRESENT' : 'MISSING');
 
 // Middleware
 app.use(express.json());
@@ -22,7 +17,7 @@ app.get('/api/test', (req, res) => {
     res.json({ 
         message: '🚀 Server is working!',
         timestamp: new Date().toISOString(),
-        emailConfig: !!process.env.EMAIL_USER
+        emailConfig: true
     });
 });
 
@@ -48,17 +43,17 @@ app.post('/api/send-email', async (req, res) => {
             port: 465,
             secure: true,
             auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASSWORD
+                user: 'josegabrielestrella05@gmail.com',
+                pass: 'zlwdjmnqbswgnvsz' // sin espacios
             }
         });
 
         const mailOptions = {
             from: {
                 name: "AlexYah Transportation",
-                address: process.env.EMAIL_USER
+                address: 'josegabrielestrella05@gmail.com'
             },
-            to: process.env.EMAIL_USER,
+            to: 'josegabrielestrella04@gmail.com',
             replyTo: {
                 name: name,
                 address: email
@@ -122,7 +117,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Nombres bonitos
 const nombresBonitos = {
   driver_license: "Driver License",
   profile_picture: "Profile Picture",
@@ -141,10 +135,11 @@ const nombresBonitos = {
   w9: "W9"
 };
 
-// Campos esperados
-const camposArchivos = Object.keys(nombresBonitos).map(k => ({ name: k, maxCount: k === 'car_pictures' ? 5 : 1 }));
+const camposArchivos = Object.keys(nombresBonitos).map(k => ({
+  name: k,
+  maxCount: k === 'car_pictures' ? 5 : 1
+}));
 
-// Ruta de upload
 app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
   try {
     const attachments = [];
@@ -170,17 +165,17 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
+        user: 'josegabrielestrella05@gmail.com',
+        pass: 'zlwdjmnqbswgnvsz'
       }
     });
 
     const mailOptions = {
       from: {
         name: "AlexYah Transportation",
-        address: process.env.EMAIL_USER
+        address: 'josegabrielestrella05@gmail.com'
       },
-      to: process.env.EMAIL_USER,
+      to: 'josegabrielestrella04@gmail.com',
       replyTo: {
         name: req.body.name,
         address: req.body.email
@@ -218,10 +213,8 @@ app.get("/", (req, res) => {
   res.send("🚀 Server running in Render!");
 });
 
-// Servir archivos estáticos si los hay
 app.use(express.static('./'));
 
-// === Arrancar servidor con compatibilidad local y Render ===
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
