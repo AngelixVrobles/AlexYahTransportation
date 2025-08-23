@@ -108,6 +108,7 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
       text: `
 📋 Datos del Usuario:
 - Name: ${req.body.name}
+- Last Name: ${req.body.last_name}
 - Email: ${req.body.email}
 - Phone Number: ${req.body.phone}
 - State: ${req.body.state}
