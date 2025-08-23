@@ -10698,7 +10698,7 @@ p {
   text-transform: uppercase;
 }
 #mainNav .navbar-brand img {
-  height: 1.5rem;
+  height: 3.5rem;
 }
 
 /* NAVBAR LINKS */
@@ -10724,13 +10724,13 @@ p {
   }
 
   #mainNav .navbar-brand {
-    font-size: 1.0em;           /* CAMBIO: antes era 1.5em */
+    font-size: 2.0em;           /* CAMBIO: antes era 1.5em */
     transition: font-size 0.3s ease-in-out;
   }
 
   /*LOGO ALEXYAHTRANS*/
   #mainNav .navbar-brand img {
-    height: 5rem;             /* CAMBIO: antes era 6rem */
+    height: 8rem;             /* CAMBIO: antes era 6rem */
     transition: height 0.3s ease-in-out;
   }
 
@@ -10746,7 +10746,7 @@ p {
 
   #mainNav.navbar-shrink .navbar-brand svg,
   #mainNav.navbar-shrink .navbar-brand img {
-    height: 2rem;               /* CAMBIO: antes era 1.5rem */
+    height: 6rem;               /* CAMBIO: antes era 1.5rem */
   }
 }
 
