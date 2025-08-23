@@ -1,14 +1,30 @@
 {
-  "name": "driver-registration",
+  "name": "AlexYahTransportation",
   "version": "1.0.0",
+  "description": "",
   "main": "server.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AngelixVrobles/alexyahtransportation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AngelixVrobles/alexyahtransportation/issues"
+  },
+  "homepage": "https://github.com/AngelixVrobles/alexyahtransportation#readme",
   "dependencies": {
-    "express": "^4.19.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
     "multer": "^1.4.5-lts.1",
-    "nodemailer": "^6.9.8",
+    "nodemailer": "^7.0.5",
+    "nodemon": "^3.1.10",
     "path": "^0.12.7"
   }
 }

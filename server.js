@@ -1,13 +1,163 @@
-const express = require("express");
-const multer = require("multer");
-const nodemailer = require("nodemailer");
-const path = require("path");
+import express from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import nodemailer from 'nodemailer';
+
+dotenv.config({ path: 'secrets.env' });
+
+console.log('🔍 Loading envoirements variables from: secrets.env');
+console.log('📧 Email config:', process.env.EMAIL_USER ? 'PRESENT' : 'AUSENT');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // 🚀 Railway asigna el puerto
+const multer = require("multer");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use(express.urlencoded({ extended: true }));
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Ruta de prueba
+app.get('/api/test', (req, res) => {
+    res.json({ 
+        message: '🚀 Server is working!',
+        timestamp: new Date().toISOString(),
+        emailConfig: !!process.env.EMAIL_USER
+    });
+});
+
+// Ruta para enviar emails CON NODEMAILER
+app.post('/api/send-email', async (req, res) => {
+    try {
+        const { name, email, phone, message } = req.body;
+        
+        console.log('📨 Request received from:', email);
+        
+        // Validar campos requeridos
+        if (!name || !email || !message) {
+            return res.status(400).json({
+                success: false,
+                error: 'Name, email and message are required fields.'
+            });
+        }
+
+        // Configurar transporter de Nodemailer
+        const transporter = nodemailer.createTransport({
+            service: 'gmail', // Puedes usar 'hotmail', 'yahoo', etc.
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_USER, // Tu email completo
+                pass: process.env.EMAIL_PASSWORD // Tu contraseña de aplicación
+            }
+        });
+
+        // Configurar el email
+        const mailOptions = {
+            from: {
+                name: "AlexYah Transportation",
+                address: process.env.EMAIL_USER
+            },
+            to: process.env.EMAIL_USER,
+            replyTo: {
+                name: name,
+                address: email
+            }, // Email del cliente para responder
+            subject: `📧 New Message from ${name} - AlexYah Transportation`,
+            html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body { 
+                            font-family: Arial, sans-serif; 
+                            line-height: 1.6; 
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 20px;
+                        }
+                        .container { 
+                            max-width: 600px; 
+                            margin: 0 auto; 
+                            background: white;
+                            padding: 20px; 
+                            border-radius: 10px;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                        }
+                        .header { 
+                            background: #007bff; 
+                            color: white; 
+                            padding: 20px; 
+                            text-align: center; 
+                            border-radius: 5px;
+                        }
+                        .info { 
+                            margin: 15px 0; 
+                            padding: 15px; 
+                            background: #f8f9fa; 
+                            border-radius: 5px; 
+                            border-left: 4px solid #007bff;
+                        }
+                        .info strong {
+                            color: #007bff;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>🚚 New Message - AlexYah Transportation</h1>
+                        </div>
+                        
+                        <div class="info">
+                            <strong>👤 Name:</strong> ${name}
+                        </div>
+                        
+                        <div class="info">
+                            <strong>📧 Email:</strong> ${email}
+                        </div>
+                        
+                        <div class="info">
+                            <strong>📱 Phone:</strong> ${phone}
+                        </div>
+                        
+                        <div class="info">
+                            <strong>📩 Message:</strong><br>
+                            ${message.replace(/\n/g, '<br>')}
+                        </div>
+                        
+                        <div class="info" style="background: #e7f3ff;">
+                            <strong>📬 This message was sent from the contact us form of AlexYah Transportation</strong>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `,
+            text: `New message from ${name} (${email}). Phone: ${phone}. Message: ${message}`
+        };
+
+        console.log('📤 Sending email...');
+        
+        // Enviar email
+        const info = await transporter.sendMail(mailOptions);
+        
+        console.log('✅ Email sent witg ID:', info.messageId);
+        
+        res.json({ 
+            success: true, 
+            message: 'Email sent successfully!',
+            messageId: info.messageId
+        });
+
+    } catch (error) {
+        console.error('❌ Error Nodemailer:', error);
+        
+        res.status(500).json({ 
+            success: false, 
+            error: 'Error sending email. Please try again later.',
+            details: error.message
+        });
 
 // === Multer config ===
 const storage = multer.diskStorage({
@@ -90,23 +240,20 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
         listaArchivos += `✅ ${filename}${extension}\n`;
       });
     }
-
-    // === Configurar transporte de correo ===
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "josegabrielestrella05@gmail.com",
-        pass: "zlwd jmnq bswg nvsz"
-      }
-    });
-
     // === Enviar correo ===
-    const mailOptions = {
-      from: "josegabrielestrella05@gmail.com",
-      to: "josegabrielestrella04@gmail.com",
-      subject: "Nueva Solicitud de Registro 🚗",
+    const mailOptionsDriverRegistration = {
+       from: {
+          name: "AlexYah Transportation",
+          address: process.env.EMAIL_USER
+      },
+      to: process.env.EMAIL_USER,
+      replyTo: {
+          name: name,
+          address: email
+      },
+      subject: "New Register Request 🚗",
       text: `
-📋 Datos del Usuario:
+📋 User Data:
 - Name: ${req.body.name}
 - Last Name: ${req.body.last_name}
 - Email: ${req.body.email}
@@ -114,29 +261,29 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
 - State: ${req.body.state}
 - City: ${req.body.city}
 
-📎 Archivos Recibidos:
+📎 Received Files:
 ${listaArchivos}
       `,
       attachments
     };
 
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptionsDriverRegistration);
 
     // Ahora:
-    res.json({ success: true, message: "Formulario y archivos enviados correctamente ✅" });
+    res.json({ success: true, message: "Driver form was sent successfully ✅" });
   } catch (err) {
   console.error(err);
-  res.status(500).json({ success: false, message: "Error al enviar el formulario ❌" });
+  res.status(500).json({ success: false, message: "Failed to sending form ❌" });
 }
 });
 
-// === Ruta raíz para Railway ===
+// === Ruta raíz para Render ===
 app.get("/", (req, res) => {
-  res.send("🚀 Server running in Railway!");
+  res.send("🚀 Server running in Render!");
 });
 
-app.use(express.static("public"));
-
+app.use(express.static('./'));
+      
 // === Servidor ===
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`);
