@@ -2019,12 +2019,12 @@ progress {
 .form-control[type=file]:not(:disabled):not([readonly]) {
   cursor: pointer;
 }
-.form-control:focus {
+.form-control {
   color: #212529;
   background-color: #fff;
-  border-color: #ffe480;
+  border: 1px solid #3857F6; /* Aplica el borde azul siempre */
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(255, 200, 0, 0.25);
+  box-shadow: 0 0 0 0.02rem rgb(56, 87, 246); /* Sombra visible siempre */
 }
 .form-control::-webkit-date-and-time-value {
   height: 1.5em;
@@ -2042,10 +2042,10 @@ progress {
   opacity: 1;
 }
 .form-control::file-selector-button {
-  padding: 0.375rem 0.75rem;
-  margin: -0.375rem -0.75rem;
-  -webkit-margin-end: 0.75rem;
-          margin-inline-end: 0.75rem;
+  padding: 0.800rem 1rem;
+  margin: -0.800rem -1rem;
+  -webkit-margin-end: 1rem;
+          margin-inline-end: 0.90rem;
   color: #212529;
   background-color: #e9ecef;
   pointer-events: none;
@@ -2168,10 +2168,10 @@ textarea.form-control-lg {
     transition: none;
   }
 }
-.form-select:focus {
-  border-color: #ffe480;
+.form-select {
+  border: 1px solid #3857F6; /* Borde azul permanente */
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(255, 200, 0, 0.25);
+  box-shadow: 0 0 0 0.1rem rgba(56, 87, 246, 0.25); /* Sombra azul clara */
 }
 .form-select[multiple], .form-select[size]:not([size="1"]) {
   padding-right: 0.75rem;
@@ -2249,13 +2249,13 @@ textarea.form-control-lg {
   filter: brightness(90%);
 }
 .form-check-input:focus {
-  border-color: #ffe480;
+  border-color: #3857F6;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(255, 200, 0, 0.25);
 }
 .form-check-input:checked {
-  background-color: #ffc800;
-  border-color: #ffc800;
+  background-color: #3857F6;
+  border-color: #3857F6;
 }
 .form-check-input:checked[type=checkbox] {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
@@ -2264,8 +2264,8 @@ textarea.form-control-lg {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
 }
 .form-check-input[type=checkbox]:indeterminate {
-  background-color: #ffc800;
-  border-color: #ffc800;
+  background-color: #3857F6;
+  border-color: #3857F6;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
 .form-check-input:disabled {
@@ -2351,7 +2351,7 @@ textarea.form-control-lg {
   width: 1rem;
   height: 1rem;
   margin-top: -0.25rem;
-  background-color: #ffc800;
+  background-color: #3857F6;
   border: 0;
   border-radius: 1rem;
   -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2366,7 +2366,7 @@ textarea.form-control-lg {
   }
 }
 .form-range::-webkit-slider-thumb:active {
-  background-color: #ffefb3;
+  background-color: #3857F6;
 }
 .form-range::-webkit-slider-runnable-track {
   width: 100%;
@@ -2380,7 +2380,7 @@ textarea.form-control-lg {
 .form-range::-moz-range-thumb {
   width: 1rem;
   height: 1rem;
-  background-color: #ffc800;
+  background-color: #3857F6;
   border: 0;
   border-radius: 1rem;
   -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2395,7 +2395,7 @@ textarea.form-control-lg {
   }
 }
 .form-range::-moz-range-thumb:active {
-  background-color: #ffefb3;
+  background-color: #3857F6;
 }
 .form-range::-moz-range-track {
   width: 100%;
@@ -11809,7 +11809,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
 }
 
-body {
+    body {
       background: #f8f9fa;
       font-family: "Segoe UI", Arial, sans-serif;
     }
@@ -11821,13 +11821,16 @@ body {
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    h2 {
-      color: #1a3e8c;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
+h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #3857F6;
+  font-weight: 50;         /* Muy delgado */
+  font-size: 25px;          /* Tamaño más pequeño */
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;      /* Opcional: separación de letras para elegancia */
+}
     label {
       font-weight: 500;
       margin-bottom: 6px;
@@ -11846,3 +11849,45 @@ body {
     .btn-primary:hover {
       background: #163370;
     }
+
+    /* Driver Registration */
+
+    /* Estilo general para la sección */
+#driver-registration {
+  background-color: #f8f9fa; /* bg-light equivalente */
+  padding: 80px 0;
+  margin-top: 100px;
+}
+
+/* Contenedor centrado */
+#driver-registration .container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* Título principal */
+#driver-registration h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Línea divisoria */
+#driver-registration .divider {
+  width: 900px;
+  height: 3px;
+  background-color: #3857F6;
+  border: none;
+  margin: 20px auto;
+  border-radius: 2px;
+}
+
+/* Texto secundario */
+#driver-registration p.text-muted {
+  color: #6c757d;
+  font-size: 16px;
+  margin-top: 10px;
+}
