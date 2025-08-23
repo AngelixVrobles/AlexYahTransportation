@@ -122,11 +122,12 @@ ${listaArchivos}
 
     await transporter.sendMail(mailOptions);
 
-    res.send("Formulario y archivos enviados correctamente ✅");
+    // Ahora:
+    res.json({ success: true, message: "Formulario y archivos enviados correctamente ✅" });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error al enviar el formulario ❌");
-  }
+  console.error(err);
+  res.status(500).json({ success: false, message: "Error al enviar el formulario ❌" });
+}
 });
 
 // === Ruta raíz para Railway ===
