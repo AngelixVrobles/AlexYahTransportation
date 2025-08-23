@@ -3902,6 +3902,18 @@ textarea.form-control-lg {
   transition: color 0.15s ease-in-out;
 }
 
+/* Centrar los ítems del menú en móvil (hasta 991px) */
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    text-align: center;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-item {
+    display: inline-block; /* O block si los quieres en columna */
+    float: none;
+  }
+}
 /* Responsive adjustments for navbar-expand-lg */
 @media (min-width: 992px) {
   .navbar-expand-lg {
@@ -11853,13 +11865,13 @@ h2 {
     /* Driver Registration */
 
     /* Estilo general para la sección */
+/* ===== Base ===== */
 #driver-registration {
-  background-color: #f8f9fa; /* bg-light equivalente */
+  background-color: #f8f9fa;
   padding: 80px 0;
   margin-top: 100px;
 }
 
-/* Contenedor centrado */
 #driver-registration .container {
   max-width: 960px;
   margin: 0 auto;
@@ -11867,17 +11879,17 @@ h2 {
   text-align: center;
 }
 
-/* Título principal */
+/* Título principal (fluido con clamp) */
 #driver-registration h2 {
-  font-size: 36px;
+  font-size: clamp(22px, 3.2vw, 36px);
   font-weight: 700;
   color: #333;
   margin-bottom: 20px;
 }
 
-/* Línea divisoria */
+/* Línea divisoria: ancho fluido con límite */
 #driver-registration .divider {
-  width: 900px;
+  width: min(90%, 700px);
   height: 3px;
   background-color: #3857F6;
   border: none;
@@ -11885,9 +11897,67 @@ h2 {
   border-radius: 2px;
 }
 
-/* Texto secundario */
+/* Texto secundario (fluido) */
 #driver-registration p.text-muted {
   color: #6c757d;
-  font-size: 16px;
+  font-size: clamp(14px, 1.8vw, 16px);
   margin-top: 10px;
+}
+
+/* ===== Breakpoints ===== */
+
+/* ≥992px (desktop grande) */
+@media (min-width: 992px) {
+  #driver-registration {
+    padding: 100px 0;
+    margin-top: 120px;
+  }
+  #driver-registration .divider {
+    height: 4px;
+  }
+}
+
+/* 768–991px (tablet) */
+@media (max-width: 991.98px) {
+  #driver-registration {
+    padding: 70px 0;
+    margin-top: 90px;
+  }
+  #driver-registration .container {
+    padding: 0 24px;
+  }
+}
+
+/* ≤767px (móvil) */
+@media (max-width: 767.98px) {
+  #driver-registration {
+    padding: 56px 0;
+    margin-top: 72px;
+  }
+  #driver-registration .divider {
+    width: 70%;
+    height: 3px;
+  }
+}
+
+/* ≤575px (móvil pequeño) */
+@media (max-width: 575.98px) {
+  #driver-registration {
+    padding: 48px 0;
+    margin-top: 64px;
+  }
+  #driver-registration .container {
+    padding: 0 16px;
+  }
+  #driver-registration .divider {
+    width: 64%;
+  }
+}
+
+/* Accesibilidad: menos animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
 }
