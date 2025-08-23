@@ -1,1 +1,10 @@
+# Carpetas que no deben subirse
+node_modules/
+uploads/
+
+# Archivos sensibles
+.env
 secrets.env
+
+# Archivos del sistema
+.DS_Storesecrets.env
