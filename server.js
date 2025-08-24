@@ -18,6 +18,9 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// === SERVIR ARCHIVOS ESTÁTICOS DESDE /PUBLIC ===
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Ruta de prueba
 app.get('/api/test', (req, res) => {
     res.json({ 
@@ -326,12 +329,15 @@ ${listaArchivos}`,
   }
 });
 
-// === Ruta raíz para Render ===
+// === RUTA RAIZ PARA SERVIR INDEX.HTML DESDE /PUBLIC ===
 app.get("/", (req, res) => {
-  res.send("🚀 Server running in Render!");
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.use(express.static('./public'));
+// === Ruta raíz para Render ===
+app.get("/public", (req, res) => {
+  res.send("🚀 Server running in Render!");
+});
       
 // === Servidor ===
 app.listen(process.env.PORT, () => {
