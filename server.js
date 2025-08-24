@@ -331,7 +331,7 @@ app.get("/", (req, res) => {
   res.send("🚀 Server running in Render!");
 });
 
-app.use(express.static('./'));
+app.use(express.static('./public'));
       
 // === Servidor ===
 app.listen(process.env.PORT, () => {
