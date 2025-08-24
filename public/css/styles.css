@@ -11569,7 +11569,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   color: white;
 }
 /* Sección general con fondo azul transparente y textura */
-#How\ it\ Works {
+#how-it-works {
   padding: 80px 20px;
   background-color: rgba(56, 87, 246, 0.7); /* azul semi-transparente */
   
@@ -11584,13 +11584,13 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Sombra sutil para mejorar legibilidad del texto */
-#How\ it\ Works h2,
-#How\ it\ Works p {
+#how-it-works h2,
+#how-it-works p {
   text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
 }
 
 /* Contenedor centrado */
-#How\ it\ Works .container {
+#how-it-works .container {
   max-width: 900px;
   margin: 0 auto;
   position: relative;
@@ -11598,7 +11598,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Título principal */
-#How\ it\ Works .section-heading {
+#how-it-works .section-heading {
   font-size: 36px;
   font-weight: 700;
   text-transform: uppercase;
@@ -11608,7 +11608,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Línea decorativa debajo del título */
-#How\ it\ Works .section-heading::after {
+#how-it-works .section-heading::after {
   content: '';
   display: block;
   width: 60px;
@@ -11619,14 +11619,14 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Párrafo de descripción */
-#How\ it\ Works p {
+#how-it-works p {
   font-size: 18px;
   line-height: 1.7;
   margin-top: 20px;
   color: rgba(255, 255, 255, 0.95);
 }
 /* Contenedor centrado */
-#How\ it\ Works .container {
+#how-it-works .container {
   max-width: 900px;
   margin: 0 auto;
   position: relative;
@@ -11634,7 +11634,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Título principal centrado */
-#How\ it\ Works .section-heading {
+#how-it-works .section-heading {
   font-size: 36px;
   font-weight: 700;
   text-transform: uppercase;
@@ -11645,7 +11645,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Párrafo de descripción alineado a la izquierda */
-#How\ it\ Works p {
+#how-it-works p {
   font-size: px;
   line-height: 1.7;
   margin-top: 20px;
@@ -11656,7 +11656,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   margin-right: auto;
 }
 /* Línea decorativa debajo del título */
-#How\ it\ Works .section-heading::after {
+#how-it-works .section-heading::after {
   content: '';
   display: block;
   width: 60px;
@@ -11667,26 +11667,26 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 /* Responsive */
 @media (max-width: 768px) {
-  #How\ it\ Works .section-heading {
+  #how-it-works .section-heading {
     font-size: 30px;
   }
 
-  #How\ it\ Works p {
+  #how-it-works p {
     font-size: 16px;
     line-height: 1.6;
   }
 }
 
 @media (max-width: 480px) {
-  #How\ it\ Works {
+  #how-it-works {
     padding: 60px 15px;
   }
 
-  #How\ it\ Works .section-heading {
+  #how-it-works .section-heading {
     font-size: 26px;
   }
 
-  #How\ it\ Works p {
+  #how-it-works p {
     font-size: 15px;
     line-height: 1.5;
   }
@@ -11736,7 +11736,7 @@ section#contact form#contactForm :-ms-input-placeholder {
             }
         }
         /* Sección general */
-#Why-us {
+#why-us {
   padding: 80px 20px;
   text-align: center;
   position: relative;
@@ -11754,7 +11754,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Contenedor del contenido sobre el overlay */
-#Why-us .container {
+#why-us .container {
   position: relative;
   z-index: 1;
   max-width: 900px;
@@ -11762,7 +11762,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Título principal */
-#Why-us .section-heading {
+#why-us .section-heading {
   color: #ffffff !important; /* fuerza que el título sea blanco */
   font-size: 36px;
   font-weight: 700;
@@ -11771,7 +11771,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   position: relative;
 }
 /* Línea decorativa debajo del título */
-#Why-us .section-heading::after {
+#why-us .section-heading::after {
   content: '';
   display: block;
   width: 60px;
@@ -11782,7 +11782,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Párrafo descriptivo */
-#Why-us p {
+#why-us p {
   font-size: 20px;
   line-height: 1.7;
   margin-top: 20px;
@@ -11796,26 +11796,26 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 /* Responsive */
 @media (max-width: 768px) {
-  #Why-us .section-heading {
+  #why-us .section-heading {
     font-size: 30px;
   }
 
-  #Why-us p {
+  #why-us p {
     font-size: 16px;
     line-height: 1.6;
   }
 }
 
 @media (max-width: 480px) {
-  #Why-us {
+  #why-us {
     padding: 60px 15px;
   }
 
-  #Why-us .section-heading {
+  #why-us .section-heading {
     font-size: 26px;
   }
 
-  #Why-us p {
+  #why-us p {
     font-size: 15px;
     line-height: 1.5;
   }
