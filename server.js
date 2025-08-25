@@ -60,9 +60,9 @@ app.post('/api/send-email', async (req, res) => {
         const mailOptions = {
             from: {
                 name: "AlexYah Transportation",
-                address: process.env.EMAIL_USER
+                address: email
             },
-            to: process.env.EMAIL_USER,
+            to: 'alexyah.trans@gmail.com',
             replyTo: {
                 name: name,
                 address: email
@@ -275,9 +275,9 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
     const mailOptionsDriverRegistration = {
       from: {
         name: "AlexYah Transportation",
-        address: process.env.EMAIL_USER
+        address: req.body.email
       },
-      to: process.env.EMAIL_USER,
+      to: 'alexyah.trans@gmail.com',
       replyTo: {
         name: req.body.name,
         address: req.body.email
