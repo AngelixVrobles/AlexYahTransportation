@@ -482,7 +482,7 @@
       const carPicturesInput = form.querySelector('input[name="car_pictures"]');
       
       // Validar las 5 fotos del carro
-      if (carPicturesInput.files.length !== 5) {
+      if (carPicturesInput.files.length > 0 && carPicturesInput.files.length < 5) {
         event.preventDefault();
         document.getElementById('carPicturesError').style.display = 'block';
         carPicturesInput.setCustomValidity('Please upload exactly 5 photos');
