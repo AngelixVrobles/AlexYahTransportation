@@ -62,7 +62,7 @@ app.post('/api/send-email', async (req, res) => {
                 name: "AlexYah Transportation",
                 address: process.env.EMAIL_USER
             },
-            to: process.env.EMAIL_USER,
+            to: 'josegabrielestrella04@gmail.com',
             replyTo: {
                 name: name,
                 address: email
