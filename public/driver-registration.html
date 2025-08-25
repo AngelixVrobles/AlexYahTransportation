@@ -464,7 +464,7 @@
       
       countElement.textContent = `${files.length}/5 photos selected`;
       
-      if (files.length !== 5) {
+      if (files.length > 0 && files.length < 5) {
         errorElement.style.display = 'block';
         input.setCustomValidity('Please upload exactly 5 photos');
       } else {
