@@ -23,14 +23,14 @@
                 <a class="navbar-brand" href="#page-top"><img src="assets/img/logos/AlexYahTransportationLogo.png" alt="..." /></a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
+                    
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#page-top">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="driver-registration.html">Driver Registration</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about-us">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="driver-registration.html">Apply</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about-us">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#how-it-works">How it Works</a></li>
                         <li class="nav-item"><a class="nav-link" href="#why-us">Why Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -38,11 +38,12 @@
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
-        <header class="masthead">
+        <!-- Header -->
+        <header class="masthead text-white text-center">
             <div class="container">
-                <div class="masthead-heading text-uppercase">WHERE EVERY JOURNEY MATTERS, FOR EVERY STUDENTS.</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="driver-registration.html">CLICK HERE TO REGISTER</a>
+            <h1 class="masthead-heading text-uppercase">Where Every Journey Matters</h1>
+            <p class="masthead-subheading">Safe transportation for students with special needs</p>
+            <a class="btn btn-primary btn-xl text-uppercase mt-3" href="driver-registration.html">Apply to Drive</a>
             </div>
         </header>
         <!-- About us-->
@@ -84,7 +85,7 @@
         <section class="page-section driver-resources-section" id="drive">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Drive with US</h2>
+                    <h1 class="section-heading text-uppercase">Drive with US</h1>
                     <p class="subtitle">Select a state to view available cities.</p>
                         <div class="state-buttons">
                             <button class="state-btn" data-state="California">California</button>
@@ -121,25 +122,25 @@
         </section>
         <!-- Driver Requirements-->
         <section id="requirements">
-            <div class="requirements-container">
-                <!-- Columna izquierda -->
-                <div class="requirements-left">
-                <h2 class="section-heading">Driver Requirements</h2>
-                </div>
-
-                <!-- Columna derecha -->
-                <div class="requirements-right">
-                <ul class="requirements-list">
-                    <li><span class="requirement-number">01</span> Pass a National Background Check</li>
-                    <li><span class="requirement-number">02</span> Have a Clean Driving Record</li>
-                    <li><span class="requirement-number">03</span> Own a 4-Door, Insured Vehicle</li>
-                    <li><span class="requirement-number">04</span> Carry a Valid Driver’s License</li>
-                    <li><span class="requirement-number">05</span> Complete Student Safety Training</li>
-                    <li><span class="requirement-number">06</span> Pass a Live Interview & Orientation</li>
-                    <li><span class="requirement-number">07</span> Maintain Excellent Ratings from Families</li>
-                </ul>
-                </div>
+        <div class="requirements-container">
+            <!-- Columna izquierda -->
+            <div class="requirements-left">
+            <h2 class="section-heading">Driver Requirements</h2>
             </div>
+
+            <!-- Columna derecha -->
+            <div class="requirements-right">
+            <ul class="requirements-list">
+                <li><span class="requirement-icon"></span> Pass a National Background Check</li>
+                <li><span class="requirement-icon"></span> Have a Clean Driving Record</li>
+                <li><span class="requirement-icon"></span> Own a 4-Door, Insured Vehicle</li>
+                <li><span class="requirement-icon"></span> Carry a Valid Driver’s License</li>
+                <li><span class="requirement-icon"></span> Complete Student Safety Training</li>
+                <li><span class="requirement-icon"></span> Pass a Live Interview & Orientation</li>
+                <li><span class="requirement-icon"></span> Maintain Excellent Ratings from Families</li>
+            </ul>
+            </div>
+        </div>
         </section>
         <!-- Clients
         <div class="py-5">
@@ -599,6 +600,17 @@
           }
         });
       });
+    </script>
+    <script>
+    window.addEventListener("scroll", function () {
+        const scroll = window.scrollY;
+        const section = document.getElementById("why-us");
+        if (section) {
+        // 🎨 Solo movemos la IMAGEN de fondo, no el degradado
+        section.style.backgroundPosition = 
+            `center top, center ${-(scroll * 0.3)}px`;
+        }
+    });
     </script>
   </body>
 </html>
