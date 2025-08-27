@@ -54,268 +54,93 @@
             style="max-width: 1100px;">
 
             <div class="row justify-content-center mt-5">
-              <div class="col-md-10">
-                <div class="row mb-4 align-items-center">
-                  <div class="col-md-3 text-md-end">
-                    <h2 class="form-label d-inline" style="font-weight: bold; margin-bottom: 0; white-space: nowrap;">Apply to AlexYah</h2>
-                  </div>
-                  <div class="col-md-9">
-                    <!-- Espacio vacío para alineación -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
-        <div class="row justify-content-center">
-          <!-- Nombres -->
-          <div class="col-md-10">
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">First Name*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="text" name="name" placeholder="First Name"    class="form-control" required>
-                <div class="invalid-feedback">Please enter your first name.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Last Name*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="text" name="last_name" placeholder="Last Name"  class="form-control" required>
-                <div class="invalid-feedback">Please enter your last name.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Email*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="email" name="email" placeholder="Email" class="form-control" required>
-                <div class="invalid-feedback">Please enter a valid email address.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Phone Number*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="text" name="phone" placeholder="(800) 000-000" class="form-control" required>
-                <div class="invalid-feedback">Please enter your phone number.</div>
-              </div>
-            </div>
-
-            <!-- State & City -->
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Pick your State*</label>
-              </div>
-              <div class="col-md-9">
-                <select id="state" name="state" class="form-select" required>
-                  <option value="" disabled selected>Select a State</option>
-                  <option value="California">California</option>
-                  <option value="Florida">Florida</option>
-                  <option value="Missouri">Missouri</option>
-                  <option value="Texas">Texas</option>
-                </select>
-                <div class="invalid-feedback">Please select your state.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Pick your City*</label>
-              </div>
-              <div class="col-md-9">
-                <select id="city" name="city" class="form-select" required>
-                  <option value="" disabled selected>Select a City</option>
-                </select>
-                <div class="invalid-feedback">Please select your city.</div>
-              </div>
-            </div>
-          </div>
+      <div class="col-md-10">
+        <div class="mb-4">
+          <h2 class="form-label text-center fw-bold">Apply to AlexYah</h2>
         </div>
 
-        <!-- Archivos - Manteniendo la estructura original pero centrada -->
-        <div class="row justify-content-center">
-          <div class="col-md-10">
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Driver License (DL)*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="driver_license" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">Driver license is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Profile Picture*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="profile_picture" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">Profile picture is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Insurance*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="insurance" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">Insurance document is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Inspection*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="inspection" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">Inspection document is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">5 Pictures of the Car*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="car_pictures" class="form-control image-input" accept="image/*" multiple onchange="validateCarPictures(this)">
-                <div class="invalid-feedback" id="carPicturesError">Please upload exactly 5 photos of the car.</div>
-                <small class="form-text text-muted" id="carPicturesCount">0/5 photos selected</small>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Live Scan*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="live_scan" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">Live scan document is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Tb-Test*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="tb_test" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">TB test result is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Drug Test*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="drug_test" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">Drug test result is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">CPR*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="cpr" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">CPR certification is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">DOT*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="dot" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">DOT certification is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">English Course*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="english_course" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">English course certificate (optional).</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Pull Notice*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="pull_notice" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">Pull notice document is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Safe Ride*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="safe_ride" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">Safe ride certification is required.</div>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">W9*</label>
-              </div>
-              <div class="col-md-9">
-                <input type="file" name="w9" class="form-control image-input" accept="image/*">
-                <div class="invalid-feedback">W9 form is required.</div>
-              </div>
-            </div>
-
-            <!-- Consentimiento -->
-            <div class="row mb-3 align-items-center">
-              <div class="col-md-3 text-md-start">
-                <label class="form-label">Consent*</label>
-              </div>
-              <div class="col-md-9">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="consentText" id="consentText" required>
-                  <label class="form-check-label" for="consentText">
-                    By checking this box, I consent to receive transactional messages related to my account, orders, or services i have requested. These messages may include appointment reminders, order confirmations, and account notifications among others. Message frequency may vary. Message & Data rates may apply. Reply HELP for help STOP to opt-out.
-                  </label>
-                  <div class="invalid-feedback">You must agree to the terms.</div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Personal Info -->
+        <div class="mb-3">
+          <label class="form-label">First Name*</label>
+          <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Last Name*</label>
+          <input type="text" name="last_name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email*</label>
+          <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone Number*</label>
+          <input type="text" name="phone" class="form-control" required>
         </div>
 
-        <!-- Botón Centrado -->
-        <div class="row justify-content-center mt-4">
-          <div class="col-md-10 text-center">
-            <button type="submit" class="btn btn-primary px-5">Submit Registration</button>
-          </div>
+        <!-- Estados y ciudades -->
+        <div class="mb-3">
+          <label class="form-label">Pick your State*</label>
+          <select id="state" name="state" class="form-select" required>
+            <option value="" disabled selected>Select a State</option>
+            <option value="California">California</option>
+            <option value="Florida">Florida</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Texas">Texas</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Pick your City*</label>
+          <select id="city" name="city" class="form-select" required>
+            <option value="" disabled selected>Select a City</option>
+          </select>
         </div>
 
-        <!-- Mensaje de estado Centrado -->
-        <div class="row justify-content-center mt-3">
-          <div class="col-md-10">
-            <div id="mensaje" class="text-center"></div>
-          </div>
+        <!-- Consent -->
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" name="consentText" id="consentText" required>
+          <label class="form-check-label" for="consentText">
+            I consent to receive transactional messages. Message frequency may vary.
+          </label>
         </div>
 
+        <!-- Document Upload (Optional) -->
+        <div class="text-center mb-4">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#optionalDocuments">
+            Upload Documents Now (Optional)
+          </button>
+        </div>
+
+        <div class="collapse" id="optionalDocuments">
+          <div class="row mb-3"><label class="form-label">Driver License</label><input type="file" name="driver_license" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">Profile Picture</label><input type="file" name="profile_picture" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">Insurance</label><input type="file" name="insurance" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">Inspection</label><input type="file" name="inspection" class="form-control" /></div>
+          <div class="row mb-3">
+            <label class="form-label">5 Pictures of the Car</label>
+            <input type="file" name="car_pictures" class="form-control" multiple accept="image/*" onchange="validateCarPictures(this)">
+            <div class="invalid-feedback d-block" id="carPicturesError" style="display:none;">Please upload exactly 5 photos of the car.</div>
+            <small class="form-text text-muted" id="carPicturesCount">0/5 photos selected</small>
+          </div>
+          <div class="row mb-3"><label class="form-label">Live Scan</label><input type="file" name="live_scan" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">TB Test</label><input type="file" name="tb_test" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">Drug Test</label><input type="file" name="drug_test" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">CPR</label><input type="file" name="cpr" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">DOT</label><input type="file" name="dot" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">English Course</label><input type="file" name="english_course" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">Pull Notice</label><input type="file" name="pull_notice" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">Safe Ride</label><input type="file" name="safe_ride" class="form-control" /></div>
+          <div class="row mb-3"><label class="form-label">W9</label><input type="file" name="w9" class="form-control" /></div>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary px-5">Submit Registration</button>
+        </div>
+
+        <!-- Status Message -->
+        <div id="mensaje" class="text-center mt-3"></div>
+      </div>
+    </div>
     </form>
 
     <!-- Footer-->

@@ -277,7 +277,7 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
         name: "AlexYah Transportation",
         address: req.body.email
       },
-      to: 'alexyah.trans@gmail.com',
+      to: 'josegabrielestrella04@gmail.com',
       replyTo: {
         name: req.body.name,
         address: req.body.email
