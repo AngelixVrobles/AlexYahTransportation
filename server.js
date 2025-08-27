@@ -277,12 +277,12 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
         name: "AlexYah Transportation",
         address: req.body.email
       },
-      to: 'josegabrielestrella04@gmail.com',
+      to: 'alexyah.trans@gmail.com',
       replyTo: {
         name: req.body.name,
         address: req.body.email
       },
-      subject: "New Register Request 🚗",
+      subject: "New Apply Request 🚗",
       text: `📋 User Data:
 - Name: ${req.body.name}
 - Last Name: ${req.body.last_name}

@@ -110,27 +110,67 @@
           </button>
         </div>
 
-        <div class="collapse" id="optionalDocuments">
-          <div class="row mb-3"><label class="form-label">Driver License</label><input type="file" name="driver_license" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">Profile Picture</label><input type="file" name="profile_picture" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">Insurance</label><input type="file" name="insurance" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">Inspection</label><input type="file" name="inspection" class="form-control" /></div>
+       <div class="collapse" id="optionalDocuments">
+          <div class="row mb-3">
+            <label class="form-label">Driver License</label>
+            <input type="file" name="driver_license" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">Profile Picture</label>
+            <input type="file" name="profile_picture" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">Insurance</label>
+            <input type="file" name="insurance" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">Inspection</label>
+            <input type="file" name="inspection" class="form-control" accept="image/*" />
+          </div>
           <div class="row mb-3">
             <label class="form-label">5 Pictures of the Car</label>
             <input type="file" name="car_pictures" class="form-control" multiple accept="image/*" onchange="validateCarPictures(this)">
             <div class="invalid-feedback d-block" id="carPicturesError" style="display:none;">Please upload exactly 5 photos of the car.</div>
             <small class="form-text text-muted" id="carPicturesCount">0/5 photos selected</small>
           </div>
-          <div class="row mb-3"><label class="form-label">Live Scan</label><input type="file" name="live_scan" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">TB Test</label><input type="file" name="tb_test" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">Drug Test</label><input type="file" name="drug_test" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">CPR</label><input type="file" name="cpr" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">DOT</label><input type="file" name="dot" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">English Course</label><input type="file" name="english_course" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">Pull Notice</label><input type="file" name="pull_notice" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">Safe Ride</label><input type="file" name="safe_ride" class="form-control" /></div>
-          <div class="row mb-3"><label class="form-label">W9</label><input type="file" name="w9" class="form-control" /></div>
+          <div class="row mb-3">
+            <label class="form-label">Live Scan</label>
+            <input type="file" name="live_scan" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">TB Test</label>
+            <input type="file" name="tb_test" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">Drug Test</label>
+            <input type="file" name="drug_test" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">CPR</label>
+            <input type="file" name="cpr" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">DOT</label>
+            <input type="file" name="dot" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">English Course</label>
+            <input type="file" name="english_course" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">Pull Notice</label>
+            <input type="file" name="pull_notice" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">Safe Ride</label>
+            <input type="file" name="safe_ride" class="form-control" accept="image/*" />
+          </div>
+          <div class="row mb-3">
+            <label class="form-label">W9</label>
+            <input type="file" name="w9" class="form-control" accept="image/*" />
+          </div>
         </div>
+        
 
         <!-- Submit -->
         <div class="text-center mt-4">
