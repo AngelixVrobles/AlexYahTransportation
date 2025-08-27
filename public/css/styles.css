@@ -3964,6 +3964,7 @@ textarea.form-control-lg {
 }
 
 
+
 .card {
   --bs-card-spacer-y: 1rem;
   --bs-card-spacer-x: 1rem;
@@ -10712,7 +10713,22 @@ p {
 #mainNav .navbar-brand img {
   height: 3.5rem;
 }
+/* Ajustar el botón hamburguesa */
+.navbar-toggler {
+  padding: 0.25rem 0.5rem;   /* controla el tamaño del recuadro blanco */
+  border: none;              /* quita el borde si no lo quieres */
+  background-color: transparent; /* fondo transparente */
+}
 
+/* Ajustar solo el icono (las rayitas) */
+.navbar-toggler .fa-bars {
+  font-size: 1.6rem; /* cambia el tamaño del ícono */
+  color: #1f2937;    /* azul (o el color que quieras) */
+}
+.navbar-toggler:focus {
+  outline: none;       /* quita el contorno por defecto */
+  box-shadow: none;    /* quita el resplandor azul de Bootstrap */
+}
 /* NAVBAR LINKS */
 #mainNav .navbar-nav .nav-item .nav-link {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -11165,20 +11181,20 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Título principal */
-.driver-resources-section h2 {
-  font-size: 40px;
+.driver-resources-section h1 {
+  font-size: 60px;
   color: #1f2937;
   margin-bottom: 10px;
   position: relative;
 }
 
 /* Línea decorativa debajo del título */
-.driver-resources-section h2::after {
+.driver-resources-section h1::after {
   content: '';
   display: block;
   width: 60px;
   height: 4px;
-  background-color: #3857F6; /* línea azul para contraste */
+  background-color: #E0BD0A; /* línea azul para contraste */
   margin: 15px auto 0;
   border-radius: 2px;
 }
@@ -11210,9 +11226,9 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .state-btn.active,
 .state-btn:hover {
-  background-color: #3b82f6;
+  background-color: #E0BD0A;
   color: white;
-  border-color: #3b82f6;
+  border-color: transparent;
 }
 
 .cities-grid {
@@ -11246,7 +11262,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   background-color: #E8E9F1; /* gris claro */
   color: #2c3e50;
   text-align: center;
-  font-family: 'Segoe UI', sans-serif;
+
 }
 
 /* Contenedor centrado */
@@ -11272,7 +11288,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   display: block;
   width: 60px;
   height: 4px;
-  background-color: #3857F6; /* línea negra para contraste */
+  background-color: #E0BD0A; /* línea negra para contraste */
   margin: 15px auto 0;
   border-radius: 2px;
 }
@@ -11284,7 +11300,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   margin-top: 20px;
   color: #2c3e50;
   text-align: center;
-  font-weight: 700; /* bold */
+  font-weight: 600; /* bold */
 }
 
 /* Responsive */
@@ -11403,6 +11419,26 @@ section#contact form#contactForm :-ms-input-placeholder {
   line-height: 1.6;
   text-align: left;
 }
+#benefits::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px; /* ajusta según el tamaño de tu imagen */
+  height: 100%;
+  background-image: url('../assets/img/benefits-bg-left.png'); /* RUTA de tu imagen */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left center;
+  opacity: 0.15; /* ajusta visibilidad */
+  z-index: 0;
+  pointer-events: none; /* permite clics a través */
+}
+
+#benefits .container {
+  position: relative;
+  z-index: 1;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -11429,19 +11465,52 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
 }
 
+
+/* REQUIREMENTS */
 #requirements {
-  background-color: #E8E9F1;
-  padding: 60px 20px;
+  /* Variables para controlar la posición de la imagen */
+  --bgX: 20%;   /* puede ser left, right o un valor como 30% */
+  --bgY: 100%;    /* controla altura */
+
+  padding: 80px 40px;
   font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  position: relative;
+  color: white;
+
+  background-image: 
+    linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%),
+    url("../assets/img/RequirementsBackGround.png");
+
+  background-repeat: no-repeat, no-repeat;
+
+  /* tamaño fijo de la ilustración */
+  background-size: cover, 600px auto;
+
+  /* usa las variables para mover la imagen */
+  background-position: center center, var(--bgX) var(--bgY);
 }
 
-.section-heading {
-  font-size: 40px;
-  font-weight: 700;
-  margin-bottom: 40px;
-  color: #2c3e50;
-  text-transform: uppercase;
-  text-align: center;
+
+#requirements .section-heading {
+  color: #ffffff; 
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5 ); /* sombra difusa negra */
+    font-weight: 750;  /* extra bold, más ancho */
+}
+
+#requirements .section-heading {
+  position: relative;
+  top: -120px; 
+}
+
+#requirements .section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #E0BD0A; /* azul principal */
+  margin: 15px auto 0;
+  border-radius: 2px;
 }
 
 .requirements-container {
@@ -11452,6 +11521,8 @@ section#contact form#contactForm :-ms-input-placeholder {
   max-width: 1100px;
   margin: 0 auto;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .requirements-left {
@@ -11461,7 +11532,6 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .requirements-image {
   width: 100%;
-  max-width: px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
@@ -11469,11 +11539,10 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .requirements-right {
   flex: 1 1 650px;
-  background-color: #FAFBFF; /* color de fondo (puedes cambiarlo) */
+  background-color: #FAFBFF;
   padding: 30px;
-  border-radius: 12px; /* opcional, si quieres esquinas redondeadas */
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1); /* opcional, sombra */
-  
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
 .requirements-list {
@@ -11490,25 +11559,76 @@ section#contact form#contactForm :-ms-input-placeholder {
   line-height: 1.6;
   color: #34495e;
   position: relative;
-  padding-left: 40px;
+  padding-left: 45px;
 }
 
-.requirement-number {
+.requirement-icon {
   position: absolute;
   left: 0;
-  top: 0;
-  background-color: #3498db;
-  color: white;
-  font-weight: bold;
-  border-radius: 50%;
+  top: 5px;
   width: 28px;
   height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
+  background-image: url('../assets/img/CheckRequirements.png'); /* tu ícono */
+  background-size: cover;
+  background-position: center;
 }
 
+/* Quitar la imagen en móviles */
+@media (max-width: 768px) {
+  #requirements {
+    background-image: 
+      linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+    background-size: cover;
+    background-position: center;
+  }
+}
+/* Tablets y móviles */
+@media (max-width: 992px) {
+  #requirements .section-heading {
+    color: #1f2937; 
+    text-shadow: none;
+    font-weight: 750; /* más bold en responsive */
+  }
+}
+
+  /* 👇 textos alineados a la izquierda */
+  #requirements .requirements-right,
+  #requirements .requirements-list,
+  #requirements .requirements-left {
+    text-align: left;
+}
+
+/* Móviles grandes */
+@media (max-width: 768px) {
+  #requirements .section-heading {
+    color: #1f2937;
+    text-shadow: none;
+    top: -30px;
+    text-align: center;
+  }
+
+  #requirements .requirements-right,
+  #requirements .requirements-list,
+  #requirements .requirements-left {
+    text-align: left;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  #requirements .section-heading {
+    color: #1f2937;
+    text-shadow: none;
+    top: -10px;
+    text-align: center;
+  }
+
+  #requirements .requirements-right,
+  #requirements .requirements-list,
+  #requirements .requirements-left {
+    text-align: left;
+  }
+}
 .square:hover {
   background-color: #4fc3f7;
   color: white;
@@ -11646,14 +11766,15 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 /* Párrafo de descripción alineado a la izquierda */
 #how-it-works p {
-  font-size: px;
+  font-size: 18px;
   line-height: 1.7;
   margin-top: 20px;
-  color: rgba(255, 255, 255, 0.95);
-  text-align: center;         /* ahora alineado a la izquierda */
-  max-width: 1100px;         /* ancho máximo para mejor legibilidad */
-  margin-left: auto;        /* centra dentro del contenedor */
+  color: white;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
   margin-right: auto;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
 }
 /* Línea decorativa debajo del título */
 #how-it-works .section-heading::after {
@@ -11742,15 +11863,13 @@ section#contact form#contactForm :-ms-input-placeholder {
   position: relative;
   color: white;
 
-  /* Imagen de fondo con degradado vertical suave */
+  /* Fondo compuesto: degradado + imagen */
   background-image: 
-    linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%), /* degradado más suave arriba */
+    linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%),
     url("../assets/img/why-us.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  transition: background 0.6s ease; /* transición suave si cambian colores o efectos */
+  background-size: cover, cover;  /* primero el degradado, después la imagen */
+  background-repeat: no-repeat, no-repeat;
+  background-position: center top, center top; /* degradado fijo + imagen arriba */
 }
 
 /* Contenedor del contenido sobre el overlay */
@@ -11783,7 +11902,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 /* Párrafo descriptivo */
 #why-us p {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.7;
   margin-top: 20px;
   color: white;
@@ -11820,6 +11939,21 @@ section#contact form#contactForm :-ms-input-placeholder {
     line-height: 1.5;
   }
 }
+
+@media (max-width: 768px) {
+  #why-us {
+    background-size: cover, 1500% auto; /* la imagen escala más para evitar corte raro */
+    background-position: center top, center 1000%; /* 👈 empieza desde arriba */
+  }
+}
+
+@media (max-width: 480px) {
+  #why-us {
+    background-size: cover, 290% auto; /* más grande aún en móviles chicos */
+    background-position: center top, center 1000%; /* 👈 un poquito más abajo que el tope */
+  }
+}
+
 
     body {
       background: #f8f9fa;
