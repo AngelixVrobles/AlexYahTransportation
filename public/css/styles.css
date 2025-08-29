@@ -57,7 +57,7 @@
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: Roboto Slab, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --bs-body-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -11274,12 +11274,14 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* Título principal */
 #about-us .section-heading {
   font-size: 36px;
-  font-weight: 700; /* bold */
+  font-weight: 750; /* bold */
   text-transform: uppercase;
   margin-bottom: 25px;
   color: #2c3e50;
   text-align: center;
   position: relative;
+  
+  
 }
 
 /* Línea decorativa debajo del título */
@@ -11362,9 +11364,12 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 25px;
-  color: #FCFDFF; /* título negro */
+  color: #FCFDFF;
   position: relative;
   text-align: center;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+               "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", 
+               "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /* Línea decorativa debajo del título */
@@ -11494,8 +11499,11 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 #requirements .section-heading {
   color: #ffffff; 
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.5 ); /* sombra difusa negra */
-    font-weight: 750;  /* extra bold, más ancho */
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  font-weight: 750;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+               "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", 
+               "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 #requirements .section-heading {
@@ -11617,9 +11625,29 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* Móviles pequeños */
 @media (max-width: 480px) {
   #requirements .section-heading {
-    color: #1f2937;
+    color: #E8E9F1;
     text-shadow: none;
     top: -10px;
+    text-align: center;
+  }
+
+  #requirements .requirements-right,
+  #requirements .requirements-list,
+  #requirements .requirements-left {
+    text-align: left;
+  }
+}
+/* Móviles (hasta 768px): aplicar fondo de color */
+@media (max-width: 768px) {
+  #requirements {
+    background-image: none; /* Quitar imagen */
+    background-color: #f3f4f6; /* Color de fondo deseado (ejemplo: gris claro) */
+  }
+
+  #requirements .section-heading {
+    color: #1f2937;
+    text-shadow: none;
+    top: -30px;
     text-align: center;
   }
 
@@ -11720,7 +11748,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* Título principal */
 #how-it-works .section-heading {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 750;
   text-transform: uppercase;
   margin-bottom: 25px;
   color: white;
@@ -11756,7 +11784,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* Título principal centrado */
 #how-it-works .section-heading {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 750;
   text-transform: uppercase;
   margin-bottom: 25px;
   color: white;
@@ -11884,7 +11912,8 @@ section#contact form#contactForm :-ms-input-placeholder {
 #why-us .section-heading {
   color: #ffffff !important; /* fuerza que el título sea blanco */
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 750;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
   text-transform: uppercase;
   margin-bottom: 25px;
   position: relative;
