@@ -12124,3 +12124,72 @@ h2 {
     transition: none !important;
   }
 }
+/* Contenedor principal */
+#contact .contact-phone {
+    background: linear-gradient(135deg, #243B55, #3a8dff 40%, #243B55);
+    color: #fff;
+    border-radius: 20px;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column; /* para que el mensaje quede arriba */
+    align-items: flex-start;
+    text-align: left;
+    gap: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.2);
+    transition: all 0.3s ease-in-out;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* Mensaje motivador */
+#contact .contact-phone .phone-message {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    opacity: 0.95;
+    margin-bottom: 5px;
+    color: #e0e7ff;
+}
+
+/* Ícono */
+#contact .contact-phone i {
+    font-size: 1.3rem;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+
+/* Número de teléfono */
+#contact .contact-phone a {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* Hover elegante */
+#contact .contact-phone:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+    background: linear-gradient(135deg, #3a8dff, #0d6efd 40%, #0096ff);
+}
+/* === Responsive spacing para que no quede pegado al botón === */
+@media (max-width: 767px) {
+  #contact .contact-phone {
+    margin-bottom: 20px; /* separa del Submit Message en móviles */
+  }
+}
+
+@media (min-width: 768px) {
+  #contact .contact-phone {
+    margin-bottom: 30px; /* separa en tablets */
+  }
+}
+
+@media (min-width: 992px) {
+  #contact .contact-phone {
+    margin-bottom: 40px; /* más espacio en desktop */
+  }
+}
+
+
+
