@@ -251,24 +251,72 @@
     const stateSelect = document.getElementById("state");
     const citySelect = document.getElementById("city");
 
-     const citiesByState = {
-        California: [
-          "Alameda", "Antioch", "Antelope","Berkeley", "Burlingame", "Campbell", "Castro Valley", "Citrus Heights",
-          "Concord", "Cupertino", "Dublin", "Elk Grove", "Fairfield", "Foster City", "Hayward", "Lodi",
-          "Los Gatos", "Menlo Park", "Milpitas", "Modesto", "Mountain View", "Morgan Hill", "Napa", "Palo Alto",
-          "Oakland","Richmond", "San Jose", "Santa Clara", "Santa Cruz", "San Lorenzo", "San Pablo", "Sacramento",
-          "Saratoga", "Scotts Valley", "Stockton", "Sunnyvale","South San Francisco", "San Ramon","San Mateo","San Bruno",  "Vallejo", "Watsonville"
-        ],
-        Florida: [
-          "Auburndale", "Bartow", "Lakeland", "Mulberry"
-        ],
-        Missouri: [
-          "Independence", "Kansas City", "Lee’s Summit", "Saint Louis"
-        ],
-        Texas: [
-          "Houston", "Katy"
-        ]
-      };
+    const citiesByState = {
+      California: [
+        "Alameda",
+        "Antelope",
+        "Antioch",
+        "Berkeley",
+        "Burlingame",
+        "Campbell",
+        "Castro Valley",
+        "Citrus Heights",
+        "Concord",
+        "Cupertino",
+        "Dublin",
+        "Elk Grove",
+        "Fairfield",
+        "Foster City",
+        "Hayward",
+        "Lodi",
+        "Los Gatos",
+        "Menlo Park",
+        "Milpitas",
+        "Modesto",
+        "Morgan Hill",
+        "Mountain View",
+        "Napa",
+        "Oakland",
+        "Palo Alto",
+        "Richmond",
+        "Sacramento",
+        "San Bruno",
+        "San Jose",
+        "San Lorenzo",
+        "San Mateo",
+        "San Pablo",
+        "San Ramon",
+        "Santa Clara",
+        "Santa Cruz",
+        "Saratoga",
+        "Scotts Valley",
+        "South San Francisco",
+        "Stockton",
+        "Sunnyvale",
+        "Vallejo",
+        "Watsonville"
+      ],
+
+      Florida: [
+        "Auburndale",
+        "Bartow",
+        "Lakeland",
+        "Mulberry"
+      ],
+
+      Missouri: [
+        "Independence",
+        "Kansas City",
+        "Lee’s Summit",
+        "Saint Louis"
+      ],
+
+      Texas: [
+        "Houston",
+        "Katy"
+      ]
+    };
+
 
 
     stateSelect.addEventListener("change", function () {
@@ -288,18 +336,71 @@
     });
   </script>
   <script>
-  const citiesbyState = {
-    California: [
-      "Alameda", "Antioch", "Berkeley", "Burlingame", "Campbell", "Castro Valley", "Citrus Heights",
-      "Concord", "Cupertino", "Dublin", "Elk Grove", "Fairfield", "Foster City", "Hayward", "Lodi",
-      "Los Gatos", "Menlo Park", "Milpitas", "Modesto", "Mountain View", "Morgan Hill", "Napa",
-      "Oakland", "San Jose", "Santa Clara", "Santa Cruz", "San Lorenzo", "San Pablo", "Sacramento",
-      "Saratoga", "Scotts Valley", "Stockton", "Sunnyvale", "Richmond", "Vallejo", "Watsonville", "Antelope", "South San Francisco", "San Ramon", "San Mateo", "San Bruno", "Palo Alto"],
+const citiesbyState = {
+  California: [
+    "Alameda",
+    "Antelope",
+    "Antioch",
+    "Berkeley",
+    "Burlingame",
+    "Campbell",
+    "Castro Valley",
+    "Citrus Heights",
+    "Concord",
+    "Cupertino",
+    "Dublin",
+    "Elk Grove",
+    "Fairfield",
+    "Foster City",
+    "Hayward",
+    "Lodi",
+    "Los Gatos",
+    "Menlo Park",
+    "Milpitas",
+    "Modesto",
+    "Morgan Hill",
+    "Mountain View",
+    "Napa",
+    "Oakland",
+    "Palo Alto",
+    "Richmond",
+    "Sacramento",
+    "San Bruno",
+    "San Jose",
+    "San Lorenzo",
+    "San Mateo",
+    "San Pablo",
+    "San Ramon",
+    "Santa Clara",
+    "Santa Cruz",
+    "Saratoga",
+    "Scotts Valley",
+    "South San Francisco",
+    "Stockton",
+    "Sunnyvale",
+    "Vallejo",
+    "Watsonville"
+  ],
 
-    Florida: ["Auburndale", "Bartow", "Lakeland", "Mulberry"],
-    Missouri: ["Independence", "Kansas City", "Lee’s Summit", "Saint Louis"],
-    Texas: ["Houston", "Katy"]
-  };
+  Florida: [
+    "Auburndale",
+    "Bartow",
+    "Lakeland",
+    "Mulberry"
+  ],
+
+  Missouri: [
+    "Independence",
+    "Kansas City",
+    "Lee’s Summit",
+    "Saint Louis"
+  ],
+
+  Texas: [
+    "Houston",
+    "Katy"
+  ]
+};
 
   const stateCards = document.querySelectorAll('.state-card');
   const citiesContainer = document.getElementById('citiesContainer');
