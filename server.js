@@ -62,7 +62,7 @@ app.post('/api/send-email', async (req, res) => {
                 name: "AlexYah Transportation",
                 address: email
             },
-            to: 'alexyah.trans@gmail.com',
+            to: 'Alexyahiring@gmail.com', // Destinatario
             replyTo: {
                 name: name,
                 address: email
@@ -277,7 +277,7 @@ app.post("/upload", upload.fields(camposArchivos), async (req, res) => {
         name: "AlexYah Transportation",
         address: req.body.email
       },
-      to: 'alexyah.trans@gmail.com',
+      to: 'Alexyahiring@gmail.com', // Destinatario
       replyTo: {
         name: req.body.name,
         address: req.body.email
