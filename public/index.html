@@ -353,78 +353,81 @@
 <!-- States -> Cities -->
 <script>
 const cityData = {
-  California: [
-    "Alameda",
-    "Antelope",
-    "Antioch",
-    "Bellflower",
-    "Berkeley",
-    "Burlingame",
-    "Campbell",
-    "Castro Valley",
-    "Citrus Heights",
-    "Concord",
-    "Cupertino",
-    "Downey",
-    "Dublin",
-    "Elk Grove",
-    "Fairfield",
-    "Foster City",
-    "Hayward",
-    "Lakewood",
-    "Lodi",
-    "Long Beach",
-    "Los Gatos",
-    "Menlo Park",
-    "Milpitas",
-    "Modesto",
-    "Morgan Hill",
-    "Mountain View",
-    "Napa",
-    "Oakland",
-    "Palo Alto",
-    "Paramount",
-    "Richmond",
-    "Sacramento",
-    "San Bruno",
-    "San Jose",
-    "San Lorenzo",
-    "San Mateo",
-    "San Pablo",
-    "San Ramon",
-    "Santa Clara",
-    "Santa Cruz",
-    "Saratoga",
-    "Scotts Valley",
-    "South San Francisco",
-    "Stockton",
-    "Sunnyvale",
-    "Vallejo",
-    "Watsonville",
-    "San Diego ",
-    "Bay Park",
-    "Clairemont",
-    "Encanto",
-    "Del Cerro",
-    "Surrounding Area "
-  ],
-    Florida: [
-        "Auburndale",
-        "Bartow",
-        "Lakeland",
-        "Mulberry"
-    ],
-    Missouri: [
-        "Independence",
-        "Kansas City",
-        "Lee’s Summit",
-        "Saint Louis"
-    ],
-    Texas: [
-        "Houston",
-        "Katy"
-    ],
-   };
+California: [
+  "Alameda",
+  "Antelope",
+  "Antioch",
+  "Bay Park",
+  "Bellflower",
+  "Berkeley",
+  "Burlingame",
+  "Campbell",
+  "Castro Valley",
+  "Clairemont",
+  "Citrus Heights",
+  "Concord",
+  "Cupertino",
+  "Del Cerro",
+  "Downey",
+  "Dublin",
+  "Elk Grove",
+  "Encanto",
+  "Fairfield",
+  "Foster City",
+  "Hayward",
+  "Lakewood",
+  "Lodi",
+  "Long Beach",
+  "Los Gatos",
+  "Menlo Park",
+  "Milpitas",
+  "Modesto",
+  "Morgan Hill",
+  "Mountain View",
+  "Napa",
+  "Oakland",
+  "Palo Alto",
+  "Paramount",
+  "Richmond",
+  "Sacramento",
+  "San Bruno",
+  "San Diego",
+  "San Jose",
+  "San Lorenzo",
+  "San Mateo",
+  "San Pablo",
+  "San Ramon",
+  "Santa Clara",
+  "Santa Cruz",
+  "Saratoga",
+  "Scotts Valley",
+  "South San Francisco",
+  "Stockton",
+  "Sunnyvale",
+  "Vallejo",
+  "Watsonville"
+],
+
+Florida: [
+  "Auburndale",
+  "Bartow",
+  "Lakeland",
+  "Mulberry"
+],
+
+Missouri: [
+  "Independence",
+  "Kansas City",
+  "Lee’s Summit",
+  "Saint Louis"
+],
+
+Texas: [
+  "Houston",
+  "Katy"
+]
+};
+
 
       const buttons = document.querySelectorAll(".state-btn");
       const cityContainer = document.getElementById("citiesGrid");
