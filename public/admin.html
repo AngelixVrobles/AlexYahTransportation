@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — AlexYah Transportation</title>
+  <link rel="icon" href="https://www.alexyah.com/assets/img/logos/AlexYahTransportationLogo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface-2: #232733;
+      --border: #2e3240;
+      --text: #e4e6ec;
+      --text-muted: #8b8fa3;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* === LOGIN OVERLAY === */
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.4s, visibility 0.4s;
+    }
+
+    .login-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .login-card img {
+      width: 80px;
+      margin-bottom: 20px;
+      border-radius: 16px;
+    }
+
+    .login-card h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .login-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .login-card input:focus {
+      border-color: var(--accent);
+    }
+
+    .login-card .login-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .login-card .login-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .login-card .login-btn:active {
+      transform: scale(0.98);
+    }
+
+    .login-error {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* === LAYOUT === */
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+    }
+
+    .sidebar-header span {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-nav button {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .sidebar-nav button:hover {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .sidebar-nav button.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+
+    .sidebar-nav button i {
+      width: 20px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sidebar-footer button {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .sidebar-footer button:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .main {
+      flex: 1;
+      margin-left: 260px;
+      padding: 32px 40px;
+    }
+
+    .main-header {
+      margin-bottom: 32px;
+    }
+
+    .main-header h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    .main-header p {
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-size: 0.9rem;
+    }
+
+    /* === CARDS === */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* === BUTTONS === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .btn-success:hover {
+      background: #16a34a;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-icon:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-icon.danger:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    /* === INPUTS === */
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .input-row input,
+    .input-row select {
+      flex: 1;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-row input:focus,
+    .input-row select:focus {
+      border-color: var(--accent);
+    }
+
+    .input-row select option {
+      background: var(--surface-2);
+    }
+
+    /* === STATE TABS === */
+    .state-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .state-tab {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .state-tab:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .state-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .state-tab .count {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+    }
+
+    .state-tab.active .count {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* === CITY LIST === */
+    .city-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .city-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+
+    .city-item:hover {
+      background: var(--border);
+    }
+
+    .city-item .city-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .city-item .city-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .city-item.editing .city-name {
+      display: none;
+    }
+
+    .city-item.editing .city-edit-input {
+      display: flex;
+    }
+
+    .city-edit-input {
+      display: none;
+      flex: 1;
+      gap: 8px;
+      margin-right: 10px;
+    }
+
+    .city-edit-input input {
+      flex: 1;
+      padding: 6px 10px;
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    /* === EDITOR === */
+    .editor-area {
+      width: 100%;
+      min-height: 400px;
+      padding: 20px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      outline: none;
+      resize: vertical;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .editor-area:focus {
+      border-color: var(--accent);
+    }
+
+    .editor-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .editor-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .editor-tab {
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .editor-tab.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .preview-area {
+      width: 100%;
+      min-height: 400px;
+      padding: 30px;
+      background: #fff;
+      border-radius: 10px;
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.7;
+      overflow-y: auto;
+    }
+
+    .preview-area h4 {
+      margin-top: 24px;
+      color: #222;
+      font-weight: 700;
+    }
+
+    .preview-area p {
+      margin-bottom: 12px;
+    }
+
+    .preview-area ul {
+      padding-left: 20px;
+    }
+
+    .preview-area li {
+      margin-bottom: 6px;
+    }
+
+    /* === TOAST === */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      padding: 14px 20px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      animation: toastIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.success {
+      border-color: var(--success);
+    }
+
+    .toast.success i {
+      color: var(--success);
+    }
+
+    .toast.error {
+      border-color: var(--danger);
+    }
+
+    .toast.error i {
+      color: var(--danger);
+    }
+
+    @keyframes toastIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+    }
+
+    /* === SECTIONS VISIBILITY === */
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    /* === MODAL === */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-box h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-box p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .modal-box .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    /* === EMPTY STATE === */
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .empty-state i {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      display: block;
+      opacity: 0.4;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 220px;
+      }
+
+      .main {
+        margin-left: 220px;
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .sidebar {
+        position: fixed;
+        left: -260px;
+        width: 260px;
+        transition: left 0.3s;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 16px;
+      }
+
+      .mobile-toggle {
+        display: block !important;
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 200;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .mobile-toggle {
+      display: none;
+    }
+
+    /* === ADD STATE === */
+    .add-state-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .add-state-row input {
+      flex: 1;
+      padding: 8px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .add-state-row input:focus {
+      border-color: var(--accent);
+    }
+
+    .delete-state-btn {
+      margin-left: auto;
+      padding: 4px 10px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .delete-state-btn:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN OVERLAY -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <img src="assets/img/logos/AlexYahTransportationLogo.png" alt="Logo">
+      <h1>Admin Panel</h1>
+      <p>Enter admin password to continue</p>
+      <form id="loginForm">
+        <input type="password" id="loginPassword" placeholder="Password" autocomplete="off">
+        <button type="submit" class="login-btn">Sign In</button>
+        <div class="login-error" id="loginError">Invalid password. Try again.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MOBILE TOGGLE -->
+  <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+
+  <!-- APP -->
+  <div class="app" id="appContainer" style="display:none;">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/img/logos/AlexYahTransportationLogo.png" alt="Logo">
+        <span>Admin Panel</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="active" data-panel="cities"><i class="fas fa-city"></i> City Manager</button>
+        <button data-panel="privacy"><i class="fas fa-shield-halved"></i> Privacy Policy</button>
+        <button data-panel="terms"><i class="fas fa-file-contract"></i> Terms of Use</button>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <!-- === CITIES PANEL === -->
+      <div class="panel active" id="panel-cities">
+        <div class="main-header">
+          <h2>City Manager</h2>
+          <p>Add, edit, or remove cities for each state</p>
+        </div>
+
+        <!-- Add State -->
+        <div class="card">
+          <div class="card-title">Add New State</div>
+          <div class="add-state-row">
+            <input type="text" id="newStateName" placeholder="State name (e.g. New York)">
+            <button class="btn btn-primary btn-sm" id="addStateBtn"><i class="fas fa-plus"></i> Add State</button>
+          </div>
+        </div>
+
+        <!-- State Tabs -->
+        <div class="state-tabs" id="stateTabs"></div>
+
+        <!-- Add City -->
+        <div class="card">
+          <div class="card-title">
+            <span>Cities in <strong id="currentStateName">—</strong></span>
+            <span id="cityCount" style="color: var(--text-muted); font-size:0.85rem"></span>
+          </div>
+          <div class="input-row">
+            <input type="text" id="newCityName" placeholder="New city name">
+            <button class="btn btn-primary btn-sm" id="addCityBtn"><i class="fas fa-plus"></i> Add</button>
+          </div>
+          <div class="city-list" id="cityList"></div>
+        </div>
+      </div>
+
+      <!-- === PRIVACY PANEL === -->
+      <div class="panel" id="panel-privacy">
+        <div class="main-header">
+          <h2>Privacy Policy</h2>
+          <p>Edit the privacy policy content displayed on the public site</p>
+        </div>
+        <div class="card">
+          <div class="editor-toolbar">
+            <div class="editor-tabs">
+              <button class="editor-tab active" data-mode="edit" data-target="privacy">Edit</button>
+              <button class="editor-tab" data-mode="preview" data-target="privacy">Preview</button>
+            </div>
+            <button class="btn btn-success btn-sm" id="savePrivacyBtn"><i class="fas fa-save"></i> Save Changes</button>
+          </div>
+          <textarea class="editor-area" id="privacyEditor"></textarea>
+          <div class="preview-area" id="privacyPreview" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- === TERMS PANEL === -->
+      <div class="panel" id="panel-terms">
+        <div class="main-header">
+          <h2>Terms of Use</h2>
+          <p>Edit the terms of use content displayed on the public site</p>
+        </div>
+        <div class="card">
+          <div class="editor-toolbar">
+            <div class="editor-tabs">
+              <button class="editor-tab active" data-mode="edit" data-target="terms">Edit</button>
+              <button class="editor-tab" data-mode="preview" data-target="terms">Preview</button>
+            </div>
+            <button class="btn btn-success btn-sm" id="saveTermsBtn"><i class="fas fa-save"></i> Save Changes</button>
+          </div>
+          <textarea class="editor-area" id="termsEditor"></textarea>
+          <div class="preview-area" id="termsPreview" style="display:none;"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- CONFIRM MODAL -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-box">
+      <h3 id="modalTitle">Confirm Action</h3>
+      <p id="modalMessage">Are you sure?</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost btn-sm" id="modalCancel">Cancel</button>
+        <button class="btn btn-danger btn-sm" id="modalConfirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    // === STATE ===
+    let adminToken = '';
+    let citiesData = {};
+    let activeState = '';
+
+    // === HELPERS ===
+    const BASE = window.location.origin;
+
+    async function api(method, url, body = null) {
+      const opts = {
+        method,
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': adminToken }
+      };
+      if (body) opts.body = JSON.stringify(body);
+      const res = await fetch(BASE + url, opts);
+      return res.json();
+    }
+
+    function toast(msg, type = 'success') {
+      const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+      const el = document.createElement('div');
+      el.className = `toast ${type}`;
+      el.innerHTML = `<i class="fas ${icon}"></i> ${msg}`;
+      document.getElementById('toastContainer').appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }
+
+    function confirm(title, message) {
+      return new Promise(resolve => {
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalMessage').textContent = message;
+        document.getElementById('confirmModal').classList.add('show');
+        document.getElementById('modalConfirm').onclick = () => {
+          document.getElementById('confirmModal').classList.remove('show');
+          resolve(true);
+        };
+        document.getElementById('modalCancel').onclick = () => {
+          document.getElementById('confirmModal').classList.remove('show');
+          resolve(false);
+        };
+      });
+    }
+
+    // === LOGIN ===
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const pw = document.getElementById('loginPassword').value;
+      try {
+        const res = await api('POST', '/api/admin/login', { password: pw });
+        if (res.success) {
+          adminToken = res.token;
+          document.getElementById('loginOverlay').classList.add('hidden');
+          document.getElementById('appContainer').style.display = 'flex';
+          loadCities();
+          loadPrivacy();
+          loadTerms();
+        } else {
+          document.getElementById('loginError').style.display = 'block';
+        }
+      } catch (err) {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    });
+
+    // === LOGOUT ===
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      adminToken = '';
+      document.getElementById('loginOverlay').classList.remove('hidden');
+      document.getElementById('appContainer').style.display = 'none';
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginError').style.display = 'none';
+    });
+
+    // === SIDEBAR NAV ===
+    document.querySelectorAll('.sidebar-nav button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-nav button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+        // Close mobile sidebar
+        document.getElementById('sidebar').classList.remove('open');
+      });
+    });
+
+    // === MOBILE TOGGLE ===
+    document.getElementById('mobileToggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    // === CITIES ===
+    async function loadCities() {
+      const data = await api('GET', '/api/cities');
+      citiesData = data;
+      renderStateTabs();
+    }
+
+    function renderStateTabs() {
+      const container = document.getElementById('stateTabs');
+      container.innerHTML = '';
+      const states = Object.keys(citiesData).sort();
+
+      states.forEach(state => {
+        const btn = document.createElement('button');
+        btn.className = `state-tab ${state === activeState ? 'active' : ''}`;
+        btn.innerHTML = `${state} <span class="count">${citiesData[state].length}</span>
+          <button class="delete-state-btn" title="Delete state" data-state="${state}"><i class="fas fa-trash-alt"></i></button>`;
+        btn.addEventListener('click', (e) => {
+          if (e.target.closest('.delete-state-btn')) return;
+          activeState = state;
+          renderStateTabs();
+          renderCities();
+        });
+        btn.querySelector('.delete-state-btn').addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const ok = await confirm('Delete State', `Delete "${state}" and all its cities?`);
+          if (!ok) return;
+          const res = await api('POST', '/api/admin/states/delete', { state });
+          if (res.success) {
+            toast(`State "${state}" deleted`);
+            if (activeState === state) activeState = '';
+            await loadCities();
+            renderCities();
+          } else toast(res.error, 'error');
+        });
+        container.appendChild(btn);
+      });
+
+      if (!activeState && states.length) {
+        activeState = states[0];
+        renderStateTabs();
+      }
+      renderCities();
+    }
+
+    function renderCities() {
+      const list = document.getElementById('cityList');
+      const nameEl = document.getElementById('currentStateName');
+      const countEl = document.getElementById('cityCount');
+
+      if (!activeState || !citiesData[activeState]) {
+        nameEl.textContent = '—';
+        countEl.textContent = '';
+        list.innerHTML = '<div class="empty-state"><i class="fas fa-map-marker-alt"></i>Select a state above</div>';
+        return;
+      }
+
+      nameEl.textContent = activeState;
+      const cities = citiesData[activeState];
+      countEl.textContent = `${cities.length} cities`;
+
+      if (!cities.length) {
+        list.innerHTML = '<div class="empty-state"><i class="fas fa-city"></i>No cities yet. Add one above.</div>';
+        return;
+      }
+
+      list.innerHTML = cities.map(city => `
+        <div class="city-item" data-city="${city}">
+          <span class="city-name">${city}</span>
+          <div class="city-edit-input">
+            <input type="text" value="${city}">
+            <button class="btn btn-success btn-sm save-edit-btn"><i class="fas fa-check"></i></button>
+            <button class="btn btn-ghost btn-sm cancel-edit-btn"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="city-actions">
+            <button class="btn-icon edit-city-btn" title="Edit"><i class="fas fa-pen"></i></button>
+            <button class="btn-icon danger delete-city-btn" title="Delete"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      `).join('');
+
+      // Edit handlers
+      list.querySelectorAll('.edit-city-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.city-item');
+          item.classList.add('editing');
+          item.querySelector('.city-edit-input input').focus();
+        });
+      });
+      list.querySelectorAll('.cancel-edit-btn').forEach(btn => {
+        btn.addEventListener('click', () => btn.closest('.city-item').classList.remove('editing'));
+      });
+      list.querySelectorAll('.save-edit-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const item = btn.closest('.city-item');
+          const oldCity = item.dataset.city;
+          const newCity = item.querySelector('.city-edit-input input').value.trim();
+          if (!newCity || newCity === oldCity) { item.classList.remove('editing'); return; }
+          const res = await api('PUT', '/api/admin/cities', { state: activeState, oldCity, newCity });
+          if (res.success) {
+            toast(`City renamed to "${newCity}"`);
+            citiesData[activeState] = res.cities;
+            renderCities();
+            renderStateTabs();
+          } else toast(res.error, 'error');
+        });
+      });
+      list.querySelectorAll('.delete-city-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const city = btn.closest('.city-item').dataset.city;
+          const ok = await confirm('Delete City', `Remove "${city}" from ${activeState}?`);
+          if (!ok) return;
+          const res = await api('POST', '/api/admin/cities/delete', { state: activeState, city });
+          if (res.success) {
+            toast(`City "${city}" removed`);
+            citiesData[activeState] = res.cities;
+            renderCities();
+            renderStateTabs();
+          } else toast(res.error, 'error');
+        });
+      });
+    }
+
+    // Add City
+    document.getElementById('addCityBtn').addEventListener('click', async () => {
+      const input = document.getElementById('newCityName');
+      const city = input.value.trim();
+      if (!city || !activeState) return;
+      const res = await api('POST', '/api/admin/cities', { state: activeState, city });
+      if (res.success) {
+        toast(`City "${city}" added`);
+        citiesData[activeState] = res.cities;
+        input.value = '';
+        renderCities();
+        renderStateTabs();
+      } else toast(res.error, 'error');
+    });
+
+    // Add State
+    document.getElementById('addStateBtn').addEventListener('click', async () => {
+      const input = document.getElementById('newStateName');
+      const state = input.value.trim();
+      if (!state) return;
+      const res = await api('POST', '/api/admin/states', { state });
+      if (res.success) {
+        toast(`State "${state}" added`);
+        input.value = '';
+        activeState = state;
+        await loadCities();
+      } else toast(res.error, 'error');
+    });
+
+    // === PRIVACY EDITOR ===
+    async function loadPrivacy() {
+      const res = await api('GET', '/api/content/privacy');
+      document.getElementById('privacyEditor').value = res.content || '';
+    }
+
+    document.getElementById('savePrivacyBtn').addEventListener('click', async () => {
+      const content = document.getElementById('privacyEditor').value;
+      const res = await api('PUT', '/api/admin/content/privacy', { content });
+      if (res.success) toast('Privacy policy saved!');
+      else toast(res.error, 'error');
+    });
+
+    // === TERMS EDITOR ===
+    async function loadTerms() {
+      const res = await api('GET', '/api/content/terms');
+      document.getElementById('termsEditor').value = res.content || '';
+    }
+
+    document.getElementById('saveTermsBtn').addEventListener('click', async () => {
+      const content = document.getElementById('termsEditor').value;
+      const res = await api('PUT', '/api/admin/content/terms', { content });
+      if (res.success) toast('Terms of use saved!');
+      else toast(res.error, 'error');
+    });
+
+    // === EDITOR TABS (Edit / Preview) ===
+    document.querySelectorAll('.editor-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.target; // 'privacy' or 'terms'
+        const mode = tab.dataset.mode;
+        const tabs = tab.parentElement.querySelectorAll('.editor-tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const editor = document.getElementById(target + 'Editor');
+        const preview = document.getElementById(target + 'Preview');
+
+        if (mode === 'preview') {
+          preview.innerHTML = editor.value;
+          editor.style.display = 'none';
+          preview.style.display = 'block';
+        } else {
+          editor.style.display = 'block';
+          preview.style.display = 'none';
+        }
+      });
+    });
+
+    // Allow Enter key in add inputs
+    document.getElementById('newCityName').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('addCityBtn').click();
+    });
+    document.getElementById('newStateName').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('addStateBtn').click();
+    });
+  </script>
+</body>
+
+</html>
