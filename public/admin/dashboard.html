@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard – AlexYah Transportation</title>
+    <link rel="icon" href="../assets/img/logos/AlexYahTransportationLogo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="dashboard-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../assets/img/logos/AlexYahTransportationLogo.png" alt="Logo" class="sidebar-logo">
+            <span class="sidebar-brand">Admin Panel</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="sidebar-link active" data-section="cities">
+                <i class="fas fa-map-marked-alt"></i> Cities & States
+            </a>
+            <a href="#" class="sidebar-link" data-section="privacy">
+                <i class="fas fa-shield-alt"></i> Privacy Policy
+            </a>
+            <a href="#" class="sidebar-link" data-section="terms">
+                <i class="fas fa-file-contract"></i> Terms of Use
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="../index.html" class="sidebar-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> View Website
+            </a>
+            <button id="logoutBtn" class="sidebar-link sidebar-logout">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="dashboard-main" id="dashMain">
+
+        <!-- Top bar -->
+        <header class="dash-topbar">
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h2 class="dash-title" id="dashTitle">Cities &amp; States</h2>
+            <div class="dash-admin-badge">
+                <i class="fas fa-user-shield"></i> Administrator
+            </div>
+        </header>
+
+        <!-- Toast notification -->
+        <div id="toast" class="toast-msg" role="alert"></div>
+
+        <!-- ==================== SECTION: CITIES ==================== -->
+        <section id="section-cities" class="dash-section active">
+            <div class="dash-card">
+                <div class="dash-card-header">
+                    <h3><i class="fas fa-map-marked-alt"></i> Manage States &amp; Cities</h3>
+                    <button class="btn-primary" id="addStateBtn">
+                        <i class="fas fa-plus"></i> Add State
+                    </button>
+                </div>
+
+                <!-- Add State Modal (inline) -->
+                <div id="addStateModal" class="inline-modal" style="display:none;">
+                    <div class="inline-modal-content">
+                        <h4>Add New State</h4>
+                        <input type="text" id="newStateName" placeholder="State name (e.g. Nevada)" class="admin-input">
+                        <div class="modal-actions">
+                            <button class="btn-secondary" id="cancelAddState">Cancel</button>
+                            <button class="btn-primary" id="confirmAddState">Add State</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cities manager -->
+                <div id="citiesManager" class="cities-manager">
+                    <p class="loading-text"><i class="fas fa-spinner fa-spin"></i> Loading...</p>
+                </div>
+
+                <div class="dash-card-footer">
+                    <button class="btn-save" id="saveCitiesBtn">
+                        <i class="fas fa-save"></i> Save All Changes
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: PRIVACY ==================== -->
+        <section id="section-privacy" class="dash-section">
+            <div class="dash-card">
+                <div class="dash-card-header">
+                    <h3><i class="fas fa-shield-alt"></i> Privacy Policy</h3>
+                </div>
+                <div class="editor-note">
+                    <i class="fas fa-info-circle"></i>
+                    You can use HTML tags like <code>&lt;h4&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>,
+                    <code>&lt;li&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;a&gt;</code>.
+                </div>
+                <textarea id="privacyEditor" class="policy-editor" placeholder="Loading..."></textarea>
+                <div class="editor-preview-toggle">
+                    <button class="btn-secondary" id="previewPrivacyBtn"><i class="fas fa-eye"></i> Preview</button>
+                </div>
+                <div id="privacyPreview" class="policy-preview" style="display:none;"></div>
+                <div class="dash-card-footer">
+                    <button class="btn-save" id="savePrivacyBtn">
+                        <i class="fas fa-save"></i> Save Privacy Policy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: TERMS ==================== -->
+        <section id="section-terms" class="dash-section">
+            <div class="dash-card">
+                <div class="dash-card-header">
+                    <h3><i class="fas fa-file-contract"></i> Terms of Use</h3>
+                </div>
+                <div class="editor-note">
+                    <i class="fas fa-info-circle"></i>
+                    You can use HTML tags like <code>&lt;h4&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>,
+                    <code>&lt;li&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;a&gt;</code>.
+                </div>
+                <textarea id="termsEditor" class="policy-editor" placeholder="Loading..."></textarea>
+                <div class="editor-preview-toggle">
+                    <button class="btn-secondary" id="previewTermsBtn"><i class="fas fa-eye"></i> Preview</button>
+                </div>
+                <div id="termsPreview" class="policy-preview" style="display:none;"></div>
+                <div class="dash-card-footer">
+                    <button class="btn-save" id="saveTermsBtn">
+                        <i class="fas fa-save"></i> Save Terms of Use
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /dashboard-main -->
+
+    <!-- Confirm delete modal -->
+    <div id="confirmModal" class="overlay-modal" style="display:none;">
+        <div class="overlay-modal-content">
+            <i class="fas fa-exclamation-triangle modal-warn-icon"></i>
+            <h4 id="confirmModalTitle">Confirm Action</h4>
+            <p id="confirmModalMsg"></p>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="confirmCancel">Cancel</button>
+                <button class="btn-danger" id="confirmOk">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>

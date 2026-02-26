@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login – AlexYah Transportation</title>
+    <link rel="icon" href="../assets/img/logos/AlexYahTransportationLogo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="login-body">
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-logo">
+                <img src="../assets/img/logos/AlexYahTransportationLogo.png" alt="AlexYah Transportation">
+            </div>
+            <h1 class="login-title">Admin Portal</h1>
+            <p class="login-subtitle">AlexYah Transportation</p>
+
+            <form id="loginForm" autocomplete="off" novalidate>
+                <div class="login-field">
+                    <label for="username"><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" autocomplete="off" required>
+                </div>
+                <div class="login-field">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <div class="password-wrap">
+                        <input type="password" id="password" name="password" placeholder="Enter password" autocomplete="current-password" required>
+                        <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="loginError" class="login-error" style="display:none;"></div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span id="loginBtnText">Sign In</span>
+                    <i class="fas fa-spinner fa-spin" id="loginSpinner" style="display:none;"></i>
+                </button>
+            </form>
+
+            <div class="login-back">
+                <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Website</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Redirect if already logged in
+        const token = sessionStorage.getItem('adminToken');
+        if (token) {
+            window.location.href = 'dashboard.html';
+        }
+
+        // Toggle password visibility
+        document.getElementById('togglePw').addEventListener('click', function () {
+            const pw = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (pw.type === 'password') {
+                pw.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                pw.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+
+        // Login form submit
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+            const btn = document.getElementById('loginBtn');
+            const btnText = document.getElementById('loginBtnText');
+            const spinner = document.getElementById('loginSpinner');
+
+            errorDiv.style.display = 'none';
+            btn.disabled = true;
+            btnText.textContent = 'Signing in...';
+            spinner.style.display = 'inline-block';
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+
+                if (data.success && data.token) {
+                    sessionStorage.setItem('adminToken', data.token);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorDiv.textContent = data.error || 'Invalid credentials.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent = 'Connection error. Please try again.';
+                errorDiv.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'Sign In';
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
