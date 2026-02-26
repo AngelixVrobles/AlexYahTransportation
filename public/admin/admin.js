@@ -80,10 +80,11 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 });
 
 // ================================================
-// CITIES MANAGEMENT
+// CITIES MANAGEMENT  –  dark card + tabs
 // ================================================
 
-let citiesData = {}; // { StateName: ['City1', 'City2', ...] }
+let citiesData = {};       // { StateName: ['City1', ...] }
+let activeStateTab = null; // currently selected state name
 
 async function loadCities() {
     try {
@@ -92,116 +93,144 @@ async function loadCities() {
         citiesData = await res.json();
         renderCities();
     } catch (err) {
-        document.getElementById('citiesManager').innerHTML =
-            `<p style="color:#dc3545;"><i class="fas fa-exclamation-circle"></i> Error loading cities: ${err.message}</p>`;
+        document.getElementById('cmTabs').innerHTML =
+            `<span style="color:#f87171;font-size:.85rem;"><i class="fas fa-exclamation-circle"></i> Error: ${err.message}</span>`;
     }
 }
 
 function renderCities() {
-    const container = document.getElementById('citiesManager');
-    container.innerHTML = '';
-
     const states = Object.keys(citiesData).sort();
+    renderTabs(states);
+    renderPanels(states);
+}
+
+/* ---- TABS ---- */
+function renderTabs(states) {
+    const tabsEl = document.getElementById('cmTabs');
+    tabsEl.innerHTML = '';
+
     if (states.length === 0) {
-        container.innerHTML = '<p class="loading-text">No states found. Add one above.</p>';
+        tabsEl.innerHTML = `<span style="color:rgba(255,255,255,.28);font-size:.82rem;font-weight:500;">No states yet — add one above.</span>`;
+        activeStateTab = null;
         return;
     }
 
+    // Preserve active tab if still valid
+    if (!activeStateTab || !states.includes(activeStateTab)) {
+        activeStateTab = states[0];
+    }
+
     states.forEach(state => {
-        const block = createStateBlock(state, citiesData[state]);
-        container.appendChild(block);
+        const tab = document.createElement('button');
+        tab.className = 'cm-tab' + (state === activeStateTab ? ' active' : '');
+        tab.dataset.state = state;
+        tab.innerHTML = `
+            ${escapeHtmlUI(state)}
+            <span class="cm-tab-count">${citiesData[state].length}</span>
+            <button class="cm-tab-del" data-del="${escapeHtmlUI(state)}" title="Delete state"><i class="fas fa-times"></i></button>`;
+
+        // Select tab
+        tab.addEventListener('click', (e) => {
+            if (e.target.closest('.cm-tab-del')) return;
+            activeStateTab = state;
+            renderCities();
+        });
+
+        // Delete state via × button
+        tab.querySelector('.cm-tab-del').addEventListener('click', (e) => {
+            e.stopPropagation();
+            confirmDeleteState(state);
+        });
+
+        tabsEl.appendChild(tab);
     });
 }
 
-function createStateBlock(state, cities) {
-    const block = document.createElement('div');
-    block.className = 'state-block';
-    block.dataset.state = state;
+/* ---- PANELS ---- */
+function renderPanels(states) {
+    const panelsEl = document.getElementById('cmPanels');
+    panelsEl.innerHTML = '';
 
-    // Header
-    const header = document.createElement('div');
-    header.className = 'state-header';
-    header.innerHTML = `
-        <div class="state-name-display">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="state-label">${escapeHtmlUI(state)}</span>
-            <span class="state-badge">${cities.length} cities</span>
-        </div>
-        <div class="state-actions">
-            <button class="btn-icon btn-icon-edit" title="Rename state" data-action="rename-state">
-                <i class="fas fa-edit"></i>
-            </button>
-            <button class="btn-icon btn-icon-delete" title="Delete state" data-action="delete-state">
-                <i class="fas fa-trash"></i>
-            </button>
-        </div>`;
-    header.querySelector('[data-action="rename-state"]').addEventListener('click', () => startRenameState(block, state));
-    header.querySelector('[data-action="delete-state"]').addEventListener('click', () => confirmDeleteState(state));
-    block.appendChild(header);
+    if (states.length === 0) return;
 
-    // Cities list
-    const listDiv = document.createElement('div');
-    listDiv.className = 'cities-list';
-    cities.forEach((city, idx) => {
-        listDiv.appendChild(createCityItem(state, city, idx));
+    states.forEach(state => {
+        const panel = buildPanel(state, citiesData[state]);
+        panelsEl.appendChild(panel);
     });
-    block.appendChild(listDiv);
+}
+
+function buildPanel(state, cities) {
+    const panel = document.createElement('div');
+    panel.className = 'cm-panel' + (state === activeStateTab ? ' active' : '');
+    panel.dataset.state = state;
+
+    // Panel header
+    const header = document.createElement('div');
+    header.className = 'cm-panel-header';
+    header.innerHTML = `
+        <span class="cm-panel-title">Cities in ${escapeHtmlUI(state)}</span>
+        <span class="cm-panel-count">${cities.length} cities</span>`;
+    panel.appendChild(header);
 
     // Add city row
     const addRow = document.createElement('div');
-    addRow.className = 'add-city-row';
+    addRow.className = 'cm-add-city-row';
     addRow.innerHTML = `
-        <input type="text" placeholder="New city name..." class="new-city-input">
-        <button class="btn-icon btn-icon-add" title="Add city"><i class="fas fa-plus"></i></button>`;
-    addRow.querySelector('.btn-icon-add').addEventListener('click', () => {
-        addCity(state, addRow.querySelector('.new-city-input'));
-    });
-    addRow.querySelector('.new-city-input').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') addCity(state, addRow.querySelector('.new-city-input'));
-    });
-    block.appendChild(addRow);
+        <input type="text" placeholder="New city name…" class="cm-new-city-input">
+        <button class="btn-primary cm-add-city-btn"><i class="fas fa-plus"></i> Add</button>`;
+    const cityInput = addRow.querySelector('.cm-new-city-input');
+    addRow.querySelector('.cm-add-city-btn').addEventListener('click', () => addCity(state, cityInput));
+    cityInput.addEventListener('keydown', e => { if (e.key === 'Enter') addCity(state, cityInput); });
+    panel.appendChild(addRow);
 
-    return block;
+    // City list
+    const list = document.createElement('div');
+    list.className = 'cm-city-list';
+
+    if (cities.length === 0) {
+        list.innerHTML = `<div class="cm-empty"><i class="fas fa-city"></i>No cities yet. Add one above.</div>`;
+    } else {
+        cities.forEach(city => list.appendChild(buildCityItem(state, city)));
+    }
+    panel.appendChild(list);
+
+    return panel;
 }
 
-function createCityItem(state, city, idx) {
+function buildCityItem(state, city) {
     const item = document.createElement('div');
-    item.className = 'city-item';
+    item.className = 'cm-city-item';
     item.dataset.city = city;
-
     item.innerHTML = `
-        <span class="city-item-name">${escapeHtmlUI(city)}</span>
-        <div class="city-actions">
-            <button class="btn-icon btn-icon-edit" title="Edit city"><i class="fas fa-edit"></i></button>
-            <button class="btn-icon btn-icon-delete" title="Delete city"><i class="fas fa-trash"></i></button>
+        <span class="cm-city-name">${escapeHtmlUI(city)}</span>
+        <div class="cm-city-actions">
+            <button class="btn-icon-dark" title="Edit city"><i class="fas fa-pen"></i></button>
+            <button class="btn-icon-dark del" title="Delete city"><i class="fas fa-trash"></i></button>
         </div>`;
-
-    item.querySelector('.btn-icon-edit').addEventListener('click', () => startEditCity(item, state, city));
-    item.querySelector('.btn-icon-delete').addEventListener('click', () => confirmDeleteCity(state, city));
-
+    const [editBtn, delBtn] = item.querySelectorAll('.btn-icon-dark');
+    editBtn.addEventListener('click', () => startEditCity(item, state, city));
+    delBtn.addEventListener('click', () => confirmDeleteCity(state, city));
     return item;
 }
 
 function startEditCity(item, state, oldCity) {
-    const nameSpan = item.querySelector('.city-item-name');
-    const originalText = oldCity;
-    nameSpan.innerHTML = `<input type="text" value="${escapeHtmlUI(oldCity)}" style="width:180px;padding:4px 9px;border:1.5px solid #0d6efd;border-radius:6px;font-size:.87rem;">`;
-    const input = nameSpan.querySelector('input');
-    input.focus();
-    input.select();
+    const nameEl = item.querySelector('.cm-city-name');
+    nameEl.innerHTML = `<input type="text" value="${escapeHtmlUI(oldCity)}">`;
+    const input = nameEl.querySelector('input');
+    input.focus(); input.select();
 
     function save() {
         const newCity = input.value.trim();
-        if (!newCity) { item.dataset.city = originalText; renderCities(); return; }
-        const cities = citiesData[state];
-        const idx = cities.indexOf(oldCity);
-        if (idx !== -1) cities[idx] = newCity;
+        if (!newCity) { renderCities(); return; }
+        const idx = citiesData[state].indexOf(oldCity);
+        if (idx !== -1) citiesData[state][idx] = newCity;
+        citiesData[state].sort();
         renderCities();
     }
     input.addEventListener('blur', save);
-    input.addEventListener('keydown', (e) => {
+    input.addEventListener('keydown', e => {
         if (e.key === 'Enter') { e.preventDefault(); save(); }
-        if (e.key === 'Escape') { renderCities(); }
+        if (e.key === 'Escape') renderCities();
     });
 }
 
@@ -216,41 +245,12 @@ function addCity(state, input) {
     showToast(`"${city}" added to ${state}.`);
 }
 
-function startRenameState(block, oldState) {
-    const header = block.querySelector('.state-header');
-    const nameDisplay = header.querySelector('.state-name-display');
-    const leftHtml = nameDisplay.innerHTML;
-
-    nameDisplay.innerHTML = `
-        <div class="state-name-edit-wrap">
-            <i class="fas fa-map-marker-alt" style="color:#0d6efd;"></i>
-            <input type="text" value="${escapeHtmlUI(oldState)}" style="width:180px;padding:6px 10px;border:1.5px solid #0d6efd;border-radius:7px;font-size:.9rem;">
-            <button class="btn-icon btn-icon-edit" title="Confirm rename" style="color:#198754;"><i class="fas fa-check"></i></button>
-            <button class="btn-icon" title="Cancel" style="color:#6b7280;"><i class="fas fa-times"></i></button>
-        </div>`;
-
-    const input = nameDisplay.querySelector('input');
-    input.focus(); input.select();
-
-    function doRename() {
-        const newState = input.value.trim();
-        if (!newState || newState === oldState) { renderCities(); return; }
-        if (citiesData[newState]) { showToast('State already exists.', true); return; }
-        citiesData[newState] = citiesData[oldState];
-        delete citiesData[oldState];
-        renderCities();
-    }
-    nameDisplay.querySelectorAll('.btn-icon')[0].addEventListener('click', doRename);
-    nameDisplay.querySelectorAll('.btn-icon')[1].addEventListener('click', () => renderCities());
-    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') doRename(); if (e.key === 'Escape') renderCities(); });
-}
-
-// Confirm delete: state
 function confirmDeleteState(state) {
     showConfirmModal(
         'Delete State',
         `Are you sure you want to delete <strong>${escapeHtmlUI(state)}</strong> and all its cities? This cannot be undone.`,
         () => {
+            if (activeStateTab === state) activeStateTab = null;
             delete citiesData[state];
             renderCities();
             showToast(`State "${state}" deleted.`);
@@ -258,7 +258,6 @@ function confirmDeleteState(state) {
     );
 }
 
-// Confirm delete: city
 function confirmDeleteCity(state, city) {
     showConfirmModal(
         'Delete City',
@@ -297,29 +296,19 @@ document.getElementById('saveCitiesBtn').addEventListener('click', async () => {
     }
 });
 
-// Add State button
-document.getElementById('addStateBtn').addEventListener('click', () => {
-    const modal = document.getElementById('addStateModal');
-    modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
-    if (modal.style.display === 'block') document.getElementById('newStateName').focus();
-});
-document.getElementById('cancelAddState').addEventListener('click', () => {
-    document.getElementById('addStateModal').style.display = 'none';
-    document.getElementById('newStateName').value = '';
-});
+// Add State
 document.getElementById('confirmAddState').addEventListener('click', () => {
     const name = document.getElementById('newStateName').value.trim();
     if (!name) { showToast('Enter a state name.', true); return; }
     if (citiesData[name]) { showToast('State already exists.', true); return; }
     citiesData[name] = [];
+    activeStateTab = name;
     renderCities();
-    document.getElementById('addStateModal').style.display = 'none';
     document.getElementById('newStateName').value = '';
     showToast(`State "${name}" added.`);
 });
 document.getElementById('newStateName').addEventListener('keydown', e => {
     if (e.key === 'Enter') document.getElementById('confirmAddState').click();
-    if (e.key === 'Escape') document.getElementById('cancelAddState').click();
 });
 
 // ================================================
