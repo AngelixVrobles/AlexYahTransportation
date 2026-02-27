@@ -7,7 +7,9 @@
     <title>Admin Dashboard – AlexYah Transportation</title>
     <link rel="icon" href="../assets/img/logos/AlexYahTransportationLogo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
 </head>
 
@@ -21,6 +23,12 @@
         </div>
 
         <nav class="sidebar-nav">
+            <span class="nav-label">Analytics</span>
+
+            <a href="#" class="sidebar-link" data-section="stats">
+                <i class="fas fa-chart-bar"></i> Statistics
+            </a>
+
             <span class="nav-label">Management</span>
 
             <a href="#" class="sidebar-link active" data-section="cities">
@@ -51,7 +59,7 @@
     <div class="dashboard-main" id="dashMain">
 
         <!-- Top bar -->
-         <header class="dash-topbar">
+        <header class="dash-topbar">
             <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
                 <i class="fas fa-bars"></i>
             </button>
@@ -61,6 +69,66 @@
 
         <!-- Toast notification -->
         <div id="toast" class="toast-msg" role="alert"></div>
+
+        <!-- ====== SECTION: STATISTICS ====== -->
+        <section id="section-stats" class="dash-section">
+
+            <div class="cm-card stats-card-wrapper">
+                <div class="cm-header">
+                    <div class="cm-header-top">
+                        <div>
+                            <div class="cm-title"><i class="fas fa-chart-bar"
+                                    style="color:#3b5bdb;margin-right:10px;"></i>Statistics</div>
+                            <div class="cm-subtitle">Real-time activity overview for your website</div>
+                        </div>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="btn-secondary" id="refreshStatsBtn">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                            <button class="btn-danger" id="resetStatsBtn">
+                                <i class="fas fa-trash"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:rgba(59,91,219,.15);">
+                            <i class="fas fa-eye" style="color:#3b5bdb;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="statVisits">–</span>
+                            <span class="stat-label">Page Visits</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:rgba(12,166,120,.15);">
+                            <i class="fas fa-envelope" style="color:#0ca678;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="statEmails">–</span>
+                            <span class="stat-label">Emails Received</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:rgba(245,159,0,.15);">
+                            <i class="fas fa-user-check" style="color:#f59f00;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="statDrivers">–</span>
+                            <span class="stat-label">Driver Applications</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cm-footer">
+                    <span class="cm-autosave-hint"><i class="fas fa-database"></i> Data persisted across server
+                        restarts</span>
+                </div>
+            </div>
+
+        </section>
 
         <!-- ====== SECTION: CITIES ====== -->
         <section id="section-cities" class="dash-section active">
@@ -94,9 +162,8 @@
 
                 <!-- Footer -->
                 <div class="cm-footer">
-                    <button class="btn-save" id="saveCitiesBtn">
-                        <i class="fas fa-save"></i> Save All Changes
-                    </button>
+                    <span class="cm-autosave-hint"><i class="fas fa-check-circle"></i>Changes are saved
+                        automatically</span>
                 </div>
             </div>
 
@@ -118,18 +185,35 @@
                 <div class="editor-note">
                     <i class="fas fa-info-circle"></i>
                     Supported tags: <code>&lt;h4&gt;</code> <code>&lt;p&gt;</code> <code>&lt;ul&gt;</code>
-                    <code>&lt;li&gt;</code> <code>&lt;strong&gt;</code> <code>&lt;a&gt;</code>
+                    <code>&lt;li&gt;</code> <code>&lt;strong&gt;</code> <code>&lt;a href=""&gt;</code>
                 </div>
-                <textarea id="privacyEditor" class="policy-editor" placeholder="Loading…"></textarea>
+                <div class="editor-toolbar">
+                    <button class="editor-toolbar-btn" onclick="insertTag('privacyEditor','h4')"><b>H4</b>
+                        Title</button>
+                    <button class="editor-toolbar-btn" onclick="insertTag('privacyEditor','p')"><i
+                            class="fas fa-paragraph"></i> Paragraph</button>
+                    <button class="editor-toolbar-btn" onclick="insertTag('privacyEditor','strong')"><b>B</b>
+                        Bold</button>
+                    <button class="editor-toolbar-btn" onclick="insertListTag('privacyEditor')"><i
+                            class="fas fa-list-ul"></i> List</button>
+                    <button class="editor-toolbar-btn" onclick="insertLinkTag('privacyEditor')"><i
+                            class="fas fa-link"></i> Link</button>
+                </div>
+                <textarea id="privacyEditor" class="policy-editor"
+                    placeholder="Write the content of the Privacy Policy here…"
+                    oninput="updateCharCount('privacyEditor','privacyCount')"></textarea>
                 <div class="editor-preview-toggle">
                     <button class="btn-secondary" id="previewPrivacyBtn">
                         <i class="fas fa-eye"></i> Preview
                     </button>
+                    <span class="editor-char-count" id="privacyCount">0 characters</span>
                 </div>
                 <div id="privacyPreview" class="policy-preview" style="display:none;"></div>
                 <div class="dash-card-footer">
+                    <span class="footer-hint"><i class="fas fa-info-circle"></i> The changes are saved when you press
+                        the button</span>
                     <button class="btn-save" id="savePrivacyBtn">
-                        <i class="fas fa-save"></i> Save Privacy Policy
+                        <i class="fas fa-save"></i> save Privacy Policy
                     </button>
                 </div>
             </div>
@@ -144,18 +228,34 @@
                 <div class="editor-note">
                     <i class="fas fa-info-circle"></i>
                     Supported tags: <code>&lt;h4&gt;</code> <code>&lt;p&gt;</code> <code>&lt;ul&gt;</code>
-                    <code>&lt;li&gt;</code> <code>&lt;strong&gt;</code> <code>&lt;a&gt;</code>
+                    <code>&lt;li&gt;</code> <code>&lt;strong&gt;</code> <code>&lt;a href=""&gt;</code>
                 </div>
-                <textarea id="termsEditor" class="policy-editor" placeholder="Loading…"></textarea>
+                <div class="editor-toolbar">
+                    <button class="editor-toolbar-btn" onclick="insertTag('termsEditor','h4')"><b>H4</b> Title</button>
+                    <button class="editor-toolbar-btn" onclick="insertTag('termsEditor','p')"><i
+                            class="fas fa-paragraph"></i> Paragraph</button>
+                    <button class="editor-toolbar-btn" onclick="insertTag('termsEditor','strong')"><b>B</b>
+                        Bold</button>
+                    <button class="editor-toolbar-btn" onclick="insertListTag('termsEditor')"><i
+                            class="fas fa-list-ul"></i> List</button>
+                    <button class="editor-toolbar-btn" onclick="insertLinkTag('termsEditor')"><i
+                            class="fas fa-link"></i> Link</button>
+                </div>
+                <textarea id="termsEditor" class="policy-editor"
+                    placeholder="Write the content of the Terms of Use here…"
+                    oninput="updateCharCount('termsEditor','termsCount')"></textarea>
                 <div class="editor-preview-toggle">
                     <button class="btn-secondary" id="previewTermsBtn">
                         <i class="fas fa-eye"></i> Preview
                     </button>
+                    <span class="editor-char-count" id="termsCount">0 characters</span>
                 </div>
                 <div id="termsPreview" class="policy-preview" style="display:none;"></div>
                 <div class="dash-card-footer">
+                    <span class="footer-hint"><i class="fas fa-info-circle"></i> The changes are saved when you press
+                        the button</span>
                     <button class="btn-save" id="saveTermsBtn">
-                        <i class="fas fa-save"></i> Save Terms of Use
+                        <i class="fas fa-save"></i> save Terms of Use
                     </button>
                 </div>
             </div>
