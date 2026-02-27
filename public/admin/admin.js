@@ -43,6 +43,7 @@ const sections = document.querySelectorAll('.dash-section');
 const dashTitle = document.getElementById('dashTitle');
 
 const sectionTitles = {
+    stats: 'Statistics',
     cities: 'Cities &amp; States',
     privacy: 'Privacy Policy',
     terms: 'Terms of Use'
@@ -224,8 +225,9 @@ function startEditCity(item, state, oldCity) {
         if (!newCity) { renderCities(); return; }
         const idx = citiesData[state].indexOf(oldCity);
         if (idx !== -1) citiesData[state][idx] = newCity;
-        citiesData[state].sort();
+        citiesData[state].sort((a, b) => a.localeCompare(b));
         renderCities();
+        autoSaveCities();
     }
     input.addEventListener('blur', save);
     input.addEventListener('keydown', e => {
@@ -234,15 +236,35 @@ function startEditCity(item, state, oldCity) {
     });
 }
 
+// Auto-save cities to backend
+async function autoSaveCities() {
+    try {
+        const res = await fetch('/api/admin/cities', {
+            method: 'POST',
+            headers: authHeaders(),
+            body: JSON.stringify(citiesData)
+        });
+        if (handleAuthError(res)) return;
+        const data = await res.json();
+        if (!data.success) {
+            showToast(data.error || 'Auto-save failed.', true);
+        }
+    } catch (err) {
+        showToast('Auto-save failed. Check connection.', true);
+    }
+}
+
 function addCity(state, input) {
     const city = input.value.trim();
     if (!city) return;
     if (!citiesData[state]) citiesData[state] = [];
     if (citiesData[state].includes(city)) { showToast('City already exists.', true); return; }
     citiesData[state].push(city);
-    citiesData[state].sort();
+    citiesData[state].sort((a, b) => a.localeCompare(b));
+    input.value = '';
     renderCities();
     showToast(`"${city}" added to ${state}.`);
+    autoSaveCities();
 }
 
 function confirmDeleteState(state) {
@@ -254,6 +276,7 @@ function confirmDeleteState(state) {
             delete citiesData[state];
             renderCities();
             showToast(`State "${state}" deleted.`);
+            autoSaveCities();
         }
     );
 }
@@ -266,35 +289,12 @@ function confirmDeleteCity(state, city) {
             citiesData[state] = citiesData[state].filter(c => c !== city);
             renderCities();
             showToast(`City "${city}" deleted.`);
+            autoSaveCities();
         }
     );
 }
 
-// Save cities
-document.getElementById('saveCitiesBtn').addEventListener('click', async () => {
-    const btn = document.getElementById('saveCitiesBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-    try {
-        const res = await fetch('/api/admin/cities', {
-            method: 'POST',
-            headers: authHeaders(),
-            body: JSON.stringify(citiesData)
-        });
-        if (handleAuthError(res)) return;
-        const data = await res.json();
-        if (data.success) {
-            showToast('Cities saved successfully!');
-        } else {
-            showToast(data.error || 'Failed to save cities.', true);
-        }
-    } catch (err) {
-        showToast('Connection error. Please try again.', true);
-    } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-save"></i> Save All Changes';
-    }
-});
+// Cities are now auto-saved on every add/edit/delete action
 
 // Add State
 document.getElementById('confirmAddState').addEventListener('click', () => {
@@ -306,6 +306,7 @@ document.getElementById('confirmAddState').addEventListener('click', () => {
     renderCities();
     document.getElementById('newStateName').value = '';
     showToast(`State "${name}" added.`);
+    autoSaveCities();
 });
 document.getElementById('newStateName').addEventListener('keydown', e => {
     if (e.key === 'Enter') document.getElementById('confirmAddState').click();
@@ -333,6 +334,51 @@ document.getElementById('confirmOk').addEventListener('click', () => {
 });
 
 // ================================================
+// EDITOR TOOLBAR HELPERS
+// ================================================
+function insertTag(editorId, tag) {
+    const ta = document.getElementById(editorId);
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end) || 'texto aquí';
+    const insertion = `<${tag}>${selected}</${tag}>`;
+    ta.value = ta.value.substring(0, start) + insertion + ta.value.substring(end);
+    ta.focus();
+    ta.selectionStart = start + tag.length + 2;
+    ta.selectionEnd = start + tag.length + 2 + selected.length;
+    updateCharCount(editorId, editorId === 'privacyEditor' ? 'privacyCount' : 'termsCount');
+}
+
+function insertListTag(editorId) {
+    const ta = document.getElementById(editorId);
+    const start = ta.selectionStart;
+    const insertion = `\n<ul>\n  <li>Elemento 1</li>\n  <li>Elemento 2</li>\n</ul>\n`;
+    ta.value = ta.value.substring(0, start) + insertion + ta.value.substring(start);
+    ta.focus();
+    updateCharCount(editorId, editorId === 'privacyEditor' ? 'privacyCount' : 'termsCount');
+}
+
+function insertLinkTag(editorId) {
+    const ta = document.getElementById(editorId);
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end) || 'texto del enlace';
+    const insertion = `<a href="https://example.com">${selected}</a>`;
+    ta.value = ta.value.substring(0, start) + insertion + ta.value.substring(end);
+    ta.focus();
+    updateCharCount(editorId, editorId === 'privacyEditor' ? 'privacyCount' : 'termsCount');
+}
+
+function updateCharCount(editorId, countId) {
+    const ta = document.getElementById(editorId);
+    const countEl = document.getElementById(countId);
+    if (ta && countEl) {
+        const len = ta.value.length;
+        countEl.textContent = `${len.toLocaleString()} caracter${len !== 1 ? 'es' : ''}`;
+    }
+}
+
+// ================================================
 // POLICY EDITORS
 // ================================================
 let policyData = { privacy: '', terms: '' };
@@ -344,6 +390,8 @@ async function loadPolicy() {
         policyData = await res.json();
         document.getElementById('privacyEditor').value = policyData.privacy || '';
         document.getElementById('termsEditor').value = policyData.terms || '';
+        updateCharCount('privacyEditor', 'privacyCount');
+        updateCharCount('termsEditor', 'termsCount');
     } catch (err) {
         showToast('Error loading policy: ' + err.message, true);
     }
@@ -414,6 +462,68 @@ document.getElementById('savePrivacyBtn').addEventListener('click', () => savePo
 document.getElementById('saveTermsBtn').addEventListener('click', () => savePolicy('terms'));
 
 // ================================================
+// STATISTICS
+// ================================================
+function animateCount(el, target) {
+    let start = 0;
+    const duration = 900;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+        start = Math.min(start + step, target);
+        el.textContent = start.toLocaleString();
+        if (start >= target) clearInterval(timer);
+    }, 16);
+}
+
+async function loadStats() {
+    try {
+        const res = await fetch('/api/admin/stats', { headers: authHeaders() });
+        if (handleAuthError(res)) return;
+        const data = await res.json();
+        if (data.success) {
+            animateCount(document.getElementById('statVisits'), data.stats.pageVisits || 0);
+            animateCount(document.getElementById('statEmails'), data.stats.emailsSent || 0);
+            animateCount(document.getElementById('statDrivers'), data.stats.driverApplications || 0);
+        }
+    } catch (err) {
+        showToast('Could not load stats.', true);
+    }
+}
+
+document.getElementById('refreshStatsBtn').addEventListener('click', () => {
+    document.getElementById('statVisits').textContent = '–';
+    document.getElementById('statEmails').textContent = '–';
+    document.getElementById('statDrivers').textContent = '–';
+    loadStats();
+    showToast('Stats refreshed.');
+});
+
+document.getElementById('resetStatsBtn').addEventListener('click', () => {
+    showConfirmModal(
+        'Reset Statistics',
+        'Are you sure you want to reset all stats to 0? This cannot be undone.',
+        async () => {
+            try {
+                const res = await fetch('/api/admin/stats/reset', {
+                    method: 'POST',
+                    headers: authHeaders()
+                });
+                if (handleAuthError(res)) return;
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('statVisits').textContent = '0';
+                    document.getElementById('statEmails').textContent = '0';
+                    document.getElementById('statDrivers').textContent = '0';
+                    showToast('Stats reset to 0.');
+                }
+            } catch {
+                showToast('Failed to reset stats.', true);
+            }
+        }
+    );
+});
+
+// ================================================
 // UTILITIES
 // ================================================
 function escapeHtmlUI(str) {
@@ -429,3 +539,4 @@ function escapeHtmlUI(str) {
 // ================================================
 loadCities();
 loadPolicy();
+loadStats();
