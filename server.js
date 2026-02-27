@@ -28,6 +28,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 // === Paths to data files ===
 const CITIES_FILE = path.join(__dirname, 'data', 'cities.json');
 const POLICY_FILE = path.join(__dirname, 'data', 'policy.json');
+const STATS_FILE  = path.join(__dirname, 'data', 'stats.json');
+
+// === Stats tracking ===
+let stats = readStatsSync();
+
+function readStatsSync() {
+    try {
+        return JSON.parse(readFileSync(STATS_FILE, 'utf8'));
+    } catch {
+        return { emailsSent: 0, driverApplications: 0, pageVisits: 0 };
+    }
+}
+
+function saveStats() {
+    try { writeFileSync(STATS_FILE, JSON.stringify(stats, null, 2), 'utf8'); } catch {}
+}
+
+function incrementStat(key) {
+    if (stats[key] !== undefined) { stats[key]++; saveStats(); }
+}
 
 // === Helper: read/write JSON data ===
 function readJSON(filePath) {
@@ -344,6 +364,8 @@ app.post('/api/send-email', async (req, res) => {
 
         console.log('Email sent with ID:', info.messageId);
 
+        incrementStat('emailsSent');
+
         res.json({
             success: true,
             message: 'Email sent successfully!',
@@ -482,6 +504,7 @@ ${listaArchivos}`,
 
         const info = await transporter.sendMail(mailOptionsDriverRegistration);
         console.log('Driver application email sent with ID:', info.messageId);
+        incrementStat('driverApplications');
 
         res.json({ success: true, message: 'Driver form was sent successfully.' });
 
@@ -498,7 +521,19 @@ ${listaArchivos}`,
 
 // === RUTA RAIZ PARA SERVIR INDEX.HTML DESDE /PUBLIC ===
 app.get('/', (req, res) => {
+    incrementStat('pageVisits');
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// === Admin Stats (protected) ===
+app.get('/api/admin/stats', verifyToken, (req, res) => {
+    res.json({ success: true, stats });
+});
+
+app.post('/api/admin/stats/reset', verifyToken, (req, res) => {
+    stats = { emailsSent: 0, driverApplications: 0, pageVisits: 0 };
+    saveStats();
+    res.json({ success: true, message: 'Stats reset.' });
 });
 
 // === Ruta raíz para Render ===
