@@ -49,6 +49,16 @@ const sectionTitles = {
     terms: 'Terms of Use'
 };
 
+// ---- Sidebar open/close helpers ----
+function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebarOverlay').classList.add('active');
+}
+function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('active');
+}
+
 sidebarLinks.forEach(link => {
     link.addEventListener('click', function (e) {
         e.preventDefault();
@@ -60,19 +70,24 @@ sidebarLinks.forEach(link => {
         sections.forEach(s => s.classList.remove('active'));
         document.getElementById('section-' + sec).classList.add('active');
 
-        dashTitle.innerHTML = sectionTitles[sec] || sec;
+        if (dashTitle) dashTitle.innerHTML = sectionTitles[sec] || sec;
 
         // Close sidebar on mobile
         if (window.innerWidth <= 768) {
-            document.getElementById('sidebar').classList.remove('open');
+            closeSidebar();
         }
     });
 });
 
-// Mobile sidebar toggle
+// Mobile sidebar toggle (hamburger)
 document.getElementById('sidebarToggle').addEventListener('click', () => {
-    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar').classList.contains('open')
+        ? closeSidebar()
+        : openSidebar();
 });
+
+// Close sidebar when clicking the overlay
+document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
 
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', () => {

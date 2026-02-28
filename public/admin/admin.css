@@ -1,6 +1,7 @@
 /* ================================================
    ADMIN PANEL – AlexYah Transportation
    Redesign: Refined Minimal / Editorial
+   ✅ Responsive Fix – All breakpoints covered
    ================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -298,10 +299,27 @@ body {
     top: 0;
     left: 0;
     height: 100vh;
-    z-index: 200;
-    transition: transform var(--transition);
+    z-index: 500;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
     border-right: 1px solid rgba(255, 255, 255, .04);
+    box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 450;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .sidebar-header {
@@ -422,23 +440,26 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: none;
 }
 
 .sidebar-toggle {
     background: none;
     border: none;
     font-size: 1.1rem;
-    color: var(--ink-3);
     cursor: pointer;
-    display: none;
-    padding: 4px;
+    padding: 8px;
     border-radius: var(--radius-sm);
-    transition: background var(--transition);
+    transition: all var(--transition);
+    display: none; /* hidden on desktop, shown on mobile via media query */
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.6);
+    flex-shrink: 0;
 }
 
 .sidebar-toggle:hover {
-    background: var(--surface-3);
+    background: rgba(255, 255, 255, .1);
+    color: #fff;
 }
 
 .dash-title {
@@ -447,6 +468,10 @@ body {
     font-weight: 700;
     color: rgba(255, 255, 255, .9);
     letter-spacing: -.01em;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dash-admin-badge {
@@ -460,13 +485,14 @@ body {
     padding: 5px 12px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, .08);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .dash-admin-badge i {
     color: var(--accent);
     font-size: .7rem;
 }
-
 
 /* ---- Sections ---- */
 .dash-section {
@@ -484,19 +510,16 @@ body {
     animation: fadeUp .22s ease;
 }
 
-
 @keyframes fadeUp {
     from {
         opacity: 0;
         transform: translateY(8px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
-
 
 /* ================================================
    BUTTONS
@@ -517,6 +540,7 @@ body {
     transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
     letter-spacing: .01em;
     box-shadow: 0 2px 8px rgba(59, 91, 219, .2);
+    white-space: nowrap;
 }
 
 .btn-primary:hover {
@@ -539,6 +563,7 @@ body {
     align-items: center;
     gap: 6px;
     transition: all var(--transition);
+    white-space: nowrap;
 }
 
 .btn-secondary:hover {
@@ -640,8 +665,6 @@ body {
 /* ================================================
    CITIES MANAGER  –  Dark card + tabs layout
    ================================================ */
-
-/* The section itself gets a dark background */
 #section-cities {
     background: transparent;
 }
@@ -675,13 +698,11 @@ body {
     margin: 0 auto;
 }
 
-/* Stats wrapper shares the same card but with a different inner layout */
 .stats-card-wrapper {
     overflow: visible;
 }
 
-
-/* ---- Card header: title + "Add State" ---- */
+/* ---- Card header ---- */
 .cm-header {
     padding: 24px 24px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, .06);
@@ -693,6 +714,7 @@ body {
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .cm-title {
@@ -715,10 +737,12 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .cm-add-state-row input {
     flex: 1;
+    min-width: 140px;
     padding: 10px 14px;
     background: rgba(255, 255, 255, .07);
     border: 1.5px solid rgba(255, 255, 255, .1);
@@ -842,7 +866,7 @@ body {
     display: flex;
 }
 
-/* Panel header: "Cities in X" + count + add input */
+/* Panel header */
 .cm-panel-header {
     display: flex;
     align-items: center;
@@ -871,10 +895,12 @@ body {
     display: flex;
     gap: 8px;
     margin-bottom: 16px;
+    flex-wrap: wrap;
 }
 
 .cm-add-city-row input {
     flex: 1;
+    min-width: 160px;
     padding: 10px 14px;
     background: rgba(255, 255, 255, .06);
     border: 1.5px solid rgba(255, 255, 255, .1);
@@ -945,7 +971,8 @@ body {
     font-size: .85rem;
     color: #fff;
     background: rgba(59, 91, 219, .12);
-    width: 220px;
+    width: 100%;
+    max-width: 220px;
     outline: none;
     font-weight: 600;
     box-shadow: 0 0 0 3px rgba(59, 91, 219, .18);
@@ -1024,7 +1051,7 @@ body {
     font-size: .85rem;
 }
 
-/* ---- Add State inline modal (hidden, integrated into cm-header) ---- */
+/* ---- Confirm overlay modal ---- */
 .inline-modal {
     display: none !important;
 }
@@ -1033,9 +1060,9 @@ body {
     display: flex;
     gap: 8px;
     margin-top: 12px;
+    flex-wrap: wrap;
 }
 
-/* ---- Confirm overlay modal ---- */
 .overlay-modal {
     position: fixed;
     inset: 0;
@@ -1046,6 +1073,7 @@ body {
     align-items: center;
     justify-content: center;
     animation: fadeIn .15s ease;
+    padding: 16px;
 }
 
 .overlay-modal-content {
@@ -1053,7 +1081,7 @@ body {
     border-radius: var(--radius-lg);
     padding: 36px 32px 28px;
     max-width: 380px;
-    width: 90%;
+    width: 100%;
     text-align: center;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--border);
@@ -1061,15 +1089,8 @@ body {
 }
 
 @keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(.92);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(.92); }
+    to   { opacity: 1; transform: scale(1); }
 }
 
 .modal-warn-icon {
@@ -1127,6 +1148,8 @@ body {
     padding: 24px 28px;
     border-bottom: 1px solid rgba(255, 255, 255, .06);
     background: #0f1623;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .dash-card-header h3 {
@@ -1150,6 +1173,7 @@ body {
     justify-content: center;
     font-size: .88rem;
     border: 1px solid rgba(59, 91, 219, .25);
+    flex-shrink: 0;
 }
 
 .editor-note {
@@ -1160,14 +1184,16 @@ body {
     color: rgba(255, 255, 255, .65);
     font-weight: 500;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     flex-wrap: wrap;
+    line-height: 1.6;
 }
 
 .editor-note i {
     font-size: .85rem;
     flex-shrink: 0;
+    margin-top: 2px;
 }
 
 .editor-note code {
@@ -1244,6 +1270,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .editor-char-count {
@@ -1273,32 +1300,20 @@ body {
     border-bottom: 2px solid rgba(59, 91, 219, .3);
 }
 
-.policy-preview h4:first-child {
-    margin-top: 0;
-}
+.policy-preview h4:first-child { margin-top: 0; }
 
-.policy-preview p {
-    margin-bottom: 14px;
-}
+.policy-preview p { margin-bottom: 14px; }
 
 .policy-preview ul {
     padding-left: 22px;
     margin-bottom: 14px;
 }
 
-.policy-preview ul li {
-    margin-bottom: 6px;
-}
+.policy-preview ul li { margin-bottom: 6px; }
 
-.policy-preview strong {
-    color: #fff;
-    font-weight: 700;
-}
+.policy-preview strong { color: #fff; font-weight: 700; }
 
-.policy-preview a {
-    color: #93c5fd;
-    text-decoration: underline;
-}
+.policy-preview a { color: #93c5fd; text-decoration: underline; }
 
 .dash-card-footer {
     padding: 18px 28px;
@@ -1383,18 +1398,6 @@ body {
     letter-spacing: .08em;
 }
 
-@media (max-width: 700px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (min-width: 701px) and (max-width: 900px) {
-    .stats-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
 /* ================================================
    TOAST
    ================================================ */
@@ -1409,7 +1412,7 @@ body {
     font-size: .84rem;
     font-weight: 600;
     box-shadow: var(--shadow-md);
-    z-index: 500;
+    z-index: 600;
     opacity: 0;
     transform: translateY(-10px) scale(.96);
     transition: opacity .25s ease, transform .25s cubic-bezier(.34, 1.56, .64, 1);
@@ -1417,7 +1420,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    max-width: 320px;
+    max-width: calc(100vw - 48px);
 }
 
 .toast-msg::before {
@@ -1443,54 +1446,224 @@ body {
    ANIMATIONS
    ================================================ */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 /* ================================================
-   RESPONSIVE
+   RESPONSIVE  ✅
    ================================================ */
+
+/* ---- Tablet & below (≤ 1024px) ---- */
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding: 20px 20px;
+    }
+}
+
+/* ---- Sidebar collapses (≤ 768px) ---- */
 @media (max-width: 768px) {
+
+    /* Sidebar: hidden off-screen, slides in on .open */
     .sidebar {
         transform: translateX(-100%);
+        width: min(var(--sidebar-w), 80vw); /* never wider than 80vw on small screens */
     }
 
     .sidebar.open {
         transform: translateX(0);
     }
 
+    /* Main takes full width */
     .dashboard-main {
         margin-left: 0;
+        max-width: 100%;
     }
 
+    /* Show the hamburger toggle */
     .sidebar-toggle {
-        display: block;
+        display: flex;
     }
 
+    /* Topbar padding adjustment */
+    .dash-topbar {
+        padding: 0 16px;
+        gap: 10px;
+    }
+
+    /* Hide badge text label on very small screens */
+    .dash-admin-badge span {
+        display: none;
+    }
+
+    /* Section padding */
     .dash-section {
         padding: 16px;
     }
 
-    .cities-manager {
-        padding: 14px 16px;
+    /* Cities card adjustments */
+    .cm-header {
+        padding: 18px 16px 14px;
     }
 
+    .cm-header-top {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cm-add-state-row {
+        width: 100%;
+    }
+
+    .cm-add-state-row input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .cm-tabs {
+        padding: 12px 16px;
+        gap: 6px;
+    }
+
+    .cm-panel {
+        padding: 16px;
+    }
+
+    .cm-add-city-row {
+        flex-direction: column;
+    }
+
+    .cm-add-city-row input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .cm-city-item {
+        padding: 10px 12px;
+    }
+
+    /* Editor card */
     .dash-card-header {
-        padding: 14px 16px;
-        flex-wrap: wrap;
-        gap: 10px;
+        padding: 16px;
     }
 
     .dash-card-footer {
         padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .editor-toolbar {
+        padding: 10px 16px;
+    }
+
+    .policy-editor {
+        padding: 16px;
+        min-height: 260px;
+    }
+
+    .policy-preview {
+        padding: 20px 16px;
+    }
+
+    /* Stats */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    /* Login */
+    .login-card {
+        padding: 36px 24px 28px;
+    }
+
+    /* Toast */
+    .toast-msg {
+        top: auto;
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        max-width: 100%;
+    }
+}
+
+/* ---- Very small phones (≤ 480px) ---- */
+@media (max-width: 480px) {
+    .login-wrapper {
+        padding: 16px;
     }
 
     .login-card {
-        padding: 36px 28px 30px;
+        padding: 28px 18px 24px;
+        border-radius: var(--radius-lg);
+    }
+
+    .login-title {
+        font-size: 1.25rem;
+    }
+
+    .dash-topbar {
+        padding: 0 12px;
+    }
+
+    .dash-title {
+        font-size: .85rem;
+    }
+
+    .dash-admin-badge {
+        padding: 4px 8px;
+        font-size: .7rem;
+    }
+
+    .dash-section {
+        padding: 12px;
+    }
+
+    .cm-card,
+    .dash-card {
+        border-radius: var(--radius);
+    }
+
+    .cm-title {
+        font-size: 1.05rem;
+    }
+
+    .cm-tab {
+        font-size: .77rem;
+        padding: 6px 10px;
+    }
+
+    .stat-card {
+        padding: 18px 16px;
+        gap: 14px;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    .stat-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+
+    /* Buttons stretch on tiny screens */
+    .btn-save,
+    .btn-primary,
+    .btn-danger {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .overlay-modal-content {
+        padding: 28px 20px 22px;
     }
 }
