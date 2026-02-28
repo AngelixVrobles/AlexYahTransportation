@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // === Paths to data files ===
 const CITIES_FILE = path.join(__dirname, 'data', 'cities.json');
 const POLICY_FILE = path.join(__dirname, 'data', 'policy.json');
-const STATS_FILE  = path.join(__dirname, 'data', 'stats.json');
+const STATS_FILE = path.join(__dirname, 'data', 'stats.json');
 
 // === Stats tracking ===
 let stats = readStatsSync();
@@ -42,7 +42,7 @@ function readStatsSync() {
 }
 
 function saveStats() {
-    try { writeFileSync(STATS_FILE, JSON.stringify(stats, null, 2), 'utf8'); } catch {}
+    try { writeFileSync(STATS_FILE, JSON.stringify(stats, null, 2), 'utf8'); } catch { }
 }
 
 function incrementStat(key) {
@@ -268,9 +268,9 @@ app.post('/api/send-email', async (req, res) => {
             });
         }
 
-        const safeName    = escapeHtml(name);
-        const safeEmail   = escapeHtml(email);
-        const safePhone   = escapeHtml(phone || '');
+        const safeName = escapeHtml(name);
+        const safeEmail = escapeHtml(email);
+        const safePhone = escapeHtml(phone || '');
         const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
 
         const transporter = createTransporter();
@@ -415,40 +415,40 @@ const upload = multer({
 
 // === Diccionario de nombres para adjuntos ===
 const nombresBonitos = {
-    driver_license:   "Driver License",
-    profile_picture:  "Profile Picture",
-    registration:     "Registration",
-    insurance:        "Insurance",
-    inspection:       "Inspection",
-    car_pictures:     "Car Picture",
-    live_scan:        "Live Scan",
-    tb_test:          "TB Test",
-    drug_test:        "Drug Test",
-    cpr:              "CPR",
-    dot:              "DOT",
-    english_course:   "English Course",
-    pull_notice:      "Pull Notice",
-    safe_ride:        "Safe Ride",
-    w9:               "W9"
+    driver_license: "Driver License",
+    profile_picture: "Profile Picture",
+    registration: "Registration",
+    insurance: "Insurance",
+    inspection: "Inspection",
+    car_pictures: "Car Picture",
+    live_scan: "Live Scan",
+    tb_test: "TB Test",
+    drug_test: "Drug Test",
+    cpr: "CPR",
+    dot: "DOT",
+    english_course: "English Course",
+    pull_notice: "Pull Notice",
+    safe_ride: "Safe Ride",
+    w9: "W9"
 };
 
 // === Campos esperados ===
 const camposArchivos = [
-    { name: "driver_license",   maxCount: 1 },
-    { name: "profile_picture",  maxCount: 1 },
-    { name: "registration",     maxCount: 1 },
-    { name: "insurance",        maxCount: 1 },
-    { name: "inspection",       maxCount: 1 },
-    { name: "car_pictures",     maxCount: 5 },
-    { name: "live_scan",        maxCount: 1 },
-    { name: "tb_test",          maxCount: 1 },
-    { name: "drug_test",        maxCount: 1 },
-    { name: "cpr",              maxCount: 1 },
-    { name: "dot",              maxCount: 1 },
-    { name: "english_course",   maxCount: 1 },
-    { name: "pull_notice",      maxCount: 1 },
-    { name: "safe_ride",        maxCount: 1 },
-    { name: "w9",               maxCount: 1 }
+    { name: "driver_license", maxCount: 1 },
+    { name: "profile_picture", maxCount: 1 },
+    { name: "registration", maxCount: 1 },
+    { name: "insurance", maxCount: 1 },
+    { name: "inspection", maxCount: 1 },
+    { name: "car_pictures", maxCount: 5 },
+    { name: "live_scan", maxCount: 1 },
+    { name: "tb_test", maxCount: 1 },
+    { name: "drug_test", maxCount: 1 },
+    { name: "cpr", maxCount: 1 },
+    { name: "dot", maxCount: 1 },
+    { name: "english_course", maxCount: 1 },
+    { name: "pull_notice", maxCount: 1 },
+    { name: "safe_ride", maxCount: 1 },
+    { name: "w9", maxCount: 1 }
 ];
 
 // === Ruta para recibir formulario de conductor ===
@@ -460,8 +460,8 @@ app.post('/upload', upload.fields(camposArchivos), async (req, res) => {
         for (let campo in req.files) {
             req.files[campo].forEach((file, index) => {
                 let nombreBase = nombresBonitos[campo] || campo;
-                let extension  = path.extname(file.originalname);
-                let filename   = nombreBase;
+                let extension = path.extname(file.originalname);
+                let filename = nombreBase;
 
                 if (req.files[campo].length > 1) {
                     filename += ` ${index + 1}`;
@@ -528,12 +528,6 @@ app.get('/', (req, res) => {
 // === Admin Stats (protected) ===
 app.get('/api/admin/stats', verifyToken, (req, res) => {
     res.json({ success: true, stats });
-});
-
-app.post('/api/admin/stats/reset', verifyToken, (req, res) => {
-    stats = { emailsSent: 0, driverApplications: 0, pageVisits: 0 };
-    saveStats();
-    res.json({ success: true, message: 'Stats reset.' });
 });
 
 // === Ruta raíz para Render ===
