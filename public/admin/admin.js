@@ -498,31 +498,6 @@ document.getElementById('refreshStatsBtn').addEventListener('click', () => {
     showToast('Stats refreshed.');
 });
 
-document.getElementById('resetStatsBtn').addEventListener('click', () => {
-    showConfirmModal(
-        'Reset Statistics',
-        'Are you sure you want to reset all stats to 0? This cannot be undone.',
-        async () => {
-            try {
-                const res = await fetch('/api/admin/stats/reset', {
-                    method: 'POST',
-                    headers: authHeaders()
-                });
-                if (handleAuthError(res)) return;
-                const data = await res.json();
-                if (data.success) {
-                    document.getElementById('statVisits').textContent = '0';
-                    document.getElementById('statEmails').textContent = '0';
-                    document.getElementById('statDrivers').textContent = '0';
-                    showToast('Stats reset to 0.');
-                }
-            } catch {
-                showToast('Failed to reset stats.', true);
-            }
-        }
-    );
-});
-
 // ================================================
 // UTILITIES
 // ================================================
