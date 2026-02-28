@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -13,13 +14,16 @@
     <!-- Core theme -->
     <link href="css/styles.css" rel="stylesheet" />
 </head>
+
 <body id="page-top">
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#page-top"><img src="assets/img/logos/AlexYahTransportationLogo.png" alt="AlexYah Transportation Logo" /></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#page-top"><img src="assets/img/logos/AlexYahTransportationLogo.png"
+                    alt="AlexYah Transportation Logo" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars ms-1"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -30,7 +34,8 @@
                     <li class="nav-item"><a class="nav-link" href="index.html#how-it-works">How it Works</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#why-us">Why Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
-                    <li class="nav-item nav-phone"><a class="nav-link" href="tel:5109624394"><i class="fas fa-phone"></i> (510) 962-4394</a></li>
+                    <li class="nav-item nav-phone"><a class="nav-link" href="tel:5109624394"><i
+                                class="fas fa-phone"></i> (510) 962-4394</a></li>
                 </ul>
             </div>
         </div>
@@ -48,11 +53,8 @@
     <!-- Registration Form -->
     <section class="reg-section">
         <div class="container">
-            <form id="driverForm"
-                  action="https://www.alexyah.com/upload"
-                  method="POST"
-                  enctype="multipart/form-data"
-                  class="reg-card">
+            <form id="driverForm" action="https://www.alexyah.com/upload" method="POST" enctype="multipart/form-data"
+                class="reg-card">
 
                 <!-- Section: Personal Info -->
                 <div class="reg-group">
@@ -87,10 +89,6 @@
                             <label class="form-label">State *</label>
                             <select id="state" name="state" class="form-select" required>
                                 <option value="" disabled selected>Select a State</option>
-                                <option value="California">California</option>
-                                <option value="Florida">Florida</option>
-                                <option value="Missouri">Missouri</option>
-                                <option value="Texas">Texas</option>
                             </select>
                         </div>
                         <div class="reg-field">
@@ -114,7 +112,8 @@
 
                 <!-- Section: Documents (collapsible) -->
                 <div class="reg-group">
-                    <button type="button" class="reg-docs-toggle" data-bs-toggle="collapse" data-bs-target="#optionalDocuments">
+                    <button type="button" class="reg-docs-toggle" data-bs-toggle="collapse"
+                        data-bs-target="#optionalDocuments">
                         <i class="fas fa-folder-open"></i> Upload Documents to Start the Process
                         <i class="fas fa-chevron-down reg-docs-chevron"></i>
                     </button>
@@ -123,7 +122,8 @@
                         <div class="reg-docs-grid">
                             <div class="reg-doc-item">
                                 <label class="form-label">Driver License *</label>
-                                <input type="file" name="driver_license" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="driver_license" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">Profile Picture *</label>
@@ -131,33 +131,41 @@
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">Vehicle Insurance *</label>
-                                <input type="file" name="insurance" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="insurance" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">Vehicle Inspection *</label>
-                                <input type="file" name="inspection" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="inspection" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">Vehicle Registration *</label>
-                                <input type="file" name="registration" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="registration" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">5 Pictures of the Car *</label>
-                                <input type="file" name="car_pictures" class="form-control" multiple accept="image/*" onchange="validateCarPictures(this)">
-                                <div class="invalid-feedback d-block" id="carPicturesError" style="display:none;">Please upload 5 photos of the car (4 sides and odometer).</div>
+                                <input type="file" name="car_pictures" class="form-control" multiple accept="image/*"
+                                    onchange="validateCarPictures(this)">
+                                <div class="invalid-feedback d-block" id="carPicturesError" style="display:none;">Please
+                                    upload 5 photos of the car (4 sides and odometer).</div>
                                 <small class="form-text text-muted" id="carPicturesCount">0/5 photos selected</small>
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">Live Scan *</label>
-                                <input type="file" name="live_scan" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="live_scan" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">TB Test *</label>
-                                <input type="file" name="tb_test" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="tb_test" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">Drug Test *</label>
-                                <input type="file" name="drug_test" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="drug_test" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">CPR *</label>
@@ -169,15 +177,18 @@
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">English Course *</label>
-                                <input type="file" name="english_course" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="english_course" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">Pull Notice *</label>
-                                <input type="file" name="pull_notice" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="pull_notice" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">Safe Ride *</label>
-                                <input type="file" name="safe_ride" class="form-control" accept="image/*,application/pdf" />
+                                <input type="file" name="safe_ride" class="form-control"
+                                    accept="image/*,application/pdf" />
                             </div>
                             <div class="reg-doc-item">
                                 <label class="form-label">W9 *</label>
@@ -202,7 +213,8 @@
     <footer class="footer py-4">
         <div class="container">
             <div class="text-center mb-3">
-                <img src="assets/img/logos/AlexYahTransportationLogo.png" alt="AlexYah Transportation" class="footer-logo">
+                <img src="assets/img/logos/AlexYahTransportationLogo.png" alt="AlexYah Transportation"
+                    class="footer-logo">
             </div>
             <div class="row align-items-center">
                 <div class="col-lg-4 text-lg-start">
@@ -211,11 +223,14 @@
                 <div class="col-lg-4 my-3 my-lg-0 text-center">
                     <a class="btn btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-social mx-2" href="#!" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin-in"></i></a>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <a class="link-dark text-decoration-none me-3" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
-                    <a class="link-dark text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Use</a>
+                    <a class="link-dark text-decoration-none me-3" href="#" data-bs-toggle="modal"
+                        data-bs-target="#privacyModal">Privacy Policy</a>
+                    <a class="link-dark text-decoration-none" href="#" data-bs-toggle="modal"
+                        data-bs-target="#termsModal">Terms of Use</a>
                 </div>
             </div>
         </div>
@@ -231,9 +246,13 @@
                 </div>
                 <div class="modal-body" style="text-align: justify;">
                     <h4>Privacy Policy</h4>
-                    <p>At our company, dedicated to the safe transportation of children with disabilities to their schools, we value the trust applicants place in us when sharing their personal information.</p>
-                    <p>The information provided will be used <strong>only</strong> to contact applicants, process their driver applications, and handle related administrative tasks. We will not share, sell, or transfer this information to any third party.</p>
-                    <p>Applicants have the right to request access, modification, or deletion of their personal data at any time by contacting our company through official communication channels.</p>
+                    <p>At our company, dedicated to the safe transportation of children with disabilities to their
+                        schools, we value the trust applicants place in us when sharing their personal information.</p>
+                    <p>The information provided will be used <strong>only</strong> to contact applicants, process their
+                        driver applications, and handle related administrative tasks. We will not share, sell, or
+                        transfer this information to any third party.</p>
+                    <p>Applicants have the right to request access, modification, or deletion of their personal data at
+                        any time by contacting our company through official communication channels.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -252,9 +271,13 @@
                 </div>
                 <div class="modal-body" style="text-align: justify;">
                     <h4>Terms of Use</h4>
-                    <p>By using this website, you agree to these Terms of Use. The portal is intended solely for individuals interested in applying as drivers for our company.</p>
-                    <p>Applicants agree to provide true and complete information. Submitting an application does not guarantee acceptance as a driver. The company reserves the right to select, interview, and hire based on internal criteria.</p>
-                    <p>All website content is protected by copyright and may not be reproduced without authorization. Use of this site is at the sole responsibility of the user.</p>
+                    <p>By using this website, you agree to these Terms of Use. The portal is intended solely for
+                        individuals interested in applying as drivers for our company.</p>
+                    <p>Applicants agree to provide true and complete information. Submitting an application does not
+                        guarantee acceptance as a driver. The company reserves the right to select, interview, and hire
+                        based on internal criteria.</p>
+                    <p>All website content is protected by copyright and may not be reproduced without authorization.
+                        Use of this site is at the sole responsibility of the user.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -270,40 +293,38 @@
     <script src="js/scripts.js"></script>
 
     <script>
-        // Datos de ciudades por estado
-        const citiesByState = {
-            California: [
-                "Alameda", "Antelope", "Antioch", "Bay Park", "Bellflower",
-                "Berkeley", "Burlingame", "Campbell", "Carlsbad", "Castro Valley",
-                "Clairemont", "Citrus Heights", "Concord", "Cupertino", "Del Cerro",
-                "Downey", "Dublin", "Elk Grove", "Encanto", "Encinitas",
-                "Escondido", "Fairfield", "Foster City", "Hayward", "Lakewood",
-                "Lodi", "Long Beach", "Los Gatos", "Menlo Park", "Milpitas",
-                "Modesto", "Morgan Hill", "Mountain View", "Napa", "Oakland",
-                "Oceanside", "Palo Alto", "Paramount", "Poway", "Richmond",
-                "Sacramento", "San Bruno", "San Diego", "San Jose", "San Lorenzo",
-                "San Mateo", "San Pablo", "San Ramon", "Santa Clara", "Santa Cruz",
-                "Saratoga", "Scotts Valley", "South San Francisco", "Stockton",
-                "Sunnyvale", "Vallejo", "Ventura", "Watsonville"
-            ],
-            Florida: ["Auburndale", "Bartow", "Lakeland", "Mulberry"],
-            Missouri: ["Independence", "Kansas City", "Lee's Summit", "Saint Louis"],
-            Texas: ["Houston", "Katy"]
-        };
+        // Cities loaded from API
+        (async function () {
+            let citiesByState = {};
+            try {
+                const res = await fetch('/api/cities');
+                citiesByState = await res.json();
+            } catch (e) {
+                console.error('Could not load cities:', e);
+            }
 
-        const stateSelect = document.getElementById('state');
-        const citySelect  = document.getElementById('city');
-
-        stateSelect.addEventListener('change', function () {
-            const cities = citiesByState[this.value] || [];
-            citySelect.innerHTML = '<option value="" disabled selected>Select a City</option>';
-            cities.forEach(function (city) {
+            // Populate state dropdown
+            const stateSelect = document.getElementById('state');
+            const citySelect = document.getElementById('city');
+            const states = Object.keys(citiesByState).sort();
+            states.forEach(function (state) {
                 const option = document.createElement('option');
-                option.value = city;
-                option.textContent = city;
-                citySelect.appendChild(option);
+                option.value = state;
+                option.textContent = state;
+                stateSelect.appendChild(option);
             });
-        });
+
+            stateSelect.addEventListener('change', function () {
+                const cities = citiesByState[this.value] || [];
+                citySelect.innerHTML = '<option value="" disabled selected>Select a City</option>';
+                cities.forEach(function (city) {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            });
+        })();
 
         // Validación de las 5 fotos del carro
         function validateCarPictures(input) {
@@ -352,23 +373,24 @@
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                const mensajeDiv = document.getElementById('mensaje');
-                if (data.success) {
-                    mensajeDiv.innerHTML = '<div class="alert alert-success mt-3">Your application has been submitted successfully!</div>';
-                    form.reset();
-                    form.classList.remove('was-validated');
-                    document.getElementById('carPicturesCount').textContent = '0/5 photos selected';
-                } else {
-                    mensajeDiv.innerHTML = '<div class="alert alert-danger mt-3">There was an error submitting your application. Please try again.</div>';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('mensaje').innerHTML = '<div class="alert alert-danger mt-3">There was an error submitting your application. Please try again.</div>';
-            });
+                .then(response => response.json())
+                .then(data => {
+                    const mensajeDiv = document.getElementById('mensaje');
+                    if (data.success) {
+                        mensajeDiv.innerHTML = '<div class="alert alert-success mt-3">Your application has been submitted successfully!</div>';
+                        form.reset();
+                        form.classList.remove('was-validated');
+                        document.getElementById('carPicturesCount').textContent = '0/5 photos selected';
+                    } else {
+                        mensajeDiv.innerHTML = '<div class="alert alert-danger mt-3">There was an error submitting your application. Please try again.</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('mensaje').innerHTML = '<div class="alert alert-danger mt-3">There was an error submitting your application. Please try again.</div>';
+                });
         });
     </script>
 </body>
+
 </html>
